@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import { v4 as uuidv4 } from 'uuid';
 import { getPool } from '../mysql_explorer/db.js';
-
 // import questionnaireData from '../src/assets/questionnaire.json' with { type: 'json' };
 // import questionnaireData from './questionnaire.json' with { type: 'json' };
 
@@ -18,8 +17,6 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 app.set('trust proxy', true);
-
-
 
 
 function calculateSnehithaRisk(formData) {
@@ -57,7 +54,7 @@ function calculateSnehithaRisk(formData) {
     // console.log(`  - Age at First Birth >=30: ${ageAtFirstLiveBirth30OrMore}`);
 
     // --- 3. Calculate logit(p) using the provided formula ---
-    const logitP = -0.140 +
+    const logitP = -0.940 +
         (0.027 * age) -
         (0.082 * ageAtMenarche) +
         (0.453 * irregularCycles) -
