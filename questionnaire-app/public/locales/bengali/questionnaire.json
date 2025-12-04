@@ -45,7 +45,7 @@
         { "key": "Q44", "type": "text" },
         { "key": "Q45", "type": "text", "placeholder": "সর্বজনীন" },
         { "key": "Q47", "type": "radio", "required": true },
-        { "key": "Q1", "type": "number", "placeholder": "যেমন., 35", "required": true, "min": 18, "max": 120, "step": 1},
+        { "key": "Q1", "type": "number", "placeholder": "যেমন., 35", "required": true, "min": 18, "max": 120, "step": 1, "integerOnly": true},
         { "key": "Q2", "type": "number", "placeholder": "যেমন., 165", "required": true, "min": 100, "max": 300, "step": 1},
         { "key": "Q3", "type": "number", "placeholder": "যেমন., 60", "required": true, "min": 30, "max": 500, "step": 0.1 },
         { "key": "Q4", "type": "select", "required": true },
@@ -68,6 +68,7 @@
               "min": 8,
               "max": 100,
               "step":1,
+              "integerOnly": true,
               "placeholder": "বছরে বয়স লিখুন"
             },
             {
@@ -93,7 +94,7 @@
         },
         { "key": "Q13", "type": "radio" },
         { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "Yes" }, "subQuestions": [
-          { "key": "Q15", "type": "number", "placeholder": "অনুগ্রহ করে একটি নম্বর লিখুন।", "required": true, "min": 1, "max": 120, "step": 1 },
+          { "key": "Q15", "type": "number", "placeholder": "অনুগ্রহ করে একটি নম্বর লিখুন।", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly":true },
           { "key": "Q16", "type": "radio", "required": true },
           { "key": "Q17", "type": "radio", "required": true }
         ]},
@@ -101,10 +102,10 @@
         { "key": "Q19", "type": "radio", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
-          { "key": "Q22", "type": "number", "placeholder": "যেমন., 45", "required": true, "min": 1, "max": 120, "step": 1 },
+          { "key": "Q22", "type": "number", "placeholder": "যেমন., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly":true },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "মৃত্যুর বয়স লিখুন", "min": 1, "max": 120, "step": 1 }
+            { "key": "Q25", "type": "number", "placeholder": "মৃত্যুর বয়স লিখুন", "min": 1, "max": 120, "step": 1, "integerOnly":true }
           ]},
           { "key": "Q26", "type": "select", "required": true }
         ]}

@@ -1,12 +1,7 @@
-
-
-
-
 import express from 'express';
 import cors from 'cors';
 import { v4 as uuidv4 } from 'uuid';
 import { getPool } from '../mysql_explorer/db.js';
-
 // import questionnaireData from '../src/assets/questionnaire.json' with { type: 'json' };
 // import questionnaireData from './questionnaire.json' with { type: 'json' };
 
@@ -22,8 +17,6 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 app.set('trust proxy', true);
-
-
 
 
 function calculateSnehithaRisk(formData) {
@@ -50,15 +43,15 @@ function calculateSnehithaRisk(formData) {
     const ageAtFirstLiveBirth30OrMore = ageAtFirstBirth_gte30 ? 1 : 0;
 
     // --- Log the interpreted values for debugging ---
-    // console.log('Interpreted Variables:');
-    // console.log(`  - Age: ${age}`);
-    // console.log(`  - Age at Menarche: ${ageAtMenarche}`);
-    // console.log(`  - Irregular Cycles: ${irregularCycles} (from '${formData.Q11}')`);
-    // console.log(`  - Breastfeeding >24M: ${breastfeeding24M} (from '${formData.Q17}')`);
-    // console.log(`  - First-Degree Relatives: ${firstDegreeRelatives} (from '${formData.Q21}')`);
-    // console.log(`  - Previous Biopsy: ${previousBiopsy} (from '${formData.Q40}')`);
-    // console.log(`  - Age at First Birth 25-29 or Nullipara: ${ageAtFirstLiveBirth2529OrNullipara}`);
-    // console.log(`  - Age at First Birth >=30: ${ageAtFirstLiveBirth30OrMore}`);
+    console.log('Interpreted Variables:');
+    console.log(`  - Age: ${age}`);
+    console.log(`  - Age at Menarche: ${ageAtMenarche}`);
+    console.log(`  - Irregular Cycles: ${irregularCycles} (from '${formData.Q11}')`);
+    console.log(`  - Breastfeeding >24M: ${breastfeeding24M} (from '${formData.Q17}')`);
+    console.log(`  - First-Degree Relatives: ${firstDegreeRelatives} (from '${formData.Q21}')`);
+    console.log(`  - Previous Biopsy: ${previousBiopsy} (from '${formData.Q40}')`);
+    console.log(`  - Age at First Birth 25-29 or Nullipara: ${ageAtFirstLiveBirth2529OrNullipara}`);
+    console.log(`  - Age at First Birth >=30: ${ageAtFirstLiveBirth30OrMore}`);
 
     // --- 3. Calculate logit(p) using the provided formula ---
     const logitP = -0.940 +
@@ -67,7 +60,7 @@ function calculateSnehithaRisk(formData) {
         (0.453 * irregularCycles) -
         (0.892 * breastfeeding24M) +
         (0.810 * firstDegreeRelatives) +
-        (1.420 * previousBiopsy) -
+        (1.420 * previousBiopsy) +
         (0.811 * ageAtFirstLiveBirth2529OrNullipara) +
         (1.035 * ageAtFirstLiveBirth30OrMore);
 

@@ -44,7 +44,7 @@
         { "key": "Q44", "type": "text" },
         { "key": "Q45", "type": "text", "placeholder": "सार्वभौमिक" },
         { "key": "Q47", "type": "radio", "required": true },
-        { "key": "Q1", "type": "number", "placeholder": "उदा., 35", "required": true, "min": 18, "max": 120, "step": 1},
+        { "key": "Q1", "type": "number", "placeholder": "उदा., 35", "required": true, "min": 18, "max": 120, "step": 1, "integerOnly": true },
         { "key": "Q2", "type": "number", "placeholder": "उदा., 165", "required": true, "min": 100, "max": 300, "step": 1 },
         { "key": "Q3", "type": "number", "placeholder": "उदा., 60", "required": true, "min": 30, "max": 500, "step": 0.1 },
         { "key": "Q4", "type": "select", "required": true },
@@ -56,7 +56,7 @@
           "key": "Q9",
           "type": "radio",
           "required": true,
-          "condition": { "key": "Q9", "value": "हाँ" }, 
+          "condition": { "key": "Q9", "value": "Yes" }, 
           
     
           "subQuestions": [
@@ -67,6 +67,7 @@
               "min": 8,
               "max": 100,
               "step":1,
+              "integerOnly": true,
               "placeholder": "वर्षों में आयु दर्ज करें"
             },
             {
@@ -78,32 +79,32 @@
                   "key": "Q11",
                   "type": "radio",
                   "required": true,
-                  "condition": { "key": "Q12_Current", "value": "हाँ" }
+                  "condition": { "key": "Q12_Current", "value": "Yes" }
                 },
                 {
                   "key": "Q12",
                   "type": "radio",
                   "required": true,
-                  "condition": { "key": "Q12_Current", "value": "नहीं" }
+                  "condition": { "key": "Q12_Current", "value": "No" }
                 }
               ]
             }
           ]
         },
         { "key": "Q13", "type": "radio" },
-        { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "हाँ" }, "subQuestions": [
-          { "key": "Q15", "type": "number", "placeholder": "कृपया एक संख्या दर्ज करें", "required": true, "min": 1, "max": 120, "step": 1 },
+        { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "Yes" }, "subQuestions": [
+          { "key": "Q15", "type": "number", "placeholder": "कृपया एक संख्या दर्ज करें", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
           { "key": "Q16", "type": "radio", "required": true },
           { "key": "Q17", "type": "radio", "required": true }
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "हाँ" }, "subQuestions": [
+        { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
-          { "key": "Q22", "type": "number", "placeholder": "उदा., 45", "required": true, "min": 1, "max": 120, "step": 1 },
+          { "key": "Q22", "type": "number", "placeholder": "उदा., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
           { "key": "Q23", "type": "checkbox", "required": true },
-          { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "नहीं" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "मृत्यु की आयु", "min": 1, "max": 120, "step": 1 }
+          { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
+            { "key": "Q25", "type": "number", "placeholder": "मृत्यु की आयु", "min": 1, "max": 120, "step": 1, "integerOnly": true}
           ]},
           { "key": "Q26", "type": "select", "required": true }
         ]}
@@ -115,7 +116,7 @@
         { 
           "key": "Q27",
           "type": "radio", 
-          "condition": {"key": "Q27", "value": "हाँ"}, 
+          "condition": {"key": "Q27", "value": "Yes"}, 
           "videoUrlOnNo": "https://www.youtube.com/embed/nKVjF3u3CNg?autoplay=1&rel=0&start=0", 
           "subQuestions": [
             { "key": "Q28", "type": "radio" },
@@ -123,7 +124,7 @@
             { 
               "key": "Q36", 
               "type": "radio", 
-              "condition": {"key": "Q36", "value": "हाँ"}, 
+              "condition": {"key": "Q36", "value": "Yes"}, 
               "subQuestions": [
                 { "key": "Q37", "type": "checkbox" }
               ]
@@ -133,7 +134,7 @@
         { 
           "key": "Q30",
           "type": "radio", 
-          "condition": {"key": "Q30", "value": "हाँ"}, 
+          "condition": {"key": "Q30", "value": "Yes"}, 
           "subQuestions": [
             { "key": "Q31", "type": "radio" },
             { "key": "Q32", "type": "radio" },
@@ -143,7 +144,7 @@
         { 
           "key": "Q34", 
           "type": "radio", 
-          "condition": {"key": "Q34", "value": "हाँ"}, 
+          "condition": {"key": "Q34", "value": "Yes"}, 
           "subQuestions": [
             { "key": "Q35", "type": "radio" }
           ]
@@ -153,13 +154,13 @@
     {
       "title": "अनुभाग 3: BE के बाद",
       "questions": [
-        { "key": "Q38", "type": "radio", "condition": {"key": "Q38", "value": "हाँ"}, "subQuestions": [
+        { "key": "Q38", "type": "radio", "condition": {"key": "Q38", "value": "Yes"}, "subQuestions": [
           { "key": "Q39", "type": "radio", "required": true }
         ]},
-        { "key": "Q40", "type": "radio", "required": true, "condition": {"key": "Q40", "value": "हाँ"}, "subQuestions": [
+        { "key": "Q40", "type": "radio", "required": true, "condition": {"key": "Q40", "value": "Yes"}, "subQuestions": [
           { "key": "Q41", "type": "radio" }
         ]},
-        { "key": "Q42", "type": "radio", "required": true, "condition": {"key": "Q42", "value": "हाँ"}, "subQuestions": [
+        { "key": "Q42", "type": "radio", "required": true, "condition": {"key": "Q42", "value": "Yes"}, "subQuestions": [
           { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "कृपया अन्य कैंसर बताइए", "required": true }
         ]}
       ]
