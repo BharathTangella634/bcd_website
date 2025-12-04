@@ -5,8 +5,8 @@ import { getPool } from '../mysql_explorer/db.js';
 // import questionnaireData from '../src/assets/questionnaire.json' with { type: 'json' };
 // import questionnaireData from './questionnaire.json' with { type: 'json' };
 
-import questionnaireJson from '../src/assets/questionnaire.json' with { type: 'json' };
-// import questionnaireJson from './questionnaire.json' with { type: 'json' };
+// import questionnaireJson from '../src/assets/questionnaire.json' with { type: 'json' };
+import questionnaireJson from './questionnaire.json' with { type: 'json' };
 
 
 const questionnaireData = questionnaireJson.questions; 
