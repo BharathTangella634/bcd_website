@@ -154,12 +154,8 @@
     {
       "title": "विभाग 3: बीई (BE) नंतर",
       "questions": [
-        { "key": "Q38","type": "radio","condition": { "key": "Q38", "value": "Yes" },"subQuestions": [
-          { "key": "Q39", "type": "radio", "required": true }
-        ]},
-        { "key": "Q40","type": "radio","required": true,"condition": { "key": "Q40", "value": "Yes" },"subQuestions": [
-          { "key": "Q41", "type": "radio" }
-        ]},
+        { "key": "Q38","type": "radio","condition": { "key": "Q38", "value": "Yes" }},
+        { "key": "Q40","type": "radio","required": true,"condition": { "key": "Q40", "value": "Yes" }},
         { "key": "Q42","type": "radio","required": true,"condition": { "key": "Q42", "value": "Yes" },"subQuestions": [
             { "key": "Q43","type": "checkbox-plus-text","otherOptionId": "q43_other_specify","otherPlaceholder": "इतर कर्करोग नमूद करा","required": true }
         ]}
