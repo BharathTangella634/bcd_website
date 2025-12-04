@@ -260,6 +260,8 @@ function App() {
   const formStructure = t('questionnaire:formStructure', { returnObjects: true });
   const questionnaireData = t('questionnaire:questions', { returnObjects: true });
   const questionnaireDataEn = questionnaireDataEng.questions;
+  const formStructureEn = questionnaireDataEng.formStructure;
+  
   // --- END MODIFICATION ---
 
   const { i18n } = useTranslation();
@@ -295,7 +297,7 @@ function App() {
 
     
     setIsSubmitting(true);
-    setFinalFormData(formData); // Store the final data for the PDF
+    setFinalFormData(formDataEn); // Store the final data for the PDF
     // console.log('Submitting Form Data:', { formData, formDataEn });
 
     try {
@@ -351,8 +353,8 @@ function App() {
           formData={finalFormData}
           sessionId={sessionId}
           // Pass the loaded data down
-          formStructure={formStructure}
-          questionnaireData={questionnaireData}
+          formStructure={formStructureEn}
+          questionnaireData={questionnaireDataEn}
         />
       )}
     </div>

@@ -30,6 +30,11 @@
     },
     "defaults": {
       "q45": "యూనివర్సల్"
+    },
+    "invalidInput": {
+      "numberPrefix": "దయచేసి ఒక సరైన సంఖ్యను నమోదు చేయండి ",
+      "and": "మరియు",
+      "validInput": "దయచేసి ఒక సరైన ఇన్‌పుట్‌ను నమోదు చేయండి."
     }
   },
   "formStructure": [
@@ -38,33 +43,67 @@
       "questions": [
         { "key": "Q44", "type": "text" },
         { "key": "Q45", "type": "text", "placeholder": "యూనివర్సల్" },
-        { "key": "Q1", "type": "number", "placeholder": "ఉదా., 35", "required": true },
-        { "key": "Q2", "type": "number", "placeholder": "ఉదా., 165", "required": true },
-        { "key": "Q3", "type": "number", "placeholder": "ఉదా., 60", "required": true },
+        { "key": "Q47", "type": "radio", "required": true },
+        { "key": "Q1", "type": "number", "placeholder": "ఉదా., 35", "required": true, "min": 18, "max": 120, "step": 1 },
+        { "key": "Q2", "type": "number", "placeholder": "ఉదా., 165", "required": true, "min": 100, "max": 300, "step": 1 },
+        { "key": "Q3", "type": "number", "placeholder": "ఉదా., 60", "required": true, "min": 30, "max": 500, "step": 0.1 },
         { "key": "Q4", "type": "select", "required": true },
         { "key": "Q5", "type": "radio", "required": true },
         { "key": "Q6", "type": "radio", "required": true },
         { "key": "Q7", "type": "radio", "required": true },
         { "key": "Q8", "type": "radio", "required": true },
-        { "key": "Q9", "type": "radio", "required": true, "condition": { "key": "Q9", "value": "అవును" }, "subQuestions": [
-          { "key": "Q10", "type": "number", "placeholder": "దయచేసి సంవత్సరాల్లో సంఖ్యను నమోదు చేయండి", "required": true },
-          { "key": "Q11", "type": "radio", "required": true },
-          { "key": "Q12", "type": "radio", "required": true }
-        ]},
+        {
+          "key": "Q9",
+          "type": "radio",
+          "required": true,
+          "condition": { "key": "Q9", "value": "Yes" }, 
+          
+    
+          "subQuestions": [
+            {
+              "key": "Q10",
+              "type": "number",
+              "required": true,
+              "min": 8,
+              "max": 100,
+              "step":1,
+              "placeholder": "సంవత్సరాలలో వయస్సును నమోదు చేయండి"
+            },
+            {
+              "key": "Q12_Current",
+              "type": "radio",
+              "required": true,
+              "subQuestions": [
+                {
+                  "key": "Q11",
+                  "type": "radio",
+                  "required": true,
+                  "condition": { "key": "Q12_Current", "value": "Yes" }
+                },
+                {
+                  "key": "Q12",
+                  "type": "radio",
+                  "required": true,
+                  "condition": { "key": "Q12_Current", "value": "No" }
+                }
+              ]
+            }
+          ]
+        },
         { "key": "Q13", "type": "radio" },
-        { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "అవును" }, "subQuestions": [
-          { "key": "Q15", "type": "number", "placeholder": "దయచేసి సంఖ్యను నమోదు చేయండి", "required": true },
+        { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "Yes" }, "subQuestions": [
+          { "key": "Q15", "type": "number", "placeholder": "దయచేసి సంఖ్యను నమోదు చేయండి", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q16", "type": "radio", "required": true },
           { "key": "Q17", "type": "radio", "required": true }
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "అవును" }, "subQuestions": [
+        { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
-          { "key": "Q22", "type": "number", "placeholder": "ఉదా., 45", "required": true },
+          { "key": "Q22", "type": "number", "placeholder": "ఉదా., 45", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q23", "type": "checkbox", "required": true },
-          { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "కాదు" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "మరణ వయసును నమోదు చేయండి" }
+          { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
+            { "key": "Q25", "type": "number", "placeholder": "మరణ వయసును నమోదు చేయండి", "min": 1, "max": 120, "step": 1 }
           ]},
           { "key": "Q26", "type": "select", "required": true }
         ]}
@@ -76,15 +115,15 @@
         { 
           "key": "Q27",
           "type": "radio", 
-          "condition": {"key": "Q27", "value": "అవును"}, 
-          "videoUrlOnNo": "https://www.youtube.com/embed/zr672IqRbqs?autoplay=1&rel=0&start=0", 
+          "condition": {"key": "Q27", "value": "Yes"}, 
+          "videoUrlOnNo": "https://www.youtube.com/embed/pzq5ZctgQ2A?autoplay=1&rel=0&start=0", 
           "subQuestions": [
             { "key": "Q28", "type": "radio" },
             { "key": "Q29", "type": "radio" },
             { 
               "key": "Q36", 
               "type": "radio", 
-              "condition": {"key": "Q36", "value": "అవును"}, 
+              "condition": {"key": "Q36", "value": "Yes"}, 
               "subQuestions": [
                 { "key": "Q37", "type": "checkbox" }
               ]
@@ -94,7 +133,7 @@
         { 
           "key": "Q30",
           "type": "radio", 
-          "condition": {"key": "Q30", "value": "అవును"}, 
+          "condition": {"key": "Q30", "value": "Yes"}, 
           "subQuestions": [
             { "key": "Q31", "type": "radio" },
             { "key": "Q32", "type": "radio" },
@@ -104,7 +143,7 @@
         { 
           "key": "Q34", 
           "type": "radio", 
-          "condition": {"key": "Q34", "value": "అవును"}, 
+          "condition": {"key": "Q34", "value": "Yes"}, 
           "subQuestions": [
             { "key": "Q35", "type": "radio" }
           ]
@@ -114,13 +153,13 @@
     {
       "title": "విభాగం 3: BE దాటి",
       "questions": [
-        { "key": "Q38", "type": "radio", "condition": {"key": "Q38", "value": "అవును"}, "subQuestions": [
+        { "key": "Q38", "type": "radio", "condition": {"key": "Q38", "value": "Yes"}, "subQuestions": [
           { "key": "Q39", "type": "radio", "required": true }
         ]},
-        { "key": "Q40", "type": "radio", "required": true, "condition": {"key": "Q40", "value": "అవును"}, "subQuestions": [
+        { "key": "Q40", "type": "radio", "required": true, "condition": {"key": "Q40", "value": "Yes"}, "subQuestions": [
           { "key": "Q41", "type": "radio" }
         ]},
-        { "key": "Q42", "type": "radio", "required": true, "condition": {"key": "Q42", "value": "అవును"}, "subQuestions": [
+        { "key": "Q42", "type": "radio", "required": true, "condition": {"key": "Q42", "value": "Yes"}, "subQuestions": [
           { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "ఇతర క్యాన్సర్‌ను పేర్కొనండి", "required": true }
         ]}
       ]
@@ -154,7 +193,7 @@
     "Q6": {
       "question": "మీరు పూర్తి చేసిన గరిష్ట విద్యా స్థాయి ఏమిటి?",
       "answers": [
-        "ఏదైనా విద్య లేదు", "10 సంవత్సరాల కంటే తక్కువ పాఠశాల విద్య", "ఇంటర్మీడియట్ విద్య", "డిగ్రీ & పైగా"
+        "ఏదైనా విద్య లేదు", "9వ తరగతి వరకు (ప్రాథమిక/మధ్యమ)", "10వ తరగతి లేదా 12వ తరగతి (సెకండరీ/హైయర్ సెకండరీ)", "డిగ్రీ & పైగా"
       ]
     },
     "Q7": {
@@ -166,21 +205,26 @@
       "answers": ["అవును", "కాదు", "నాకు తెలియదు"]
     },
     "Q9": {
-      "question": "మీకు రుతు స్రావం ప్రారంభమైందా?",
-      "answers": ["అవును", "కాదు", "నాకు తెలియదు"]
+      "question": "మీకు ఎప్పుడైనా ఋతుస్రావం (Menstrual Period) అయిందా?",
+      "answers": [ "అవును", "లేదు", "నాకు తెలియదు" ]
     },
-    "Q10": { 
-      "question": "మీకు మొదటి రుతు స్రావం వచ్చిన వయస్సు ఎంత?", 
-      "answers": [] 
+    "Q10": {
+      "question": "మీకు ఏ వయస్సులో మొదటి ఋతుస్రావం వచ్చింది?",
+      "answers": []
     },
-    "Q11": { 
-      "question": "మీ రుతు చక్రాలు నియమితమా లేక అసమానమా?", 
-      "answers": ["నియమిత", "అసమాన"] 
+    "Q12_Current": {
+      "question": "మీకు ప్రస్తుతం ఋతుస్రావం అవుతుందా?",
+      "answers": ["అవును", "లేదు"]
+    },
+    "Q11": {
+      "question": "మీ ఋతుచక్రాలు క్రమంగా ఉన్నాయా?",
+      "answers": [ "క్రమంగా", "క్రమంగా లేని" ]
     },
     "Q12": {
-      "question": "క్రిందివాటిలో మీ రుతు స్థితిని ఏది బాగా వివరిస్తుంది?",
+      "question": "మీ ఋతుస్రావం స్థితిని ఉత్తమంగా వివరించేది ఏమిటి?",
       "answers": [
-        "రుతు కొనసాగుతోంది - నియమిత చక్రాలు", "రుతు కొనసాగుతోంది - అసమాన చక్రాలు", "పెరిమెనోపాజల్ (చక్రాలు అసమానంగా లేదా 12 నెలల లోపు ఆగాయి)", "పోస్ట్‌మెనోపాజల్ (12 నెలల పాటు చక్రాలు లేవు)"
+        "పెరిమెనోపాజల్ (ఋతుస్రావం క్రమంగా లేదు లేదా 12 నెలల కంటే తక్కువ కాలం ఆగిపోయింది)",
+        "పోస్ట్‌మెనోపాజల్ (ఋతుస్రావం వరుసగా 12 నెలలు లేదా అంతకంటే ఎక్కువ కాలం ఆగిపోయింది)"
       ]
     },
     "Q13": { 
@@ -228,7 +272,7 @@
     "Q23": {
       "question": "క్యాన్సర్ రకం:",
       "answers": [
-        "స్తన క్యాన్సర్", "గర్భాశయ క్యాన్సర్", "కాలన్, రెక్టల్ లేదా ప్యాంక్రియాటిక్ క్యాన్సర్", "యుటరైన్ క్యాన్సర్", "ప్రోస్టేట్ క్యాన్సర్"
+        "స్తన క్యాన్సర్", "గర్భాశయ క్యాన్సర్", "కాలన్ రెక్టల్ క్యాన్సర్", "ప్యాంక్రియాటిక్ క్యాన్సర్", "యుటరైన్ క్యాన్సర్", "ప్రోస్టేట్ క్యాన్సర్"
       ]
     },
     "Q24": { 
@@ -241,7 +285,7 @@
     },
     "Q26": { 
       "question": "వారి జాతిని ఎంచుకోండి:", 
-      "answers": [] 
+      "answers": ["ఉత్తర భారతీయుడు", "దక్షిణ భారతీయుడు", "తూర్పు భారతీయుడు", "పడమర భారతీయుడు", "ఈశాన్య భారతీయుడు", "మధ్య భారతీయుడు / ఆదివాసీ సమాజాలు", "మిశ్రిత / ఇతర భారతీయ జాతి", "ప్రవాస భారతీయుడు (NRI)", "ఇతరులు"]
     },
     "Q27": { 
       "question": "మీరు ఎప్పుడైనా స్తన పరీక్ష (BE) చేయించుకున్నారా?", 
@@ -320,7 +364,7 @@
     "Q43": { 
       "question": "దయచేసి క్యాన్సర్ రకాన్ని పేర్కొనండి:", 
       "answers": [
-        "స్తన క్యాన్సర్", "గర్భాశయ క్యాన్సర్", "కాలన్, రెక్టల్ లేదా ప్యాంక్రియాటిక్ క్యాన్సర్", "యుటరైన్ క్యాన్సర్", "ఇతర"
+        "స్తన క్యాన్సర్", "గర్భాశయ క్యాన్సర్", "కాలన్ రెక్టల్ క్యాన్సర్", "ప్యాంక్రియాటిక్ క్యాన్సర్", "యుటరైన్ క్యాన్సర్", "ఇతర"
       ]
     },
     "Q44": { 
@@ -330,6 +374,10 @@
     "Q45": { 
       "question": "హాస్పిటల్ ఐడీని (ఆసుపత్రి ఐడి) నమోదు చేయండి (ఉంటే నమోదు చేయండి, లేకుంటే ఖాళీగా ఉంచండి):", 
       "answers": [] 
+    },
+    "Q47": {
+      "question": "మీ లింగం ఏమిటి?",
+      "answers": ["స్త్రీ", "పురుషుడు", "ఇతర"]
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "title": "સબમિશન પૂર્ણ થયું",
   "message": "પ્રશ્નાવલી પૂર્ણ કરવા બદલ આભાર!",
-  "riskScoreLabel": "જોખમ સ્કોર:",
+  "riskScoreLabel": "જોખમ સ્તર:",
   "interpretation": {
     "title": "તમારો જોખમ સ્કોર શું સૂચવે છે",
     "headers": {
@@ -48,7 +48,7 @@
   },
   "pdf": {
     "alertNoData": "PDF બનાવવા માટે ફોર્મ ડેટા ઉપલબ્ધ નથી.",
-    "mainTitle": "તમારું સ્તન કેન્સર જોખમ મૂલ્યાંકન સારાંશ",
+    "mainTitle": "સ્તન કેન્સર જોખમ મૂલ્યાંકન સારાંશ",
     "footerPage": "પાનું",
     "footerGenerated": "તૈયાર થયું",
     "answerPrefix": "ઉ:",

@@ -30,6 +30,11 @@
     },
     "defaults": {
       "q45": "સાર્વત્રિક"
+    },
+    "invalidInput": {
+      "numberPrefix": "કૃપા કરીને એક માન્ય નંબર દાખલ કરો ",
+      "and": "અને",
+      "validInput": "કૃપા કરીને માન્ય ઇનપુટ દાખલ કરો."
     }
   },
   "formStructure": [
@@ -38,22 +43,56 @@
       "questions": [
         { "key": "Q44", "type": "text" },
         { "key": "Q45", "type": "text", "placeholder": "Universal" },
-        { "key": "Q1", "type": "number", "placeholder": "e.g., 35", "required": true },
-        { "key": "Q2", "type": "number", "placeholder": "e.g., 165", "required": true },
-        { "key": "Q3", "type": "number", "placeholder": "e.g., 60", "required": true },
+        { "key": "Q47", "type": "radio", "required": true },
+        { "key": "Q1", "type": "number", "placeholder": "e.g., 35", "required": true, "min": 18, "max": 120, "step": 1},
+        { "key": "Q2", "type": "number", "placeholder": "e.g., 165", "required": true, "min": 100, "max": 300, "step": 1 },
+        { "key": "Q3", "type": "number", "placeholder": "e.g., 60", "required": true, "min": 30, "max": 500, "step": 0.1 },
         { "key": "Q4", "type": "select", "required": true },
         { "key": "Q5", "type": "radio", "required": true },
         { "key": "Q6", "type": "radio", "required": true },
         { "key": "Q7", "type": "radio", "required": true },
         { "key": "Q8", "type": "radio", "required": true },
-        { "key": "Q9", "type": "radio", "required": true, "condition": { "key": "Q9", "value": "Yes" }, "subQuestions": [
-          { "key": "Q10", "type": "number", "placeholder": "કૃપા કરીને એક સંખ્યા દાખલ કરો - વર્ષ", "required": true },
-          { "key": "Q11", "type": "radio", "required": true },
-          { "key": "Q12", "type": "radio", "required": true }
-        ]},
+        {
+          "key": "Q9",
+          "type": "radio",
+          "required": true,
+          "condition": { "key": "Q9", "value": "Yes" }, 
+          
+    
+          "subQuestions": [
+            {
+              "key": "Q10",
+              "type": "number",
+              "required": true,
+              "min": 8,
+              "max": 100,
+              "step":1,
+              "placeholder": "કૃપા કરીને એક નંબર દાખલ કરો"
+            },
+            {
+              "key": "Q12_Current",
+              "type": "radio",
+              "required": true,
+              "subQuestions": [
+                {
+                  "key": "Q11",
+                  "type": "radio",
+                  "required": true,
+                  "condition": { "key": "Q12_Current", "value": "Yes" }
+                },
+                {
+                  "key": "Q12",
+                  "type": "radio",
+                  "required": true,
+                  "condition": { "key": "Q12_Current", "value": "No" }
+                }
+              ]
+            }
+          ]
+        },
         { "key": "Q13", "type": "radio" },
         { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "Yes" }, "subQuestions": [
-          { "key": "Q15", "type": "number", "placeholder": "કૃપા કરીને એક નંબર દાખલ કરો", "required": true },
+          { "key": "Q15", "type": "number", "placeholder": "કૃપા કરીને એક નંબર દાખલ કરો", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q16", "type": "radio", "required": true },
           { "key": "Q17", "type": "radio", "required": true }
         ]},
@@ -61,10 +100,10 @@
         { "key": "Q19", "type": "radio", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
-          { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true },
+          { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "મૃત્યુની ઉંમર દાખલ કરો" }
+            { "key": "Q25", "type": "number", "placeholder": "મૃત્યુની ઉંમર દાખલ કરો", "min": 1, "max": 120, "step": 1 }
           ]},
           { "key": "Q26", "type": "select", "required": true }
         ]}
@@ -77,7 +116,7 @@
           "key": "Q27",
           "type": "radio", 
           "condition": {"key": "Q27", "value": "Yes"}, 
-          "videoUrlOnNo": "https://www.youtube.com/embed/wI71TXaoMp8?autoplay=1&rel=0&start=0", 
+          "videoUrlOnNo": "https://www.youtube.com/embed/nKVjF3u3CNg?autoplay=1&rel=0&start=0", 
           "subQuestions": [
             { "key": "Q28", "type": "radio" },
             { "key": "Q29", "type": "radio" },
@@ -154,7 +193,7 @@
     "Q6": {
       "question": "તમે પૂર્ણ કરેલ શિક્ષણનું ઉચ્ચતમ સ્તર કયું છે?",
       "answers": [ 
-        "કોઈ ઔપચારિક શિક્ષણ નહીં", "10 વર્ષથી ઓછું શાળાકીય શિક્ષણ", "મધ્યવર્તી શિક્ષણ", "સ્નાતક અને તેથી વધુ" 
+        "કોઈ ઔપચારિક શિક્ષણ નહીં", "ધોરણ ૯ સુધી (પ્રાથમિક/મધ્યમ)", "ધોરણ ૧૦ અથવા ૧૨ (માધ્યમિક/ઉચ્ચ માધ્યમિક)", "સ્નાતક અને તેથી વધુ" 
       ]
     },
     "Q7": {
@@ -166,21 +205,26 @@
       "answers": [ "હા","ના","મને ખબર નથી" ]
     },
     "Q9": {
-      "question": "શું તમને માસિક સ્રાવ થયો છે?",
-      "answers": [ "હા","ના","મને ખબર નથી" ]
+      "question": "તમને માસિક સ્રાવ ક્યારેય આવ્યું છે?",
+      "answers": [ "હા", "ના", "મને ખબર નથી" ]
     },
     "Q10": {
-      "question": "જ્યારે તમને પ્રથમ માસિક સ્રાવ થયો ત્યારે તમારી ઉંમર કેટલી હતી?",
+      "question": "તમને કેટલા વર્ષની ઉંમરે પ્રથમ માસિક સ્રાવ શરૂ થયો હતો?",
       "answers": []
     },
+    "Q12_Current": {
+      "question": "તમને હાલમાં માસિક સ્રાવ આવે છે?",
+      "answers": ["હા", "ના"]
+    },
     "Q11": {
-      "question": "શું તમારું માસિક ચક્ર નિયમિત છે કે અનિયમિત?",
-      "answers": [ "નિયમિત","અનિયમિત" ]
+      "question": "શું તમારું માસિક ચક્ર નિયમિત છે?",
+      "answers": [ "નિયમિત", "અનિયમિત" ]
     },
     "Q12": {
-      "question": "આમાંથી કઈ તમારી મેનોપોઝલ સ્થિતિનું શ્રેષ્ઠ વર્ણન કરે છે?",
+      "question": "તમારી માસિક સ્થિતિનું શ્રેષ્ઠ વર્ણન શું કરે છે?",
       "answers": [
-        "પ્રીમેનોપોઝલ (હજુ પણ માસિક સ્રાવ ચાલુ છે) - નિયમિત ચક્ર", "પ્રીમેનોપોઝલ (હજુ પણ માસિક સ્રાવ ચાલુ છે) - અનિયમિત ચક્ર", "પેરિમેનોપોઝલ (માસિક સ્રાવ અનિયમિત છે અથવા 12 મહિનાથી ઓછા સમયથી બંધ છે)", "પોસ્ટમેનોપોઝલ (માસિક સ્રાવ ચાલુ છે જે સતત 12 મહિના કે તેથી વધુ સમયથી બંધ છે)"
+        "પેરીમેનોપોઝલ (માસિક અનિયમિત છે અથવા 12 મહિના કરતાં ઓછા સમય માટે બંધ થઈ ગયું છે)",
+        "પોસ્ટમેનોપોઝલ (માસિક સતત 12 મહિના અથવા વધુ સમય માટે બંધ થઈ ગયું છે)"
       ]
     },
     "Q13": {
@@ -241,7 +285,7 @@
     },
     "Q26": {
       "question": "કૃપા કરીને તેમની વંશીયતા પસંદ કરો:",
-      "answers": []
+      "answers": ["ઉત્તર ભારતીય", "દક્ષિણ ભારતીય", "પૂર્વ ભારતીય", "પશ્ચિમ ભારતીય", "ઉત્તર-પૂર્વ ભારતીય", "મધ્ય ભારતીય / આદિવાસી સમુદાયો", "મિશ્રિત / અન્ય ભારતીય જાતિ", "પ્રવાસી ભારતીય (NRI)", "અન્ય"]
     },
     "Q27": {
       "question": "શું તમે ક્યારેય બ્રેસ્ટ એક્ઝામિનેશન (BE) કરાવ્યું છે?",
@@ -330,6 +374,10 @@
     "Q45": {
       "question": "હોસ્પિટલ ID દાખલ કરો (જો કોઈ હોય, તો છોડી દો):",
       "answers": []
+    },
+    "Q47": {
+      "question": "તમારું લિંગ શું છે?",
+      "answers": ["સ્ત્રી", "પુરુષ", "અન્ય"]
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "title": "सबमिशन पूर्ण",
   "message": "प्रश्नावली भरने के लिए धन्यवाद!",
-  "riskScoreLabel": "जोखिम स्कोर:",
+  "riskScoreLabel": "जोखिम स्तर:",
   "interpretation": {
     "title": "आपके जोखिम स्कोर का मतलब",
     "headers": {
@@ -47,7 +47,7 @@
   },
   "pdf": {
     "alertNoData": "PDF बनाने के लिए फॉर्म डेटा उपलब्ध नहीं है।",
-    "mainTitle": "आपके स्तन कैंसर जोखिम आकलन का सारांश",
+    "mainTitle": "स्तन कैंसर जोखिम आकलन सारांश",
     "footerPage": "पृष्ठ",
     "footerGenerated": "निर्मित",
     "answerPrefix": "उत्तर:",

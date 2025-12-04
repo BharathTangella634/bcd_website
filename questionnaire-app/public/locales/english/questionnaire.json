@@ -30,6 +30,11 @@
     },
     "defaults": {
       "q45": "Universal"
+    },
+    "invalidInput": {
+      "numberPrefix": "Please enter a valid number between ",
+      "and": "and",
+      "validInput": "please enter a valid input."
     }
   },
   "formStructure": [
@@ -38,22 +43,57 @@
       "questions": [
         { "key": "Q44", "type": "text" },
         { "key": "Q45", "type": "text", "placeholder": "Universal" },
-        { "key": "Q1", "type": "number", "placeholder": "e.g., 35", "required": true },
-        { "key": "Q2", "type": "number", "placeholder": "e.g., 165", "required": true },
-        { "key": "Q3", "type": "number", "placeholder": "e.g., 60", "required": true },
+        { "key": "Q47", "type": "radio", "required": true },
+        { "key": "Q1", "type": "number", "placeholder": "e.g., 35", "required": true, "min": 18, "max": 120, "step": 1 },
+        { "key": "Q2", "type": "number", "placeholder": "e.g., 165", "required": true, "min": 100, "max": 300, "step": 1},
+        { "key": "Q3", "type": "number", "placeholder": "e.g., 60", "required": true, "min": 30, "max": 500, "step": 0.1 },
         { "key": "Q4", "type": "select", "required": true },
         { "key": "Q5", "type": "radio", "required": true },
         { "key": "Q6", "type": "radio", "required": true },
         { "key": "Q7", "type": "radio", "required": true },
         { "key": "Q8", "type": "radio", "required": true },
-        { "key": "Q9", "type": "radio", "required": true, "condition": { "key": "Q9", "value": "Yes" }, "subQuestions": [
-          { "key": "Q10", "type": "number", "placeholder": "Please enter a number - years", "required": true },
-          { "key": "Q11", "type": "radio", "required": true },
-          { "key": "Q12", "type": "radio", "required": true }
-        ]},
+      
+        {
+          "key": "Q9",
+          "type": "radio",
+          "required": true,
+          "condition": { "key": "Q9", "value": "Yes" }, 
+          
+    
+          "subQuestions": [
+            {
+              "key": "Q10",
+              "type": "number",
+              "required": true,
+              "min": 8,
+              "max": 100,
+              "step":1,
+              "placeholder": "Enter age in years"
+            },
+            {
+              "key": "Q12_Current",
+              "type": "radio",
+              "required": true,
+              "subQuestions": [
+                {
+                  "key": "Q11",
+                  "type": "radio",
+                  "required": true,
+                  "condition": { "key": "Q12_Current", "value": "Yes" }
+                },
+                {
+                  "key": "Q12",
+                  "type": "radio",
+                  "required": true,
+                  "condition": { "key": "Q12_Current", "value": "No" }
+                }
+              ]
+            }
+          ]
+        },
         { "key": "Q13", "type": "radio" },
         { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "Yes" }, "subQuestions": [
-          { "key": "Q15", "type": "number", "placeholder": "Please enter a number", "required": true },
+          { "key": "Q15", "type": "number", "placeholder": "Please enter a number", "required": true, "min": 1, "max": 120, "step": 1},
           { "key": "Q16", "type": "radio", "required": true },
           { "key": "Q17", "type": "radio", "required": true }
         ]},
@@ -61,10 +101,10 @@
         { "key": "Q19", "type": "radio", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
-          { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true },
+          { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1  },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "Enter age of death" }
+            { "key": "Q25", "type": "number", "placeholder": "Enter age of death", "min": 1, "max": 120, "step": 1  }
           ]},
           { "key": "Q26", "type": "select", "required": true }
         ]}
@@ -77,7 +117,7 @@
           "key": "Q27",
           "type": "radio", 
           "condition": {"key": "Q27", "value": "Yes"}, 
-          "videoUrlOnNo": "https://www.youtube.com/embed/wI71TXaoMp8?autoplay=1&rel=0&start=0", 
+          "videoUrlOnNo": "https://www.youtube.com/embed/nKVjF3u3CNg?autoplay=1&rel=0&start=0", 
           "subQuestions": [
             { "key": "Q28", "type": "radio" },
             { "key": "Q29", "type": "radio" },
@@ -154,7 +194,7 @@
     "Q6": {
       "question": "What is the highest level of education you have completed?",
       "answers": [
-        "No formal education", "<10 years of Schooling", "Intermediate Education", "Graduation & Above"
+        "No formal education", "Up to Class 9(Primary/Middle)", "Class 10 or 12(Secondary/Higher Secondary)", "Graduation & Above"
       ]
     },
     "Q7": {
@@ -170,17 +210,22 @@
       "answers": [ "Yes", "No", "I don't know" ]
     },
     "Q10": {
-      "question": "What was your age when you had your first menstrual period?",
+      "question": "At what age did you get your first menstrual period?",
       "answers": []
     },
+    "Q12_Current": {
+      "question": "Are you currently having menstrual periods?",
+      "answers": ["Yes", "No"]
+    },
     "Q11": {
-      "question": "Are your menstrual cycles regular or irregular?",
+      "question": "Are your menstrual cycles regular?",
       "answers": [ "Regular", "Irregular" ]
     },
     "Q12": {
-      "question": "Which of these best describes your menopausal status?",
+      "question": "What best describes your menstrual status?",
       "answers": [
-        "Premenopausal (still having periods) - regular cycles", "Premenopausal (still having periods) - irregular cycles", "Perimenopausal (periods are irregular or have stopped for less than 12 months)", "Postmenopausal (periods have stopped for 12 consecutive months or more)"
+        "Perimenopausal (periods are irregular or have stopped for less than 12 months)",
+        "Postmenopausal (periods have stopped for 12 consecutive months or more)"
       ]
     },
     "Q13": {
@@ -241,7 +286,7 @@
     },
     "Q26": {
       "question": "Please select their ethnicity:",
-      "answers": []
+      "answers": ["North Indian", "South Indian", "East Indian", "West Indian", "North-East Indian", "Central Indian / Tribal Communities", "Mixed / Other Indian Ethnicity", "Non-Resident Indian (NRI)", "Others"]
     },
     "Q27": {
       "question": "Have you ever undergone a Breast Examination (BE)?",
@@ -330,6 +375,10 @@
     "Q45": {
       "question": "Enter the Hospital ID(If any, else leave):",
       "answers": []
+    },
+    "Q47": {
+      "question": "What is your Gender?",
+      "answers": ["Female", "Male", "Other"]
     }
   }
 }

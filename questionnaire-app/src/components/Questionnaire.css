@@ -533,6 +533,11 @@
 }
 
 
+.field-error {
+  color: #d93025;
+  font-size: 0.9rem;
+  margin-top: 6px;
+}
 
 
 /* --- Logo Styles --- */

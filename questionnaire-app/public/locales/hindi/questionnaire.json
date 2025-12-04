@@ -30,6 +30,11 @@
     },
     "defaults": {
       "q45": "सार्वभौमिक"
+    },
+    "invalidInput": {
+      "numberPrefix": "कृपया एक मान्य संख्या दर्ज करें ",
+      "and": "और",
+      "validInput": "कृपया एक मान्य इनपुट दर्ज करें।"
     }
   },
   "formStructure": [
@@ -38,22 +43,56 @@
       "questions": [
         { "key": "Q44", "type": "text" },
         { "key": "Q45", "type": "text", "placeholder": "सार्वभौमिक" },
-        { "key": "Q1", "type": "number", "placeholder": "उदा., 35", "required": true },
-        { "key": "Q2", "type": "number", "placeholder": "उदा., 165", "required": true },
-        { "key": "Q3", "type": "number", "placeholder": "उदा., 60", "required": true },
+        { "key": "Q47", "type": "radio", "required": true },
+        { "key": "Q1", "type": "number", "placeholder": "उदा., 35", "required": true, "min": 18, "max": 120, "step": 1},
+        { "key": "Q2", "type": "number", "placeholder": "उदा., 165", "required": true, "min": 100, "max": 300, "step": 1 },
+        { "key": "Q3", "type": "number", "placeholder": "उदा., 60", "required": true, "min": 30, "max": 500, "step": 0.1 },
         { "key": "Q4", "type": "select", "required": true },
         { "key": "Q5", "type": "radio", "required": true },
         { "key": "Q6", "type": "radio", "required": true },
         { "key": "Q7", "type": "radio", "required": true },
         { "key": "Q8", "type": "radio", "required": true },
-        { "key": "Q9", "type": "radio", "required": true, "condition": { "key": "Q9", "value": "हाँ" }, "subQuestions": [
-          { "key": "Q10", "type": "number", "placeholder": "कृपया संख्या दर्ज करें - वर्ष", "required": true },
-          { "key": "Q11", "type": "radio", "required": true },
-          { "key": "Q12", "type": "radio", "required": true }
-        ]},
+        {
+          "key": "Q9",
+          "type": "radio",
+          "required": true,
+          "condition": { "key": "Q9", "value": "हाँ" }, 
+          
+    
+          "subQuestions": [
+            {
+              "key": "Q10",
+              "type": "number",
+              "required": true,
+              "min": 8,
+              "max": 100,
+              "step":1,
+              "placeholder": "वर्षों में आयु दर्ज करें"
+            },
+            {
+              "key": "Q12_Current",
+              "type": "radio",
+              "required": true,
+              "subQuestions": [
+                {
+                  "key": "Q11",
+                  "type": "radio",
+                  "required": true,
+                  "condition": { "key": "Q12_Current", "value": "हाँ" }
+                },
+                {
+                  "key": "Q12",
+                  "type": "radio",
+                  "required": true,
+                  "condition": { "key": "Q12_Current", "value": "नहीं" }
+                }
+              ]
+            }
+          ]
+        },
         { "key": "Q13", "type": "radio" },
         { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "हाँ" }, "subQuestions": [
-          { "key": "Q15", "type": "number", "placeholder": "कृपया एक संख्या दर्ज करें", "required": true },
+          { "key": "Q15", "type": "number", "placeholder": "कृपया एक संख्या दर्ज करें", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q16", "type": "radio", "required": true },
           { "key": "Q17", "type": "radio", "required": true }
         ]},
@@ -61,10 +100,10 @@
         { "key": "Q19", "type": "radio", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "हाँ" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
-          { "key": "Q22", "type": "number", "placeholder": "उदा., 45", "required": true },
+          { "key": "Q22", "type": "number", "placeholder": "उदा., 45", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "नहीं" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "मृत्यु की आयु" }
+            { "key": "Q25", "type": "number", "placeholder": "मृत्यु की आयु", "min": 1, "max": 120, "step": 1 }
           ]},
           { "key": "Q26", "type": "select", "required": true }
         ]}
@@ -77,7 +116,7 @@
           "key": "Q27",
           "type": "radio", 
           "condition": {"key": "Q27", "value": "हाँ"}, 
-          "videoUrlOnNo": "https://www.youtube.com/embed/hB8Q0IsXF-w?autoplay=1&rel=0&start=0", 
+          "videoUrlOnNo": "https://www.youtube.com/embed/nKVjF3u3CNg?autoplay=1&rel=0&start=0", 
           "subQuestions": [
             { "key": "Q28", "type": "radio" },
             { "key": "Q29", "type": "radio" },
@@ -154,7 +193,7 @@
     "Q6": {
       "question": "आपने किस स्तर की उच्चतम शिक्षा पूरी की है?",
       "answers": [
-        "कोई औपचारिक शिक्षा नहीं","10 वर्षों से कम स्कूली शिक्षा","माध्यमिक शिक्षा","स्नातक और उससे ऊपर"
+        "कोई औपचारिक शिक्षा नहीं","कक्षा 9 तक (प्राथमिक/मध्य)", "कक्षा 10 या 12 (माध्यमिक/उच्च माध्यमिक)","स्नातक और उससे ऊपर"
       ]
     },
     "Q7": {
@@ -166,21 +205,26 @@
       "answers": [ "हाँ", "नहीं", "मुझे नहीं पता" ]
     },
     "Q9": {
-      "question": "क्या आपने मासिक धर्म अनुभव किया है?",
+      "question": "क्या आपको कभी मासिक धर्म हुआ है?",
       "answers": [ "हाँ", "नहीं", "मुझे नहीं पता" ]
     },
     "Q10": {
-      "question": "जब आपकी पहली मासिक धर्म हुई थी तब आपकी आयु कितनी थी?",
+      "question": "आपको किस उम्र में पहली बार मासिक धर्म हुआ था?",
       "answers": []
     },
+    "Q12_Current": {
+      "question": "क्या आपको वर्तमान में मासिक धर्म हो रहा है?",
+      "answers": ["हाँ", "नहीं"]
+    },
     "Q11": {
-      "question": "क्या आपके मासिक चक्र नियमित हैं या अनियमित?",
+      "question": "क्या आपके मासिक धर्म चक्र नियमित हैं?",
       "answers": [ "नियमित", "अनियमित" ]
     },
     "Q12": {
-      "question": "इनमें से कौन सा आपके मेनोपॉज़ (रजोनिवृत्ति) की स्थिति का वर्णन करता है?",
+      "question": "आपकी मासिक धर्म की स्थिति का सबसे अच्छा वर्णन क्या है?",
       "answers": [
-        "प्रीमेनोपॉज़ल (अभी भी पीरियड होते हैं) - नियमित चक्र","प्रीमेनोपॉज़ल (अभी भी पीरियड होते हैं) - अनियमित चक्र","पेरिमेनोपॉज़ल (पीरियड्स अनियमित हैं या 12 महीनों से कम समय के लिए रुके हुए हैं), रजोनिवृत्ति के बाद (लगातार 12 महीने या उससे अधिक समय तक मासिक धर्म बंद हो जाना)"
+        "पेरीमेनोपॉज़ल (मासिक धर्म अनियमित है या 12 महीने से कम समय के लिए बंद हो गया है)",
+        "पोस्टमेनोपॉज़ल (मासिक धर्म लगातार 12 महीने या उससे अधिक समय तक बंद रहा है)"
       ]
     },
     "Q13": {
@@ -241,7 +285,7 @@
     },
     "Q26": {
       "question": "कृपया उनकी जातीयता चुनें:",
-      "answers": []
+      "answers": ["उत्तर भारतीय", "दक्षिण भारतीय", "पूर्वी भारतीय", "पश्चिमी भारतीय", "उत्तर-पूर्व भारतीय", "मध्य भारतीय / आदिवासी समुदाय", "मिश्रित / अन्य भारतीय समुदाय", "प्रवासी भारतीय (NRI)", "अन्य"]
     },
     "Q27": {
       "question": "क्या आपने कभी स्तन परीक्षण (BE) कराया है?",
@@ -330,6 +374,10 @@
     "Q45": {
       "question": "अस्पताल आईडी दर्ज करें (यदि कोई हो तो, अन्यथा खाली छोड़ें):",
       "answers": []
+    },
+    "Q47": {
+      "question": "आपका लिंग क्या है?",
+      "answers": [ "महिला", "पुरुष", "अन्य" ]
     }
   }
 }

@@ -691,6 +691,38 @@
 }
 
 
+.what-to-do-container {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.what-to-do-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.8rem;
+}
+
+.what-to-do-box {
+  background-color: #f9f9f9;
+  border-left: 4px solid #007bff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.what-to-do-text {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.no-data-text {
+  font-size: 0.95rem;
+  color: #777;
+  margin-top: 0.5rem;
+}
 
 
 

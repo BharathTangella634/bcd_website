@@ -1258,6 +1258,27 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
   const [q27VideoConfirmed, setQ27VideoConfirmed] = useState(false);
   const [randomPatientId, setRandomPatientId] = useState('');
   
+  // Helper to get the translated value for a condition
+  // It looks up the English index of the value (e.g., "No") and finds the matching translated string.
+  const getTranslatedConditionValue = (condition) => {
+    if (!condition || !condition.key || !condition.value) return null;
+    
+    // 1. Get English answers for the condition key
+    const enAnswers = questionnaireDataEn[condition.key]?.answers;
+    if (!Array.isArray(enAnswers)) return null;
+
+    // 2. Find index of the required value (e.g., "No" is index 1)
+    const index = enAnswers.indexOf(condition.value);
+    if (index === -1) return null;
+
+    // 3. Get the Translated answer at that index
+    // We use the 't' function logic or direct prop access
+    const translatedAnswers = questionnaireData[condition.key]?.answers;
+    
+    // Fallback to English if translation missing
+    return translatedAnswers?.[index] || enAnswers[index];
+  };
+
   // Effect to set random ID and defaults
   useEffect(() => {
     const newId = generateRandomId();
@@ -1286,13 +1307,19 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
               
               // CRITICAL FIX: Check condition against the translated "Yes" value
               // Get the "value" from the JSON (e.g., "Yes")
-              const conditionValue = q.condition ? q.condition.value : null; 
-              // Find the translated version of that value (e.g., "हाँ")
-              // We assume "Yes" is always the first answer (index 0)
-              const translatedConditionValue = (q.condition && q.condition.key && t(`questions.${q.condition.key}.answers`)) ? t(`questions.${q.condition.key}.answers.0`) : null; 
+              // const conditionValue = q.condition ? q.condition.value : null; 
+              // // Find the translated version of that value (e.g., "हाँ")
+              // // We assume "Yes" is always the first answer (index 0)
+              // const translatedConditionValue = (q.condition && q.condition.key && t(`questions.${q.condition.key}.answers`)) ? t(`questions.${q.condition.key}.answers.0`) : null; 
 
-              if (q.subQuestions && q.condition && currentFormData[q.condition.key] === translatedConditionValue) {
-                  traverse(q.subQuestions);
+              // if (q.subQuestions && q.condition && currentFormData[q.condition.key] === translatedConditionValue) {
+              //     traverse(q.subQuestions);
+              // }
+              if (q.subQuestions && q.condition) {
+                  const translatedConditionValue = getTranslatedConditionValue(q.condition);
+                  if (currentFormData[q.condition.key] === translatedConditionValue) {
+                      traverse(q.subQuestions);
+                  }
               }
           });
       };
@@ -1372,13 +1399,19 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
             if (q.required) {
                 visibleRequired.push(q.name || q.key);
             }
-             // CRITICAL FIX: Check condition against translated "Yes" value
-             const conditionValue = q.condition ? q.condition.value : null;
-             // Assumes "Yes" is the first answer (index 0)
-             const translatedConditionValue = (q.condition && q.condition.key && t(`questions.${q.condition.key}.answers`)) ? t(`questions.${q.condition.key}.answers.0`) : null;
+            //  // CRITICAL FIX: Check condition against translated "Yes" value
+            //  const conditionValue = q.condition ? q.condition.value : null;
+            //  // Assumes "Yes" is the first answer (index 0)
+            //  const translatedConditionValue = (q.condition && q.condition.key && t(`questions.${q.condition.key}.answers`)) ? t(`questions.${q.condition.key}.answers.0`) : null;
 
-             if (q.subQuestions && q.condition && FormData[q.condition.key] === translatedConditionValue) {
-                traverseQuestions(q.subQuestions);
+            //  if (q.subQuestions && q.condition && FormData[q.condition.key] === translatedConditionValue) {
+            //     traverseQuestions(q.subQuestions);
+            // }
+            if (q.subQuestions && q.condition) {
+                const translatedConditionValue = getTranslatedConditionValue(q.condition);
+                if (formData[q.condition.key] === translatedConditionValue) {
+                     traverseQuestions(q.subQuestions);
+                }
             }
         }
     };
@@ -1387,6 +1420,47 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     }
     return visibleRequired;
   };
+  // Helper: validate numeric rules and return array of failing keys
+  const validateNumericRules = (data) => {
+    const failures = [];
+
+    if (!Array.isArray(formStructure)) return failures;
+
+    const traverse = (questions) => {
+      if (!Array.isArray(questions)) return;
+      for (const q of questions) {
+        const key = q.name || q.key;
+        // Only validate numeric fields that have value
+        if (q.type === 'number') {
+          const raw = data[key];
+          if (raw !== undefined && raw !== null && raw !== '') {
+            // coerce to number safely
+            const num = Number(raw);
+            if (Number.isNaN(num)) {
+              failures.push(key);
+              continue;
+            }
+            if (q.min !== undefined && num < q.min) {
+              failures.push(key);
+              continue;
+            }
+            if (q.max !== undefined && num > q.max) {
+              failures.push(key);
+              continue;
+            }
+          } else if (q.required) {
+            // if required and empty, will be caught by missingFields too; optional
+          }
+        }
+        // Recurse into subQuestions
+        if (q.subQuestions) traverse(q.subQuestions);
+      }
+    };
+
+    formStructure.forEach(section => traverse(section.questions));
+    return failures;
+  };
+
   
   // handleSubmit (with default value logic) - Modified for translated text
   const handleSubmit = (e) => {
@@ -1414,19 +1488,34 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
         const value = dataToSubmit[key];
         return value === undefined || value === null || value === '' || (Array.isArray(value) && value.length === 0);
     });
-    console.log('Submitting:', { dataToSubmit, dataToSubmitEn, missingFields });
+    // console.log('Submitting:', { dataToSubmit, dataToSubmitEn, missingFields });
 
-    if (missingFields.length > 0) {
-      console.log('Validation Errors:', missingFields);
-        setValidationErrors(missingFields);
-        alert(t('ui.errors.validationAlert')); // Use translated alert
-        const firstErrorKey = missingFields[0];
-        const errorElement = document.querySelector(`[name="${firstErrorKey}"]`);
-        if (errorElement) {
-            errorElement.closest('.question-block').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        return;
+    const numericFailures = validateNumericRules(dataToSubmit);
+
+    const combinedFailures = [...new Set([...missingFields, ...numericFailures])];
+    // console.log('Validation Failures:', combinedFailures);
+
+    if (combinedFailures.length > 0) {
+      setValidationErrors(combinedFailures);
+      alert(t('ui.errors.validationAlert')); // same alert
+      const firstErrorKey = combinedFailures[0];
+      const errorElement = document.querySelector(`[name="${firstErrorKey}"]`);
+      if (errorElement) {
+        errorElement.closest('.question-block').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
     }
+    // if (missingFields.length > 0) {
+    //   console.log('Validation Errors:', missingFields);
+    //     setValidationErrors(missingFields);
+    //     alert(t('ui.errors.validationAlert')); // Use translated alert
+    //     const firstErrorKey = missingFields[0];
+    //     const errorElement = document.querySelector(`[name="${firstErrorKey}"]`);
+    //     if (errorElement) {
+    //         errorElement.closest('.question-block').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    //     }
+    //     return;
+    // }
 
   
     onSubmit(dataToSubmit, dataToSubmitEn);
@@ -1445,6 +1534,35 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     }
 
     if (!Array.isArray(data.answers) || data.answers.length === 0) {
+      if (qConfig.type === 'number') {
+        const minAttr = qConfig.min !== undefined ? qConfig.min : undefined;
+        const maxAttr = qConfig.max !== undefined ? qConfig.max : undefined;
+        const stepAttr = qConfig.step !== undefined ? qConfig.step : undefined;
+
+        return (
+          <>
+            <input
+              type="number"
+              name={name}
+              placeholder={placeholder}
+              value={formData[name] || ''}
+              onChange={handleChange}
+              className="text-input"
+              min={minAttr}
+              max={maxAttr}
+              step={stepAttr}
+            />
+            {/* <-- paste the error message snippet here */}
+            {validationErrors.includes(name) && (
+              <div className="field-error">
+                {qConfig.min !== undefined && qConfig.max !== undefined
+                  ? `${t('ui.invalidInput.numberPrefix')} ${qConfig.min} ${t('ui.invalidInput.and')} ${qConfig.max}.`
+                  : `${t('ui.invalidInput.validInput')} `}
+              </div>
+            )}
+          </>
+        );
+      }
       return <input 
         type={qConfig.type || 'text'} 
         name={name} 
@@ -1487,12 +1605,12 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
                        /> {ans}
                      </label>
                  ))}
-                  <input 
+                  {/* <input 
                     type="text" name={qConfig.otherOptionId} 
                     placeholder={qConfig.otherPlaceholder || t('ui.inputs.otherPlaceholder', 'Specify other')} 
                     onChange={handleChange} className="text-input" 
                     value={formData[qConfig.otherOptionId] || ''}
-                  />
+                  /> */}
               </div>
           );
        case 'radio':
@@ -1513,31 +1631,113 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
   };
 
   // renderSubQuestions - Modified to use translated data
+  // const renderSubQuestions = (subQuestions, parentNumber) => {
+  //   if (!Array.isArray(subQuestions)) return null; 
+  //   return subQuestions.map((subQConfig, index) => {
+  //     const subQData = questionnaireData[subQConfig.key];
+  //     if (!subQData) return null;
+      
+  //     const subQName = subQConfig.name || subQConfig.key;
+  //     const displayNumber = `${parentNumber}${String.fromCharCode(97 + index)}.`; 
+      
+  //     // const conditionValue = subQConfig.condition ? subQConfig.condition.value : null;
+  //     // Assumes "Yes" is index 0
+  //     // let translatedConditionValue = (subQConfig.condition && subQConfig.condition.key) ? t(`questions.${subQConfig.condition.key}.answers.0`) : null;
+  //     // if (subQConfig.condition.key === "Q24") {
+  //     //   translatedConditionValue = (subQConfig.condition && subQConfig.condition.key) ? t(`questions.${subQConfig.condition.key}.answers.1`) : null;
+  //     // }
+
+  //     let translatedConditionValue = null;
+  //     if (subQConfig.condition && subQConfig.condition.key) {
+  //       // default: use the first answer translation (index 0) if present
+  //       // translatedConditionValue = t(`questions.${subQConfig.condition.key}.answers.0`, { defaultValue: null });
+  //       translatedConditionValue = getTranslatedConditionValue(subQConfig.condition);
+      
+
+  //       // special-case: if condition key is Q24, we want "No" (answers[1]) as the trigger
+  //       if (subQConfig.condition.key === "Q24") {
+  //         translatedConditionValue = t(`questions.${subQConfig.condition.key}.answers.1`, { defaultValue: null });
+  //       }
+  //     }
+
+  //     return (
+  //       <React.Fragment key={subQName}>
+  //         <div className={`question-block ${validationErrors.includes(subQName) ? 'error' : ''}`}>
+  //           <label>
+  //               {displayNumber} {subQData.question}
+  //               {subQConfig.required && <span className="required-asterisk">*</span>}
+  //           </label>
+  //           {renderInput(subQConfig)} 
+  //         </div>
+  //         {subQConfig.subQuestions && (
+  //           <div className={`sub-question-container ${formData[subQName] === translatedConditionValue ? 'visible' : ''}`}>
+  //             {renderSubQuestions(subQConfig.subQuestions, displayNumber.slice(0,-1))} 
+  //           </div>
+  //         )}
+  //       </React.Fragment>
+  //     );
+  //   });
+  // };
+  // renderSubQuestions - Corrected to handle both Q12 (Fork) and Q24 (Self-Trigger)
+  // renderSubQuestions - "Look-Ahead" Version to fix empty bars
+  // renderSubQuestions - Optimized to use formDataEn for reliable condition checks
   const renderSubQuestions = (subQuestions, parentNumber) => {
-    if (!Array.isArray(subQuestions)) return null; 
+    if (!Array.isArray(subQuestions)) return null;
+
     return subQuestions.map((subQConfig, index) => {
       const subQData = questionnaireData[subQConfig.key];
       if (!subQData) return null;
+
+      const subQKey = subQConfig.name || subQConfig.key;
+      const conditionKey = subQConfig.condition ? subQConfig.condition.key : null;
+
+      // --- LOGIC 1: SHOULD THIS QUESTION (THE PARENT) RENDER? ---
+      // Check: Is this question dependent on a previous question?
+      // (e.g., Q11 depends on Q12_Current)
+      if (subQConfig.condition && conditionKey !== subQKey) {
+         // FIX: Check against formDataEn directly. This matches the "value": "Yes" in your JSON
+         // regardless of the current UI language or missing translation keys.
+         if (formDataEn[conditionKey] !== subQConfig.condition.value) {
+             return null; 
+         }
+      }
+
+      const displayNumber = `${parentNumber}${String.fromCharCode(97 + index)}.`;
+
+      // --- LOGIC 2: PRE-CALCULATE CHILDREN ---
+      let renderedChildren = null;
       
-      const subQName = subQConfig.name || subQConfig.key;
-      const displayNumber = `${parentNumber}${String.fromCharCode(97 + index)}.`; 
-      
-      const conditionValue = subQConfig.condition ? subQConfig.condition.value : null;
-      // Assumes "Yes" is index 0
-      const translatedConditionValue = (subQConfig.condition && subQConfig.condition.key) ? t(`questions.${subQConfig.condition.key}.answers.0`) : null;
+      // Check if this question allows children (Self-Trigger Logic, e.g. Q24="No")
+      let allowChildren = true;
+      if (subQConfig.condition && conditionKey === subQKey) {
+          // FIX: Check against formDataEn directly.
+          if (formDataEn[subQKey] !== subQConfig.condition.value) {
+              allowChildren = false;
+          }
+      }
+
+      // Recursively generate children if allowed
+      if (subQConfig.subQuestions && allowChildren) {
+          renderedChildren = renderSubQuestions(subQConfig.subQuestions, displayNumber.slice(0,-1));
+      }
+
+      // --- LOGIC 3: CHECK FOR VALID CHILDREN ---
+      const hasValidChildren = Array.isArray(renderedChildren) && renderedChildren.some(child => child !== null);
 
       return (
-        <React.Fragment key={subQName}>
-          <div className={`question-block ${validationErrors.includes(subQName) ? 'error' : ''}`}>
+        <React.Fragment key={subQKey}>
+          <div className={`question-block ${validationErrors.includes(subQKey) ? 'error' : ''}`}>
             <label>
                 {displayNumber} {subQData.question}
                 {subQConfig.required && <span className="required-asterisk">*</span>}
             </label>
-            {renderInput(subQConfig)} 
+            {renderInput(subQConfig)}
           </div>
-          {subQConfig.subQuestions && (
-            <div className={`sub-question-container ${formData[subQName] === translatedConditionValue ? 'visible' : ''}`}>
-              {renderSubQuestions(subQConfig.subQuestions, displayNumber.slice(0,-1))} 
+          
+          {/* Only render the container DIV if we actually have valid children to show */}
+          {hasValidChildren && (
+            <div className="sub-question-container visible">
+              {renderedChildren}
             </div>
           )}
         </React.Fragment>

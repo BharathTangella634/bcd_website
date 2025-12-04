@@ -1,7 +1,7 @@
 {
   "title": "Submission Complete",
   "message": "Thank you for completing the questionnaire!",
-  "riskScoreLabel": "Risk Score:",
+  "riskScoreLabel": "Risk Level:",
   "interpretation": {
     "title": "What Your Risk Score Means",
     "headers": {
@@ -48,7 +48,7 @@
   },
   "pdf": {
     "alertNoData": "Form data is not available to generate a PDF.",
-    "mainTitle": "Your Breast Cancer Risk Assessment Summary",
+    "mainTitle": "Breast Cancer Risk Assessment Summary",
     "footerPage": "Page",
     "footerGenerated": "Generated",
     "answerPrefix": "A:",

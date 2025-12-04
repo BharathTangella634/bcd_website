@@ -1,7 +1,7 @@
 {
   "title": "सादरीकरण पूर्ण झाले",
   "message": "प्रश्नावली पूर्ण केल्याबद्दल धन्यवाद!",
-  "riskScoreLabel": "धोका गुण: ",
+  "riskScoreLabel": "धोका स्तर: ",
   "interpretation": {
     "title": "तुमचा धोका गुण काय दर्शवतो",
     "headers": {

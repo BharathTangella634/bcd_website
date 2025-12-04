@@ -30,7 +30,13 @@
     },
     "defaults": {
       "q45": "সর্বজনীন"
+    },
+    "invalidInput": {
+      "numberPrefix": "অনুগ্রহ করে একটি বৈধ সংখ্যা লিখুন ",
+      "and": "এবং",
+      "validInput": "অনুগ্রহ করে একটি সঠিক ইনপুট দিন।"
     }
+
   },
   "formStructure": [
     {
@@ -38,22 +44,56 @@
       "questions": [
         { "key": "Q44", "type": "text" },
         { "key": "Q45", "type": "text", "placeholder": "সর্বজনীন" },
-        { "key": "Q1", "type": "number", "placeholder": "যেমন., 35", "required": true },
-        { "key": "Q2", "type": "number", "placeholder": "যেমন., 165", "required": true },
-        { "key": "Q3", "type": "number", "placeholder": "যেমন., 60", "required": true },
+        { "key": "Q47", "type": "radio", "required": true },
+        { "key": "Q1", "type": "number", "placeholder": "যেমন., 35", "required": true, "min": 18, "max": 120, "step": 1},
+        { "key": "Q2", "type": "number", "placeholder": "যেমন., 165", "required": true, "min": 100, "max": 300, "step": 1},
+        { "key": "Q3", "type": "number", "placeholder": "যেমন., 60", "required": true, "min": 30, "max": 500, "step": 0.1 },
         { "key": "Q4", "type": "select", "required": true },
         { "key": "Q5", "type": "radio", "required": true },
         { "key": "Q6", "type": "radio", "required": true },
         { "key": "Q7", "type": "radio", "required": true },
         { "key": "Q8", "type": "radio", "required": true },
-        { "key": "Q9", "type": "radio", "required": true, "condition": { "key": "Q9", "value": "Yes" }, "subQuestions": [
-          { "key": "Q10", "type": "number", "placeholder": "অনুগ্রহ করে একটি সংখ্যা লিখুন - বছর", "required": true },
-          { "key": "Q11", "type": "radio", "required": true },
-          { "key": "Q12", "type": "radio", "required": true }
-        ]},
+        {
+          "key": "Q9",
+          "type": "radio",
+          "required": true,
+          "condition": { "key": "Q9", "value": "Yes" }, 
+          
+    
+          "subQuestions": [
+            {
+              "key": "Q10",
+              "type": "number",
+              "required": true,
+              "min": 8,
+              "max": 100,
+              "step":1,
+              "placeholder": "বছরে বয়স লিখুন"
+            },
+            {
+              "key": "Q12_Current",
+              "type": "radio",
+              "required": true,
+              "subQuestions": [
+                {
+                  "key": "Q11",
+                  "type": "radio",
+                  "required": true,
+                  "condition": { "key": "Q12_Current", "value": "Yes" }
+                },
+                {
+                  "key": "Q12",
+                  "type": "radio",
+                  "required": true,
+                  "condition": { "key": "Q12_Current", "value": "No" }
+                }
+              ]
+            }
+          ]
+        },
         { "key": "Q13", "type": "radio" },
         { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "Yes" }, "subQuestions": [
-          { "key": "Q15", "type": "number", "placeholder": "অনুগ্রহ করে একটি নম্বর লিখুন।", "required": true },
+          { "key": "Q15", "type": "number", "placeholder": "অনুগ্রহ করে একটি নম্বর লিখুন।", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q16", "type": "radio", "required": true },
           { "key": "Q17", "type": "radio", "required": true }
         ]},
@@ -61,10 +101,10 @@
         { "key": "Q19", "type": "radio", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
-          { "key": "Q22", "type": "number", "placeholder": "যেমন., 45", "required": true },
+          { "key": "Q22", "type": "number", "placeholder": "যেমন., 45", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "মৃত্যুর বয়স লিখুন" }
+            { "key": "Q25", "type": "number", "placeholder": "মৃত্যুর বয়স লিখুন", "min": 1, "max": 120, "step": 1 }
           ]},
           { "key": "Q26", "type": "select", "required": true }
         ]}
@@ -77,7 +117,7 @@
           "key": "Q27",
           "type": "radio", 
           "condition": {"key": "Q27", "value": "Yes"}, 
-          "videoUrlOnNo": "https://www.youtube.com/embed/sgFCNcEaGr0?autoplay=1&rel=0&start=0", 
+          "videoUrlOnNo": "https://www.youtube.com/embed/bfoOshMQTq4?autoplay=1&rel=0&start=0", 
           "subQuestions": [
             { "key": "Q28", "type": "radio" },
             { "key": "Q29", "type": "radio" },
@@ -154,7 +194,7 @@
     "Q6": {
       "question": "আপনি শিক্ষার সর্বোচ্চ স্তর কি সম্পন্ন করেছেন?",
       "answers": [
-        "প্রাতিষ্ঠানিক শিক্ষা নেই","10 বছরেরও কম সময় ধরে স্কুলে পড়াশোনা","ইন্টারমিডিয়েট শিক্ষা","স্নাতক এবং উপরে"
+        "প্রাতিষ্ঠানিক শিক্ষা নেই","শ্রেণি ৯ পর্যন্ত (প্রাথমিক/মাধ্যমিক)", "শ্রেণি ১০ বা ১২ (মাধ্যমিক/উচ্চ মাধ্যমিক)","স্নাতক এবং উপরে"
       ]
     },
     "Q7": {
@@ -166,21 +206,26 @@
       "answers": [ "হ্যাঁ","না","আমি জানি না" ]
     },
     "Q9": {
-      "question": "আপনার কি মাসিক হয়েছে?",
-      "answers": [ "হ্যাঁ","না","আমি জানি না" ]
+      "question": "আপনার কি কখনও মাসিক হয়েছে?",
+      "answers": [ "হ্যাঁ", "না", "আমি জানি না" ]
     },
     "Q10": {
-      "question": "আপনার প্রথম মাসিকের সময় আপনার বয়স কত ছিল?",
+      "question": "কত বছর বয়সে আপনার প্রথম মাসিক শুরু হয়েছিল?",
       "answers": []
     },
+    "Q12_Current": {
+      "question": "আপনার কি বর্তমানে মাসিক চলছে?",
+      "answers": ["হ্যাঁ", "না"]
+    },
     "Q11": {
-      "question": "আপনার মাসিক চক্র কি নিয়মিত নাকি অনিয়মিত?",
-      "answers": [ "নিয়মিত","অনিয়মিত" ]
+      "question": "আপনার মাসিক চক্র কি নিয়মিত?",
+      "answers": [ "নিয়মিত", "অনিয়মিত" ]
     },
     "Q12": {
-      "question": "এইগুলির মধ্যে কোনটি আপনার মেনোপজ অবস্থাকে সবচেয়ে ভালভাবে বর্ণনা করে?",
+      "question": "আপনার মাসিকের অবস্থা সবচেয়ে ভালোভাবে কী বর্ণনা করে?",
       "answers": [
-        "প্রিমেনোপজাল (এখনও মাসিক বন্ধ) - নিয়মিত চক্র", "প্রিমেনোপজাল (এখনও মাসিক বন্ধ) - অনিয়মিত চক্র", "পেরিমেনোপজাল (পিরিয়ড অনিয়মিত বা 12 মাসেরও কম সময় ধরে বন্ধ)", "পোস্টমেনোপজাল (পিরিয়ড টানা 12 মাস বা তার বেশি সময় ধরে বন্ধ)"
+        "পেরিমেনোপজাল (মাসিক অনিয়মিত বা 12 মাসের কম সময়ের জন্য বন্ধ হয়ে গেছে)",
+        "পোস্টমেনোপজাল (মাসিক টানা 12 মাস বা তার বেশি সময় ধরে বন্ধ হয়ে গেছে)"
       ]
     },
     "Q13": {
@@ -241,7 +286,7 @@
     },
     "Q26": {
       "question": "অনুগ্রহ করে তাদের জাতিগত নির্বাচন করুন:",
-      "answers": []
+      "answers": ["উত্তর ভারতীয়", "দক্ষিণ ভারতীয়", "পূর্ব ভারতীয়", "পশ্চিম ভারতীয়", "উত্তর-পূর্ব ভারতীয়", "মধ্য ভারতীয় / আদিবাসী সম্প্রদায়", "মিশ্রিত / অন্যান্য ভারতীয় জাতিগততা", "অপ্রবাসী ভারতীয় (এনআরআই)", "অন্যান্য"]
     },
     "Q27": {
       "question": "আপনি কি কখনও স্তন পরীক্ষা (BE) করেছেন?",
@@ -330,6 +375,10 @@
     "Q45": {
       "question": "হাসপাতালের আইডি লিখুন (যদি থাকে, অন্যথায় চলে যান):",
       "answers": []
+    },
+    "Q47": {
+      "question": "আপনার লিঙ্গ কী?",
+      "answers": ["মহিলা", "পুরুষ", "অন্যান্য"]
     }
   }
 }
