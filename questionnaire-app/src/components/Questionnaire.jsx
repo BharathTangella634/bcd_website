@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import './Questionnaire.css';
 // NEW: Import the translation hook
 import { useTranslation } from 'react-i18next';
@@ -33,14 +33,14 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     Q45: 'Universal'
   }));
   const [validationErrors, setValidationErrors] = useState([]);
-  const [progress, setProgress] = useState(0);
   const [showQ27VideoPrompt, setShowQ27VideoPrompt] = useState(false); 
   const [q27VideoConfirmed, setQ27VideoConfirmed] = useState(false);
   const [randomPatientId, setRandomPatientId] = useState('');
   
   // Helper to get the translated value for a condition
   // It looks up the English index of the value (e.g., "No") and finds the matching translated string.
-  const getTranslatedConditionValue = (condition) => {
+  // Wrapped in useCallback to be stable for useMemo dependencies
+  const getTranslatedConditionValue = useCallback((condition) => {
     if (!condition || !condition.key || !condition.value) return null;
     
     // 1. Get English answers for the condition key
@@ -57,7 +57,7 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     
     // Fallback to English if translation missing
     return translatedAnswers?.[index] || enAnswers[index];
-  };
+  }, [questionnaireData, questionnaireDataEn]);
 
   // Effect to set random ID and defaults
   useEffect(() => {
@@ -72,8 +72,10 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
   }, [t]); // 't' dependency re-runs this if language changes
   
   
-  // Progress calculation - Now safe because formStructure is a prop
-  useEffect(() => {
+  // Progress calculation - OPTIMIZED: Moved to useMemo to avoid extra render cycle
+  const progress = useMemo(() => {
+    if (!Array.isArray(formStructure)) return 0;
+
     const getVisibleQuestionKeys = (currentFormData) => {
       const visibleKeys = new Set();
       const traverse = (questions) => {
@@ -85,16 +87,6 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
                    visibleKeys.add(q.otherOptionId);
               }
               
-              // CRITICAL FIX: Check condition against the translated "Yes" value
-              // Get the "value" from the JSON (e.g., "Yes")
-              // const conditionValue = q.condition ? q.condition.value : null; 
-              // // Find the translated version of that value (e.g., "हाँ")
-              // // We assume "Yes" is always the first answer (index 0)
-              // const translatedConditionValue = (q.condition && q.condition.key && t(`questions.${q.condition.key}.answers`)) ? t(`questions.${q.condition.key}.answers.0`) : null; 
-
-              // if (q.subQuestions && q.condition && currentFormData[q.condition.key] === translatedConditionValue) {
-              //     traverse(q.subQuestions);
-              // }
               if (q.subQuestions && q.condition) {
                   const translatedConditionValue = getTranslatedConditionValue(q.condition);
                   if (currentFormData[q.condition.key] === translatedConditionValue) {
@@ -103,9 +95,7 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
               }
           });
       };
-      if (Array.isArray(formStructure)) {
-        formStructure.forEach(section => traverse(section.questions));
-      }
+      formStructure.forEach(section => traverse(section.questions));
       return visibleKeys;
     };
 
@@ -120,16 +110,13 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
         return answeredCount;
     };
 
-    if (!Array.isArray(formStructure)) {
-        setProgress(0);
-        return;
-    }
     const visibleKeysSet = getVisibleQuestionKeys(formData);
     const answeredCount = countAnsweredVisibleQuestions(formData, visibleKeysSet);
     const totalVisible = visibleKeysSet.size;
     const newProgress = totalVisible > 0 ? Math.round((answeredCount / totalVisible) * 100) : 0;
-    setProgress(Math.min(newProgress, 100)); 
-  }, [formData, formStructure, t]); // 't' is a dependency
+    return Math.min(newProgress, 100);
+  }, [formData, formStructure, getTranslatedConditionValue]);
+
 
   // handleChange - Modified to use translated "No"
   const handleChange = (e) => {
@@ -179,14 +166,6 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
             if (q.required) {
                 visibleRequired.push(q.name || q.key);
             }
-            //  // CRITICAL FIX: Check condition against translated "Yes" value
-            //  const conditionValue = q.condition ? q.condition.value : null;
-            //  // Assumes "Yes" is the first answer (index 0)
-            //  const translatedConditionValue = (q.condition && q.condition.key && t(`questions.${q.condition.key}.answers`)) ? t(`questions.${q.condition.key}.answers.0`) : null;
-
-            //  if (q.subQuestions && q.condition && FormData[q.condition.key] === translatedConditionValue) {
-            //     traverseQuestions(q.subQuestions);
-            // }
             if (q.subQuestions && q.condition) {
                 const translatedConditionValue = getTranslatedConditionValue(q.condition);
                 if (formData[q.condition.key] === translatedConditionValue) {
@@ -534,7 +513,7 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
               const name = qConfig.name || qConfig.key;
               
               // CRITICAL FIX: Get translated "Yes" and "No" for conditions
-              const conditionValue = qConfig.condition ? qConfig.condition.value : null; 
+              // const conditionValue = qConfig.condition ? qConfig.condition.value : null;
               // Assumes "Yes" is index 0
               const translatedConditionValue = (qConfig.condition && qConfig.condition.key) ? t(`questions.${qConfig.condition.key}.answers.0`) : null; 
 
