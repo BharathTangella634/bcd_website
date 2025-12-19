@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import './Questionnaire.css';
 // NEW: Import the translation hook
 import { useTranslation } from 'react-i18next';
-
+import QuestionBlock from './QuestionBlock';
 
 // Helper function to generate random string (Unchanged)
 const generateRandomId = (length = 8) => {
@@ -38,8 +38,6 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
   const [randomPatientId, setRandomPatientId] = useState('');
   
   // Helper to get the translated value for a condition
-  // It looks up the English index of the value (e.g., "No") and finds the matching translated string.
-  // Wrapped in useCallback to be stable for useMemo dependencies
   const getTranslatedConditionValue = useCallback((condition) => {
     if (!condition || !condition.key || !condition.value) return null;
     
@@ -118,7 +116,11 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
   }, [formData, formStructure, getTranslatedConditionValue]);
 
 
-  // handleChange - Modified to use translated "No"
+  // handleChange - Refactored to avoid side effects
+  // The 'handleChange' function will be re-created on every render (no useCallback)
+  // because QuestionBlock ignores its identity anyway in arePropsEqual.
+  // This simplifies dependencies and ensures 'formData' is always fresh if needed,
+  // but we use functional updates anyway.
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     // CRITICAL FIX: Get translated "No" value for Q27
@@ -133,29 +135,33 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
         setQ27VideoConfirmed(false); 
       }
     }
+
+    // Handle changes
     if (type === 'checkbox') {
         const currentValues = formData[name] || [];
         const newValues = checked ? [...currentValues, value] : currentValues.filter(v => v !== value);
+
+        // Calculate English values
         const localAnswers = questionnaireData[name]?.answers || [];
         const englishAnswers = questionnaireDataEn[name]?.answers || [];
         const englishMappedValues = newValues.map(
           val => englishAnswers[localAnswers.indexOf(val)] || val
         );
-        console.log('Checkbox Change:', { name, newValues, englishMappedValues });
 
+        // Update both states
         setFormData(prev => ({ ...prev, [name]: newValues }));
         setFormDataEn(prev => ({ ...prev, [name]: englishMappedValues }));
+
     } else {
         const hindiAnswers = questionnaireData[name]?.answers || [];
         const englishAnswers = questionnaireDataEn[name]?.answers || [];
-        const englishValue =
-          englishAnswers[hindiAnswers.indexOf(value)] || value;
+        const englishValue = englishAnswers[hindiAnswers.indexOf(value)] || value;
 
-        console.log('Input Change:', { name, value, englishValue });
         setFormData(prev => ({ ...prev, [name]: value }));
         setFormDataEn(prev => ({ ...prev, [name]: englishValue }));
     }
   };
+
 
   // getVisibleRequiredQuestions - Modified to use translated "Yes"
   const getVisibleRequiredQuestions = () => {
@@ -268,197 +274,9 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
       }
       return;
     }
-    // if (missingFields.length > 0) {
-    //   console.log('Validation Errors:', missingFields);
-    //     setValidationErrors(missingFields);
-    //     alert(t('ui.errors.validationAlert')); // Use translated alert
-    //     const firstErrorKey = missingFields[0];
-    //     const errorElement = document.querySelector(`[name="${firstErrorKey}"]`);
-    //     if (errorElement) {
-    //         errorElement.closest('.question-block').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    //     }
-    //     return;
-    // }
 
   
     onSubmit(dataToSubmit, dataToSubmitEn);
-  };
-
-  // renderInput - Modified to use translated data
-  const renderInput = (qConfig) => { 
-    // 'questionnaireData' is now a prop
-    const data = questionnaireData[qConfig.key];
-    if (!data) return <p>{t('ui.errors.questionNotFound', { key: qConfig.key })}</p>;
-    
-    const name = qConfig.name || qConfig.key;
-    let placeholder = qConfig.placeholder || '';
-    if (qConfig.key === 'Q44') {
-        placeholder = randomPatientId; 
-    }
-
-    if (!Array.isArray(data.answers) || data.answers.length === 0) {
-      if (qConfig.type === 'number') {
-        const minAttr = qConfig.min !== undefined ? qConfig.min : undefined;
-        const maxAttr = qConfig.max !== undefined ? qConfig.max : undefined;
-        const stepAttr = qConfig.step !== undefined ? qConfig.step : undefined;
-
-        return (
-          <>
-            <input
-              type="number"
-              name={name}
-              placeholder={placeholder}
-              value={formData[name] || ''}
-              onChange={handleChange}
-              onKeyDown={(e) => {
-                // block decimal point and comma when integer-only is required
-                if (qConfig.integerOnly && (e.key === '.' || e.key === ',')) {
-                  e.preventDefault();
-                }
-              }}
-              className="text-input"
-              min={minAttr}
-              max={maxAttr}
-              step={stepAttr}
-            />
-            {/* <-- paste the error message snippet here */}
-            {validationErrors.includes(name) && (
-              <div className="field-error">
-                {qConfig.min !== undefined && qConfig.max !== undefined
-                  ? `${t('ui.invalidInput.numberPrefix')} ${qConfig.min} ${t('ui.invalidInput.and')} ${qConfig.max}.`
-                  : `${t('ui.invalidInput.validInput')} `}
-              </div>
-            )}
-          </>
-        );
-      }
-      return <input 
-        type={qConfig.type || 'text'} 
-        name={name} 
-        placeholder={placeholder} 
-        value={formData[name] || ''} 
-        onChange={handleChange} 
-        className="text-input" 
-      />;
-    }
-    
-    switch (qConfig.type) {
-       case 'select':
-         return (
-           <select name={name} onChange={handleChange} value={formData[name] || ""} className="select-input">
-             <option value="" disabled>{t('ui.inputs.selectDefault')}</option>
-             {data.answers.map((ans, i) => <option key={i} value={ans}>{ans}</option>)}
-           </select>
-         );
-       case 'checkbox':
-         return (
-           <div className="checkbox-group vertical">
-             {data.answers.map((ans, i) => (
-               <label key={i}>
-                 <input 
-                   type="checkbox" name={name} value={ans} onChange={handleChange} 
-                   checked={formData[name]?.includes(ans) || false}
-                 /> {ans}
-               </label>
-             ))}
-           </div>
-         );
-       case 'checkbox-plus-text':
-          return (
-              <div className="checkbox-group vertical">
-                 {data.answers.map((ans, i) => (
-                     <label key={i}>
-                       <input 
-                         type="checkbox" name={name} value={ans} onChange={handleChange}
-                         checked={formData[name]?.includes(ans) || false}
-                       /> {ans}
-                     </label>
-                 ))}
-                  {/* <input 
-                    type="text" name={qConfig.otherOptionId} 
-                    placeholder={qConfig.otherPlaceholder || t('ui.inputs.otherPlaceholder', 'Specify other')} 
-                    onChange={handleChange} className="text-input" 
-                    value={formData[qConfig.otherOptionId] || ''}
-                  /> */}
-              </div>
-          );
-       case 'radio':
-       default:
-         return (
-           <div className="radio-group vertical">
-             {data.answers.map((ans, i) => (
-               <label key={i}>
-                 <input 
-                   type="radio" name={name} value={ans} onChange={handleChange} 
-                   checked={formData[name] === ans}
-                 /> {ans}
-               </label>
-             ))}
-           </div>
-         );
-    }
-  };
-
-  const renderSubQuestions = (subQuestions, parentNumber) => {
-    if (!Array.isArray(subQuestions)) return null;
-
-    return subQuestions.map((subQConfig, index) => {
-      const subQData = questionnaireData[subQConfig.key];
-      if (!subQData) return null;
-
-      const subQKey = subQConfig.name || subQConfig.key;
-      const conditionKey = subQConfig.condition ? subQConfig.condition.key : null;
-
-     
-      if (subQConfig.condition && conditionKey !== subQKey) {
-         // FIX: Check against formDataEn directly. This matches the "value": "Yes" in your JSON
-         // regardless of the current UI language or missing translation keys.
-         if (formDataEn[conditionKey] !== subQConfig.condition.value) {
-             return null; 
-         }
-      }
-
-      const displayNumber = `${parentNumber}${String.fromCharCode(97 + index)}.`;
-
-      // --- LOGIC 2: PRE-CALCULATE CHILDREN ---
-      let renderedChildren = null;
-      
-      // Check if this question allows children (Self-Trigger Logic, e.g. Q24="No")
-      let allowChildren = true;
-      if (subQConfig.condition && conditionKey === subQKey) {
-          // FIX: Check against formDataEn directly.
-          if (formDataEn[subQKey] !== subQConfig.condition.value) {
-              allowChildren = false;
-          }
-      }
-
-      // Recursively generate children if allowed
-      if (subQConfig.subQuestions && allowChildren) {
-          renderedChildren = renderSubQuestions(subQConfig.subQuestions, displayNumber.slice(0,-1));
-      }
-
-      // --- LOGIC 3: CHECK FOR VALID CHILDREN ---
-      const hasValidChildren = Array.isArray(renderedChildren) && renderedChildren.some(child => child !== null);
-
-      return (
-        <React.Fragment key={subQKey}>
-          <div className={`question-block ${validationErrors.includes(subQKey) ? 'error' : ''}`}>
-            <label>
-                {displayNumber} {subQData.question}
-                {subQConfig.required && <span className="required-asterisk">*</span>}
-            </label>
-            {renderInput(subQConfig)}
-          </div>
-          
-          {/* Only render the container DIV if we actually have valid children to show */}
-          {hasValidChildren && (
-            <div className="sub-question-container visible">
-              {renderedChildren}
-            </div>
-          )}
-        </React.Fragment>
-      );
-    });
   };
 
   let questionCounter = 0;
@@ -512,52 +330,27 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
               const displayNumber = `${questionCounter}.`;
               const name = qConfig.name || qConfig.key;
               
-              // CRITICAL FIX: Get translated "Yes" and "No" for conditions
-              // const conditionValue = qConfig.condition ? qConfig.condition.value : null;
-              // Assumes "Yes" is index 0
-              const translatedConditionValue = (qConfig.condition && qConfig.condition.key) ? t(`questions.${qConfig.condition.key}.answers.0`) : null; 
-
               const noValueQ27 = t('questions.Q27.answers.1'); 
               const isQ27No = qConfig.key === "Q27" && formData[name] === noValueQ27;
               
-              const showSubquestions = qConfig.subQuestions && qConfig.condition && formData[qConfig.condition.key] === translatedConditionValue;
-
               return (
-                <React.Fragment key={name}>
-                  <div className={`question-block ${validationErrors.includes(name) ? 'error' : ''}`}>
-                    <label>
-                        {displayNumber} {data.question}
-                        {qConfig.required && <span className="required-asterisk">*</span>}
-                    </label>
-                    {renderInput(qConfig)} 
-                  </div>
-                  {qConfig.subQuestions && (
-                    <div className={`sub-question-container ${showSubquestions ? 'visible' : ''}`}>
-                      {renderSubQuestions(qConfig.subQuestions, questionCounter)}
-                    </div>
-                  )}
-                   {qConfig.key === "Q27" && isQ27No && ( // Use the specific isQ27No variable
-                     <>
-                       {!q27VideoConfirmed && showQ27VideoPrompt && (
-                         <div className="video-prompt-container">
-                           <p className="video-prompt-note">{t('ui.videoPrompt.note')}</p>
-                           <button
-                             type="button"
-                             className="video-prompt-button"
-                             onClick={() => setQ27VideoConfirmed(true)} 
-                           >
-                             {t('ui.videoPrompt.button')}
-                           </button>
-                         </div>
-                       )}
-                       {q27VideoConfirmed && qConfig.videoUrlOnNo && (
-                         <div className="youtube-player-container">
-                             <iframe width="560" height="315" src={qConfig.videoUrlOnNo} title={t('ui.videoPrompt.videoTitle')} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-                         </div>
-                       )}
-                     </>
-                   )}
-                </React.Fragment>
+                <QuestionBlock
+                  key={name}
+                  qConfig={qConfig}
+                  questionnaireData={questionnaireData}
+                  questionnaireDataEn={questionnaireDataEn}
+                  formData={formData}
+                  formDataEn={formDataEn}
+                  validationErrors={validationErrors}
+                  handleChange={handleChange}
+                  t={t}
+                  displayNumber={displayNumber}
+                  isQ27No={isQ27No}
+                  showQ27VideoPrompt={showQ27VideoPrompt}
+                  q27VideoConfirmed={q27VideoConfirmed}
+                  setQ27VideoConfirmed={setQ27VideoConfirmed}
+                  randomPatientId={randomPatientId} // FIX: Pass prop
+                />
               );
             })}
           </div>
@@ -579,6 +372,4 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
   );
 }
 
-// REMOVED: The invalid export that caused the error.
-// export { formStructure }; 
 export default Questionnaire;
