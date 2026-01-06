@@ -211,7 +211,7 @@
       "answers": []
     },
     "Q12_Current": {
-      "question": "Are you currently having menstrual periods?",
+      "question": "Are your menstrual periods occurring at regular intervals?",
       "answers": ["Yes", "No"]
     },
     "Q11": {
