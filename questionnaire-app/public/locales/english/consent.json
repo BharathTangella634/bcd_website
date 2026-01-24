@@ -76,6 +76,16 @@
       "paragraphs": [
         { "text": "There is no cost to you for participating, and you will not be paid. No compensation is available for injury, as this is a minimal-risk, survey-only study." }
       ]
+    },
+    {
+      "heading": "10) Contact Information",
+      "paragraphs": [
+        { "text": "If you wish to speak to someone independent of the study, you may contact the:" },
+        { "strong": "Institutional Ethics Committee (IEC)", "text": "" },
+        { "strong": "Name:", "text": "Dr. S. Hema Priyadarshini, Secretary, IEC, TANUH" },
+        { "strong": "Email:", "text": "secretary.iec@tanuh.ai" },
+        { "strong": "Phone#", "text": "080 - 2293 4106 / 2293 4107" }
+      ]
     }
   ],
   "checkboxLabel": "I have read the above information and voluntarily agree to participate in this study.",
