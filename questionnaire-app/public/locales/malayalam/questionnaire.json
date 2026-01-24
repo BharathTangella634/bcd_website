@@ -98,7 +98,7 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q26", "type": "select", "required": true },
+        { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1 },
@@ -160,7 +160,7 @@
           { "key": "Q41", "type": "radio" }
         ]},
         { "key": "Q42", "type": "radio", "required": true, "condition": {"key": "Q42", "value": "Yes"}, "subQuestions": [
-          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Specify other cancer", "required": true }
+          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Please specify", "required": true }
         ]}
       ]
     }
@@ -241,11 +241,11 @@
     },
     "Q16": {
       "question": "ആദ്യത്തെ കുഞ്ഞ് ജനിക്കുമ്പോൾ നിങ്ങളുടെ പ്രായം തിരഞ്ഞെടുക്കുക?",
-      "answers": [ "25 ൽ കുറവ്","25 മുതൽ 29 വരെ","30 ന് ശേഷം","എനിക്കറിയില്ല" ]
+      "answers": [ "25 ൽ കുറവ്","25 മുതൽ 29 വരെ","30 ന് ശേഷം" ]
     },
     "Q17": {
       "question": "മുലയൂട്ടലിൻ്റെ ആകെ കാലയളവ് എത്രയാണ്?",
-      "answers": [ "24 മാസത്തിൽ താഴെ","24 മാസത്തിൽ കൂടുതൽ","എനിക്കറിയില്ല" ]
+      "answers": [ "24 മാസത്തിൽ താഴെ","24 മാസത്തിൽ കൂടുതൽ" ]
     },
     "Q18": {
       "question": "നിങ്ങൾ സിഗരറ്റ്, ബീഡി, അല്ലെങ്കിൽ മറ്റേതെങ്കിലും തരത്തിലുള്ള പുകയില ഉപയോഗിച്ചിട്ടുണ്ടോ (ഉദാ. പുകയില ചവയ്ക്കുന്നത്)?",

@@ -98,7 +98,7 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q26", "type": "select", "required": true },
+        { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "ಉದಾ., 45", "required": true, "min": 1, "max": 120, "step": 1 },
@@ -160,7 +160,7 @@
           { "key": "Q41", "type": "radio" }
         ]},
         { "key": "Q42", "type": "radio", "required": true, "condition": {"key": "Q42", "value": "Yes"}, "subQuestions": [
-          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Specify other cancer", "required": true }
+          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Please specify", "required": true }
         ]}
       ]
     }
@@ -241,11 +241,11 @@
     },
     "Q16": {
       "question": "ನಿಮ್ಮ ಮೊದಲ ಮಗು ಜನಿಸಿದಾಗ ನಿಮ್ಮ ವಯಸ್ಸು ಎಷ್ಟು ಇತ್ತು?",
-      "answers": [ "25 ಕಿಂತ ಕಡಿಮೆ", "25 ರಿಂದ 29", "30 ನಂತರ", "ನನಗೆ ಗೊತ್ತಿಲ್ಲ" ]
+      "answers": [ "25 ಕಿಂತ ಕಡಿಮೆ", "25 ರಿಂದ 29", "30 ನಂತರ" ]
     },
     "Q17": {
       "question": "ಸ್ತನಪಾನದ ಒಟ್ಟು ಅವಧಿ ಎಷ್ಟು?",
-      "answers": [ "24 ತಿಂಗಳಿಗಿಂತ ಕಡಿಮೆ", "24 ತಿಂಗಳಿಗಿಂತ ಹೆಚ್ಚು", "ನನಗೆ ಗೊತ್ತಿಲ್ಲ" ]
+      "answers": [ "24 ತಿಂಗಳಿಗಿಂತ ಕಡಿಮೆ", "24 ತಿಂಗಳಿಗಿಂತ ಹೆಚ್ಚು" ]
     },
     "Q18": {
       "question": "ನೀವು ಎಂದಾದರೂ ಸಿಗರೆಟ್, ಬೀಡಿ ಅಥವಾ ತಂಬಾಕು ಉತ್ಪನ್ನಗಳನ್ನು (ಉದಾ., ಚಪ್ಪು ತಂಬಾಕು) ಬಳಸಿದ್ದೀರಾ?",

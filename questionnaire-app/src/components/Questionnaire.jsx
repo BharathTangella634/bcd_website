@@ -1396,17 +1396,20 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     const traverseQuestions = (questions) => {
         if (!Array.isArray(questions)) return;
         for (const q of questions) {
+            const qKey = q.name || q.key;
             if (q.required) {
-                visibleRequired.push(q.name || q.key);
+                visibleRequired.push(qKey);
             }
-            //  // CRITICAL FIX: Check condition against translated "Yes" value
-            //  const conditionValue = q.condition ? q.condition.value : null;
-            //  // Assumes "Yes" is the first answer (index 0)
-            //  const translatedConditionValue = (q.condition && q.condition.key && t(`questions.${q.condition.key}.answers`)) ? t(`questions.${q.condition.key}.answers.0`) : null;
+            if (q.otherOptionId && q.required) {
+              const valEn = formDataEn[qKey];
+              const isOtherSelected = Array.isArray(valEn) 
+                ? (valEn.includes('Other') || valEn.includes('others'))
+                : (valEn === 'Other');
+              if (isOtherSelected) {
+                visibleRequired.push(q.otherOptionId);
+              }
+            }
 
-            //  if (q.subQuestions && q.condition && FormData[q.condition.key] === translatedConditionValue) {
-            //     traverseQuestions(q.subQuestions);
-            // }
             if (q.subQuestions && q.condition) {
                 const translatedConditionValue = getTranslatedConditionValue(q.condition);
                 if (formData[q.condition.key] === translatedConditionValue) {
@@ -1605,14 +1608,39 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
                        /> {ans}
                      </label>
                  ))}
-                  {/* <input 
-                    type="text" name={qConfig.otherOptionId} 
-                    placeholder={qConfig.otherPlaceholder || t('ui.inputs.otherPlaceholder', 'Specify other')} 
-                    onChange={handleChange} className="text-input" 
-                    value={formData[qConfig.otherOptionId] || ''}
-                  /> */}
+                 {(formDataEn[name]?.includes('Other') || formDataEn[name]?.includes('others')) && (
+                   <input 
+                     type="text" 
+                     name={qConfig.otherOptionId} 
+                     placeholder={qConfig.otherPlaceholder || t('ui.inputs.otherPlaceholder', 'Specify other')} 
+                     onChange={handleChange} 
+                     className="text-input" 
+                     value={formData[qConfig.otherOptionId] || ''}
+                     required={qConfig.required}
+                   />
+                 )}
               </div>
           );
+       case 'select-plus-text':
+         return (
+           <>
+             <select name={name} onChange={handleChange} value={formData[name] || ""} className="select-input">
+               <option value="" disabled>{t('ui.inputs.selectDefault')}</option>
+               {data.answers.map((ans, i) => <option key={i} value={ans}>{ans}</option>)}
+             </select>
+             {formDataEn[name] === 'Other' && (
+               <input 
+                 type="text" 
+                 name={qConfig.otherOptionId} 
+                 placeholder={qConfig.otherPlaceholder || t('ui.inputs.otherPlaceholder', 'Specify other')} 
+                 onChange={handleChange} 
+                 className="text-input" 
+                 value={formData[qConfig.otherOptionId] || ''}
+                 required={qConfig.required}
+               />
+             )}
+           </>
+         );
        case 'radio':
        default:
          return (

@@ -98,7 +98,7 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q26", "type": "select", "required": true },
+        { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
         { "key": "Q20","type": "radio","condition": { "key": "Q20", "value": "Yes" },"subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "उदा., 45", "required": true, "min": 1, "max": 120, "step": 1 },
@@ -241,11 +241,11 @@
     },
     "Q16": {
       "question": "तुमच्या पहिल्या प्रसूतीच्या वेळी तुमचे वय किती होते?",
-      "answers": ["25 पेक्षा कमी", "25 ते 29", "30 नंतर", "मला माहिती नाही"]
+      "answers": ["25 पेक्षा कमी", "25 ते 29", "30 नंतर"]
     },
     "Q17": {
       "question": "स्तनपानाचा एकूण कालावधी किती होता?",
-      "answers": ["24 महिन्यांपेक्षा कमी", "24 महिन्यांपेक्षा जास्त", "मला माहिती नाही"]
+      "answers": ["24 महिन्यांपेक्षा कमी", "24 महिन्यांपेक्षा जास्त"]
     },
     "Q18": {
       "question": "तुम्ही कधी सिगारेट, बीडी किंवा तंबाखूच्या इतर कोणत्याही स्वरूपाचा (उदा., चघळायचा तंबाखू) वापर केला आहे का?",

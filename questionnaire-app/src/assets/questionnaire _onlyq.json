@@ -137,16 +137,14 @@
     "answers": [
       "less than 25",
       "25 to 29",
-      "After 30",
-      "I don't know"
+      "After 30"
     ]
   },
   "Q17": {
     "question": "What is the total duration of breast feeding?",
     "answers": [
       "less than 24 months",
-      "greater than 24 months",
-      "I don't know"
+      "greater than 24 months"
     ]
   },
   "Q18": {

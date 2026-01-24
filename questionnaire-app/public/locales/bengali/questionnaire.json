@@ -99,7 +99,7 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q26", "type": "select", "required": true },
+        { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "যেমন., 45", "required": true, "min": 1, "max": 120, "step": 1 },
@@ -161,7 +161,7 @@
           { "key": "Q41", "type": "radio" }
         ]},
         { "key": "Q42", "type": "radio", "required": true, "condition": {"key": "Q42", "value": "Yes"}, "subQuestions": [
-          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Specify other cancer", "required": true }
+          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Please specify", "required": true }
         ]}
       ]
     }
@@ -242,11 +242,11 @@
     },
     "Q16": {
       "question": "প্রথম সন্তানের জন্মের সময় আপনার বয়স নির্বাচন করুন?",
-      "answers": [ "25 এর কম","25 থেকে 29","30 এর পরে","আমি জানি না" ]
+      "answers": [ "25 এর কম","25 থেকে 29","30 এর পরে" ]
     },
     "Q17": {
       "question": "বুকের দুধ খাওয়ানোর মোট সময়কাল কত?",
-      "answers": [ "24 মাসের কম","24 মাসের বেশি","আমি জানি না" ]
+      "answers": [ "24 মাসের কম","24 মাসের বেশি" ]
     },
     "Q18": {
       "question": "আপনি কি সিগারেট, বিড়ি ধূমপান করেছেন বা অন্য কোন তামাক ব্যবহার করেছেন (যেমন, তামাক চিবানো)?",

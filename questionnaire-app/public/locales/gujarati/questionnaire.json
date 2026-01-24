@@ -98,7 +98,7 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q26", "type": "select", "required": true },
+        { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1 },
@@ -160,7 +160,7 @@
           { "key": "Q41", "type": "radio" }
         ]},
         { "key": "Q42", "type": "radio", "required": true, "condition": {"key": "Q42", "value": "Yes"}, "subQuestions": [
-          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Specify other cancer", "required": true }
+          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Please specify", "required": true }
         ]}
       ]
     }
@@ -241,11 +241,11 @@
     },
     "Q16": {
       "question": "કૃપા કરીને પ્રથમ બાળકના જન્મ સમયે તમારી ઉંમર પસંદ કરો?",
-      "answers": [ "25 કરતા ઓછા","25 થી 29","30 પછી","મને ખબર નથી" ]
+      "answers": [ "25 કરતા ઓછા","25 થી 29","30 પછી" ]
     },
     "Q17": {
       "question": "સ્તનપાનની કુલ અવધિ કેટલી છે?",
-      "answers": [ "24 મહિનાથી ઓછા","24 મહિનાથી વધુ","મને ખબર નથી" ]
+      "answers": [ "24 મહિનાથી ઓછા","24 મહિનાથી વધુ" ]
     },
     "Q18": {
       "question": "શું તમે સિગારેટ, બીડી પીધી છે અથવા તમાકુના અન્ય કોઈપણ પ્રકારનો ઉપયોગ કર્યો છે (દા.ત., ચાવવાની તમાકુ)?",
