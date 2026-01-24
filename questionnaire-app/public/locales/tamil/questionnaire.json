@@ -98,14 +98,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
             { "key": "Q25", "type": "number", "placeholder": "இறப்பு வயதைக் குறிப்பிடவும்.", "min": 1, "max": 120, "step": 1 }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+          ]}
         ]}
       ]
     },
@@ -284,7 +284,7 @@
       "answers": []
     },
     "Q26": {
-      "question": "அவர்களின் இனத்தைத் தேர்ந்தெடுக்கவும்:",
+      "question": "உங்கள் இனத்தைத் தேர்ந்தெடுக்கவும்:",
       "answers": ["வடஇந்தியர்", "தென்னிந்தியர்", "கிழக்கிந்தியர்", "மேற்கு இந்தியர்", "வடகிழக்கிந்தியர்", "மத்திய இந்தியர் / பழங்குடியினர் சமூகங்கள்", "கலப்பு / பிற இந்திய இனக்குழுக்கள்", "வெளிநாட்டு இந்தியர் (NRI)", "மற்றவை"]
     },
     "Q27": {

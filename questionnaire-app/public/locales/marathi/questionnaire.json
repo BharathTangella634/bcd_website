@@ -98,14 +98,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20","type": "radio","condition": { "key": "Q20", "value": "Yes" },"subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "उदा., 45", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24","type": "radio","condition": { "key": "Q24", "value": "No" },"subQuestions": [
             { "key": "Q25", "type": "number", "placeholder": "मृत्यूचे वय प्रविष्ट करा", "min": 1, "max": 120, "step": 1 }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+          ]}
         ]}
       ]
     },
@@ -282,7 +282,7 @@
       "answers": []
     },
     "Q26": {
-      "question": "कृपया त्यांचा वंश (एथनिसिटी) निवडा:",
+      "question": "कृपया तुमचा वंश (एथनिसिटी) निवडा:",
       "answers": ["उत्तर भारतीय", "दक्षिण भारतीय", "पूर्व भारतीय", "पश्चिम भारतीय", "ईशान्य भारतीय", "मध्य भारतीय / आदिवासी समुदाय", "मिश्रित / इतर भारतीय वंश", "प्रवासी भारतीय (NRI)", "इतर"]
     },
     "Q27": {

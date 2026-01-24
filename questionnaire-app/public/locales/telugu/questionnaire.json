@@ -98,14 +98,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "ఉదా., 45", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
             { "key": "Q25", "type": "number", "placeholder": "మరణ వయసును నమోదు చేయండి", "min": 1, "max": 120, "step": 1 }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+          ]}
         ]}
       ]
     },
@@ -284,7 +284,7 @@
       "answers": [] 
     },
     "Q26": { 
-      "question": "వారి జాతిని ఎంచుకోండి:", 
+      "question": "మీ జాతిని ఎంచుకోండి:",
       "answers": ["ఉత్తర భారతీయుడు", "దక్షిణ భారతీయుడు", "తూర్పు భారతీయుడు", "పడమర భారతీయుడు", "ఈశాన్య భారతీయుడు", "మధ్య భారతీయుడు / ఆదివాసీ సమాజాలు", "మిశ్రిత / ఇతర భారతీయ జాతి", "ప్రవాస భారతీయుడు (NRI)", "ఇతరులు"]
     },
     "Q27": { 

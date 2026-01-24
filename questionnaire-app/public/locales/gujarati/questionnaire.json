@@ -98,14 +98,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
             { "key": "Q25", "type": "number", "placeholder": "મૃત્યુની ઉંમર દાખલ કરો", "min": 1, "max": 120, "step": 1 }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+          ]}
         ]}
       ]
     },
@@ -284,7 +284,7 @@
       "answers": []
     },
     "Q26": {
-      "question": "કૃપા કરીને તેમની વંશીયતા પસંદ કરો:",
+      "question": "કૃપા કરીને તમારી વંશીયતા પસંદ કરો:",
       "answers": ["ઉત્તર ભારતીય", "દક્ષિણ ભારતીય", "પૂર્વ ભારતીય", "પશ્ચિમ ભારતીય", "ઉત્તર-પૂર્વ ભારતીય", "મધ્ય ભારતીય / આદિવાસી સમુદાયો", "મિશ્રિત / અન્ય ભારતીય જાતિ", "પ્રવાસી ભારતીય (NRI)", "અન્ય"]
     },
     "Q27": {

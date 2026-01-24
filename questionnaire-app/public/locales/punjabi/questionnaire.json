@@ -98,14 +98,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
             { "key": "Q25", "type": "number", "placeholder": "ਮੌਤ ਦੀ ਉਮਰ ਦਰਜ ਕਰੋ", "min": 1, "max": 120, "step": 1 }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+          ]}
         ]}
       ]
     },
@@ -284,7 +284,7 @@
       "answers": []
     },
     "Q26": {
-      "question": "ਕਿਰਪਾ ਕਰਕੇ ਉਹਨਾਂ ਦੀ ਨਸਲ ਚੁਣੋ:",
+      "question": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਨਸਲ ਚੁਣੋ:",
       "answers": ["ਉੱਤਰੀ ਭਾਰਤੀ", "ਦੱਖਣੀ ਭਾਰਤੀ", "ਪੂਰਬੀ ਭਾਰਤੀ", "ਪੱਛਮੀ ਭਾਰਤੀ", "ਉੱਤਰ-ਪੂਰਬੀ ਭਾਰਤੀ", "ਮੱਧ ਭਾਰਤੀ / ਆਦਿਵਾਸੀ ਭਾਈਚਾਰੇ", "ਮਿਸ਼ਰਤ / ਹੋਰ ਭਾਰਤੀ ਨਸਲ", "ਪਰਵਾਸੀ ਭਾਰਤੀ (NRI)", "ਹੋਰ"]
     },
     "Q27": {

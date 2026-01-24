@@ -98,14 +98,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
             { "key": "Q25", "type": "number", "placeholder": "മരണ പ്രായം നൽകുക", "min": 1, "max": 120, "step": 1 }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+          ]}
         ]}
       ]
     },
@@ -284,7 +284,7 @@
       "answers": []
     },
     "Q26": {
-      "question": "ദയവായി അവരുടെ വംശം തിരഞ്ഞെടുക്കുക:",
+      "question": "ദയവായി നിങ്ങളുടെ വംശം തിരഞ്ഞെടുക്കുക:",
       "answers": ["ഉത്തരേന്ത്യൻ", "ദക്ഷിണേന്ത്യൻ", "കിഴക്കൻ ഇന്ത്യൻ", "പശ്ചിമ ഇന്ത്യൻ", "വടക്കുകിഴക്കൻ ഇന്ത്യൻ", "മധ്യ ഇന്ത്യൻ / ആദിവാസി സമൂഹങ്ങൾ", "മിശ്ര / മറ്റ് ഇന്ത്യൻ ജാതി", "പ്രവാസി ഇന്ത്യൻ (NRI)", "മറ്റ്"]
     },
     "Q27": {

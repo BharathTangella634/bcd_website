@@ -98,14 +98,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "ಉದಾ., 45", "required": true, "min": 1, "max": 120, "step": 1 },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "ಸಾವು ಸಂಭವಿಸಿದ ವಯಸ್ಸು ನಮೂದಿಸಿ", "min": 1, "max": 120, "step": 1 }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+            { "key": "Q25", "type": "number", "placeholder": "ಸಾವು ಸಂಭವಿಸಿದ ವಯಸ್ಸು ನಮੂದಿಸಿ", "min": 1, "max": 120, "step": 1 }
+          ]}
         ]}
       ]
     },
@@ -284,7 +284,7 @@
       "answers": []
     },
     "Q26": {
-      "question": "ದಯವಿಟ್ಟು ಅವರ ವಂಶ ಆರಿಸಿ:",
+      "question": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ವಂಶ ಆರಿಸಿ:",
       "answers": ["ಉತ್ತರ ಭಾರತೀಯ", "ದಕ್ಷಿಣ ಭಾರತೀಯ", "ಪೂರ್ವ ಭಾರತೀಯ", "ಪಶ್ಚಿಮ ಭಾರತೀಯ", "ಉತ್ತರ-ಪೂರ್ವ ಭಾರತೀಯ", "ಮಧ್ಯ ಭಾರತೀಯ / ಆದಿವಾಸಿ ಸಮುದಾಯಗಳು", "ಮಿಶ್ರ / ಇತರ ಭಾರತೀಯ ಜನಾಂಗ", "ಪ್ರವಾಸಿ ಭಾರತೀಯ (NRI)", "ಇತರೆ"]
     },
     "Q27": {
