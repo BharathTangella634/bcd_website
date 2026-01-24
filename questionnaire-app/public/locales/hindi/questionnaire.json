@@ -99,7 +99,7 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q26", "type": "select", "required": true },
+        { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "हाँ" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "उदा., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
@@ -238,11 +238,11 @@
     },
     "Q16": {
       "question": "कृपया अपने पहले बच्चे के जन्म की आयु चुनें?",
-      "answers": [ "25 वर्ष से कम", "25 से 29 वर्ष", "30 वर्ष के बाद", "मुझे नहीं पता" ]
+      "answers": [ "25 वर्ष से कम", "25 से 29 वर्ष", "30 वर्ष के बाद" ]
     },
     "Q17": {
       "question": "कुल स्तनपान की अवधि क्या है?",
-      "answers": [ "24 महीने से कम", "24 महीने से अधिक", "मुझे नहीं पता" ]
+      "answers": [ "24 महीने से कम", "24 महीने से अधिक" ]
     },
     "Q18": {
       "question": "क्या आपने सिगरेट, बीड़ी, या किसी अन्य प्रकार के तम्बाकू (जैसे चबाने वाला तम्बाकू) का उपयोग किया है?",

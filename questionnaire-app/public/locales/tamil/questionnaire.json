@@ -99,7 +99,7 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q26", "type": "select", "required": true },
+        { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
@@ -157,7 +157,7 @@
         { "key": "Q38", "type": "radio", "condition": {"key": "Q38", "value": "Yes"}},
         { "key": "Q40", "type": "radio", "required": true, "condition": {"key": "Q40", "value": "Yes"}},
         { "key": "Q42", "type": "radio", "required": true, "condition": {"key": "Q42", "value": "Yes"}, "subQuestions": [
-          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Specify other cancer", "required": true }
+          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Please specify", "required": true }
         ]}
       ]
     }
@@ -238,11 +238,11 @@
     },
     "Q16": {
       "question": "முதல் குழந்தை பிறக்கும் போது உங்கள் வயதைத் தேர்ந்தெடுக்கவும்?",
-      "answers": [ "25 க்கும் குறைவாக","25 முதல் 29 வரை","30க்குப் பிறகு","எனக்கு தெரியாது" ]
+      "answers": [ "25 க்கும் குறைவாக","25 முதல் 29 வரை","30க்குப் பிறகு" ]
     },
     "Q17": {
       "question": "தாய்ப்பால் கொடுக்கும் மொத்த கால அளவு என்ன?",
-      "answers": [ "24 மாதங்களுக்கும் குறைவானது","24 மாதங்களுக்கு மேல்","எனக்கு தெரியாது" ]
+      "answers": [ "24 மாதங்களுக்கும் குறைவானது","24 மாதங்களுக்கு மேல்" ]
     },
     "Q18": {
       "question": "நீங்கள் சிகரெட், பீடி புகைத்திருக்கிறீர்களா அல்லது வேறு ஏதேனும் புகையிலை/பாக்கு பயன்படுத்தியுள்ளீர்களா?",

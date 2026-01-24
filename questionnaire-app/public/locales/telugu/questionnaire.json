@@ -99,7 +99,7 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q26", "type": "select", "required": true },
+        { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "ఉదా., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
@@ -236,6 +236,15 @@
       "question": "మీరు జన్మనిచ్చిన పిల్లల సంఖ్యను నమోదు చేయండి:", 
       "answers": [] 
     },
+<<<<<<< HEAD
+    "Q16": {
+      "question": "మొదటి ప్రసవం సమయంలో మీ వయస్సు ఎంత?",
+      "answers": ["25 కంటే తక్కువ", "25 - 29", "30 తర్వాత"]
+    },
+    "Q17": {
+      "question": "మొత్తం పాలిచ్చిన కాలం ఎంత?",
+      "answers": ["24 నెలల కంటే తక్కువ", "24 నెలల కంటే ఎక్కువ"]
+=======
     "Q16": { 
       "question": "మీ మొదటి ప్రసవం సమయంలో మీ వయస్సు ఎంత?", 
       "answers": ["25 సంవత్సరాల కంటే తక్కువ", "25 నుండి 29 సంవత్సరాల మధ్య", "30 సంవత్సరాల తర్వాత", "తెలియదు"] 
@@ -243,6 +252,7 @@
     "Q17": { 
       "question": "మీరు మొత్తం ఎంతకాలం తల్లిపాలను ఇచ్చారు?", 
       "answers": ["24 నెలల కంటే తక్కువ", "24 నెలల కంటే ఎక్కువ", "తెలియదు"] 
+>>>>>>> refs/remotes/origin/ark/dev
     },
     "Q18": {
       "question": "మీరు ఎప్పుడైనా సిగరెట్లు, బీడీలు లేదా పొగాకు (ఉదా: నమలే పొగాకు) వాడారా?",

@@ -99,7 +99,7 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q26", "type": "select", "required": true },
+        { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
@@ -157,7 +157,7 @@
         { "key": "Q38", "type": "radio", "condition": {"key": "Q38", "value": "Yes"}},
         { "key": "Q40", "type": "radio", "required": true, "condition": {"key": "Q40", "value": "Yes"}},
         { "key": "Q42", "type": "radio", "required": true, "condition": {"key": "Q42", "value": "Yes"}, "subQuestions": [
-          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Specify other cancer", "required": true }
+          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "Please specify", "required": true }
         ]}
       ]
     }
@@ -238,11 +238,11 @@
     },
     "Q16": {
       "question": "ପ୍ରଥମ ସନ୍ତାନ ଜନ୍ମ ସମୟରେ ଦୟାକରି ଆପଣଙ୍କର ବୟସ ବାଛନ୍ତୁ?",
-      "answers": [ "25 ରୁ କମ୍","25 ରୁ 29","30 ପରେ","ମୁଁ ଜାଣେ ନାହିଁ" ]
+      "answers": [ "25 ରୁ କମ୍","25 ରୁ 29","30 ପରେ" ]
     },
     "Q17": {
       "question": "ସ୍ତନ୍ୟପାନର ସମୁଦାୟ ଅବଧି କେତେ?",
-      "answers": [ "24 ମାସରୁ କମ୍","24 ମାସରୁ ଅଧିକ |","ମୁଁ ଜାଣେ ନାହିଁ" ]
+      "answers": [ "24 ମାସରୁ କମ୍","24 ମାସରୁ ଅଧିକ |" ]
     },
     "Q18": {
       "question": "ଆପଣ ସିଗାରେଟ୍, ବିଡିସ୍ ଧୂମପାନ କରିଛନ୍ତି କିମ୍ବା ଅନ୍ୟ କ form ଣସି ପ୍ରକାରର ତମାଖୁ ବ୍ୟବହାର କରିଛନ୍ତି (ଯଥା, ତମାଖୁ ଚୋବାଇବା)?",
