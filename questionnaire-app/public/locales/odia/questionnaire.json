@@ -99,14 +99,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "Enter age of death", "min": 1, "max": 120, "step": 1, "integerOnly": true  }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+            { "key": "Q25", "type": "number", "placeholder": "Enter age of death", "min": 1, "max": 120, "step": 1 }
+          ]}
         ]}
       ]
     },
@@ -281,8 +281,34 @@
       "answers": []
     },
     "Q26": {
-      "question": "ଦୟାକରି ସେମାନଙ୍କର ଜାତି ଚୟନ କରନ୍ତୁ:",
-      "answers": ["ଉତ୍ତର ଭାରତୀୟ", "ଦକ୍ଷିଣ ଭାରତୀୟ", "ପୂର୍ବ ଭାରତୀୟ", "ପଶ୍ଚିମ ଭାରତୀୟ", "ଉତ୍ତର-ପୂର୍ବ ଭାରତୀୟ", "ମଧ୍ୟ ଭାରତୀୟ / ଆଦିବାସୀ ସମୁଦାୟ", "ମିଶ୍ରିତ / ଅନ୍ୟ ଭାରତୀୟ ଜାତି", "ପ୍ରବାସୀ ଭାରତୀୟ (NRI)", "ଅନ୍ୟ"]
+      "question": "ଦୟାକରି ଆପଣଙ୍କର ଜାତି ଚୟନ କରନ୍ତୁ:",
+      "answers": [
+        "ପଠାନ୍ (Pathan)",
+        "ପାନିୟା (Paniya)",
+        "ଅଙ୍ଗେ (Onge)",
+        "ବୈଶ୍ୟ (Vysya)",
+        "ଚେଞ୍ଚୁ (Chenchu)",
+        "କାଶ୍ମୀରୀ (Kashmiri)",
+        "ବ୍ରାହ୍ମଣ (Brahmin)",
+        "କ୍ଷତ୍ରିୟ (Kshatriya)",
+        "ସିନ୍ଧି (Sindhi)",
+        "ଭିଲ୍ (Bhil)",
+        "ଚମାର (Chamar)",
+        "ଥାରୁ (Tharu)",
+        "ଭେଲାମା (Velama)",
+        "ମାଲା (Mala)",
+        "ମାଦିଗା (Madiga)",
+        "ପାଲିୟାର (Palliyar)",
+        "ଗଣ୍ଡ (Gond)",
+        "ସାନ୍ତାଳ (Santhal)",
+        "ହୋ (Ho)",
+        "ଆଓ ନାଗା (Ao Naga)",
+        "ଶେରପା (Sherpa)",
+        "ସିଦ୍ଧି (Siddi)",
+        "ଯିହୂଦୀ (Jews)",
+        "ବେଦା (Vedda)",
+        "ଅନ୍ୟ (Other)"
+      ]
     },
     "Q27": {
       "question": "ଆପଣ କେବେ ସ୍ତନ ପରୀକ୍ଷା (BE) କରିଛନ୍ତି କି?",

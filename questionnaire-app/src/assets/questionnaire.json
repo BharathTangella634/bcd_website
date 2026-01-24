@@ -99,14 +99,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1  },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
             { "key": "Q25", "type": "number", "placeholder": "Enter age of death", "min": 1, "max": 120, "step": 1  }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+          ]}
         ]}
       ]
     },
@@ -281,8 +281,34 @@
       "answers": []
     },
     "Q26": {
-      "question": "Please select their ethnicity:",
-      "answers": ["North Indian", "South Indian", "East Indian", "West Indian", "North-East Indian", "Central Indian / Tribal Communities", "Mixed / Other Indian Ethnicity", "Non-Resident Indian (NRI)", "Others"]
+      "question": "Please select your ethnicity:",
+      "answers": [
+        "Pathan",
+        "Paniya",
+        "Onge",
+        "Vysya",
+        "Chenchu",
+        "Kashmiri",
+        "Brahmin",
+        "Kshatriya",
+        "Sindhi",
+        "Bhil",
+        "Chamar",
+        "Tharu",
+        "Velama",
+        "Mala",
+        "Madiga",
+        "Palliyar",
+        "Gond",
+        "Santhal",
+        "Ho",
+        "Ao Naga",
+        "Sherpa",
+        "Siddi",
+        "Jews",
+        "Vedda",
+        "Other"
+      ]
     },
     "Q27": {
       "question": "Have you ever undergone a Breast Examination (BE)?",

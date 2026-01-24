@@ -99,14 +99,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "இறப்பு வயதை குறிப்பிடவும்.", "min": 1, "max": 120, "step": 1, "integerOnly": true }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+            { "key": "Q25", "type": "number", "placeholder": "இறப்பு வயதைக் குறிப்பிடவும்.", "min": 1, "max": 120, "step": 1 }
+          ]}
         ]}
       ]
     },
@@ -281,8 +281,34 @@
       "answers": []
     },
     "Q26": {
-      "question": "அவர்களின் இனத்தைத் தேர்ந்தெடுக்கவும்:",
-      "answers": ["வடஇந்தியர்", "தென்னிந்தியர்", "கிழக்கிந்தியர்", "மேற்கு இந்தியர்", "வடகிழக்கிந்தியர்", "மத்திய இந்தியர் / பழங்குடியினர் சமூகங்கள்", "கலப்பு / பிற இந்திய இனக்குழுக்கள்", "வெளிநாட்டு இந்தியர் (NRI)", "மற்றவை"]
+      "question": "உங்கள் இனத்தைத் தேர்ந்தெடுக்கவும்:",
+      "answers": [
+        "பதான் (Pathan)",
+        "பனியா (Paniya)",
+        "ஓங்கே (Onge)",
+        "வைஸ்யா (Vysya)",
+        "செஞ்சு (Chenchu)",
+        "காஷ்மீரி (Kashmiri)",
+        "பிராமணர்கள் (Brahmin)",
+        "க்ஷத்திரியர்கள் (Kshatriya)",
+        "சிந்தி (Sindhi)",
+        "பில் (Bhil)",
+        "சாமர் (Chamar)",
+        "தாரு (Tharu)",
+        "வேலமா (Velama)",
+        "மாலா (Mala)",
+        "மாதிகா (Madiga)",
+        "பள்ளியர் (Palliyar)",
+        "கோண்ட் (Gond)",
+        "சாந்தல் (Santhal)",
+        "ஹோ (Ho)",
+        "ஆவ் நாகா (Ao Naga)",
+        "ஷெர்பா (Sherpa)",
+        "சித்தி (Siddi)",
+        "யூதர்கள் (Jews)",
+        "வேதா (Vedda)",
+        "மற்றவை (Other)"
+      ]
     },
     "Q27": {
       "question": "நீங்கள் எப்போதாவது மார்பக பரிசோதனை (BE) செய்திருக்கிறீர்களா?",

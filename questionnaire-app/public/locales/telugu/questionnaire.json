@@ -99,14 +99,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "ఉదా., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "మరణ వయసును నమోదు చేయండి", "min": 1, "max": 120, "step": 1, "integerOnly": true}
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+            { "key": "Q25", "type": "number", "placeholder": "మరణ వయసును నమోదు చేయండి", "min": 1, "max": 120, "step": 1 }
+          ]}
         ]}
       ]
     },
@@ -281,8 +281,34 @@
       "answers": [] 
     },
     "Q26": { 
-      "question": "వారి జాతిని ఎంచుకోండి:", 
-      "answers": ["ఉత్తర భారతీయుడు", "దక్షిణ భారతీయుడు", "తూర్పు భారతీయుడు", "పడమర భారతీయుడు", "ఈశాన్య భారతీయుడు", "మధ్య భారతీయుడు / ఆదివాసీ సమాజాలు", "మిశ్రిత / ఇతర భారతీయ జాతి", "ప్రవాస భారతీయుడు (NRI)", "ఇతరులు"]
+      "question": "మీ జాతిని ఎంచుకోండి:",
+      "answers": [
+        "పఠాన్ (Pathan)",
+        "పనియా (Paniya)",
+        "ఓంగే (Onge)",
+        "వైశ్య (Vysya)",
+        "చెంచు (Chenchu)",
+        "కాశ్మీరీ (Kashmiri)",
+        "బ్రాహ్మణ (Brahmin)",
+        "క్షత్రియ (Kshatriya)",
+        "సింధీ (Sindhi)",
+        "భిల్ (Bhil)",
+        "చమార్ (Chamar)",
+        "థారు (Tharu)",
+        "వెలమ (Velama)",
+        "మాలా (Mala)",
+        "మాదిగ (Madiga)",
+        "పల్లియార్ (Palliyar)",
+        "గోండ్ (Gond)",
+        "సంతాల్ (Santhal)",
+        "హో (Ho)",
+        "ఆవో నాగా (Ao Naga)",
+        "షెర్పా (Sherpa)",
+        "సిద్ధి (Siddi)",
+        "యూదులు (Jews)",
+        "వేదా (Vedda)",
+        "ఇతరులు (Other)"
+      ]
     },
     "Q27": { 
       "question": "మీరు ఎప్పుడైనా రొమ్ము పరీక్ష (BE) చేయించుకున్నారా?", 

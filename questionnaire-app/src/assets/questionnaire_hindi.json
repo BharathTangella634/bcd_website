@@ -59,14 +59,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "हाँ" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "उदा., ४५", "required": true },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "नहीं" }, "subQuestions": [
             { "key": "Q25", "type": "number", "placeholder": "मृत्यु की आयु" }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+          ]}
         ]}
       ]
     },
@@ -268,7 +268,7 @@
       "answers": []
     },
     "Q26": {
-      "question": "कृपया उनकी जातीयता चुनें:",
+      "question": "कृपया अपनी जातीयता चुनें:",
       "answers": []
     },
     "Q27": {

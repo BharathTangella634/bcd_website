@@ -100,14 +100,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "যেমন., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly":true },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "মৃত্যুর বয়স লিখুন", "min": 1, "max": 120, "step": 1, "integerOnly":true }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+            { "key": "Q25", "type": "number", "placeholder": "মৃত্যুর বয়স লিখুন", "min": 1, "max": 120, "step": 1 }
+          ]}
         ]}
       ]
     },
@@ -282,8 +282,34 @@
       "answers": []
     },
     "Q26": {
-      "question": "অনুগ্রহ করে তাদের জাতিগত নির্বাচন করুন:",
-      "answers": ["উত্তর ভারতীয়", "দক্ষিণ ভারতীয়", "পূর্ব ভারতীয়", "পশ্চিম ভারতীয়", "উত্তর-পূর্ব ভারতীয়", "মধ্য ভারতীয় / আদিবাসী সম্প্রদায়", "মিশ্রিত / অন্যান্য ভারতীয় জাতিগততা", "অপ্রবাসী ভারতীয় (এনআরআই)", "অন্যান্য"]
+      "question": "অনুগ্রহ করে আপনার জাতিগত নির্বাচন করুন:",
+      "answers": [
+        "পাঠান (Pathan)",
+        "পানিয়া (Paniya)",
+        "ওঙ্গে (Onge)",
+        "বৈশ্য (Vysya)",
+        "চেঞ্চু (Chenchu)",
+        "কাশ্মীরি (Kashmiri)",
+        "ব্রাহ্মণ (Brahmin)",
+        "ক্ষত্রিয় (Kshatriya)",
+        "সিন্ধি (Sindhi)",
+        "ভিল (Bhil)",
+        "চামার (Chamar)",
+        "থারু (Tharu)",
+        "ভেলামা (Velama)",
+        "মালা (Mala)",
+        "মাদিগা (Madiga)",
+        "পাল্লিয়ার (Palliyar)",
+        "গোন্ড (Gond)",
+        "সাঁওতাল (Santhal)",
+        "হো (Ho)",
+        "আও নাগা (Ao Naga)",
+        "শেরপা (Sherpa)",
+        "সিদ্ধি (Siddi)",
+        "ইহুদি (Jews)",
+        "ভেদ্দা (Vedda)",
+        "অন্যান্য (Other)"
+      ]
     },
     "Q27": {
       "question": "আপনি কি কখনও স্তন পরীক্ষা (BE) করেছেন?",

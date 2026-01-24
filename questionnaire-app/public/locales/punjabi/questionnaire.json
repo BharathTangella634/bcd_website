@@ -99,14 +99,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
+        { "key": "Q26", "type": "select", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "ਮੌਤ ਦੀ ਉਮਰ ਦਰਜ ਕਰੋ", "min": 1, "max": 120, "step": 1, "integerOnly": true  }
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+            { "key": "Q25", "type": "number", "placeholder": "ਮੌਤ ਦੀ ਉਮਰ ਦਰਜ ਕਰੋ", "min": 1, "max": 120, "step": 1 }
+          ]}
         ]}
       ]
     },
@@ -281,8 +281,34 @@
       "answers": []
     },
     "Q26": {
-      "question": "ਕਿਰਪਾ ਕਰਕੇ ਉਹਨਾਂ ਦੀ ਨਸਲ ਚੁਣੋ:",
-      "answers": ["ਉੱਤਰੀ ਭਾਰਤੀ", "ਦੱਖਣੀ ਭਾਰਤੀ", "ਪੂਰਬੀ ਭਾਰਤੀ", "ਪੱਛਮੀ ਭਾਰਤੀ", "ਉੱਤਰ-ਪੂਰਬੀ ਭਾਰਤੀ", "ਮੱਧ ਭਾਰਤੀ / ਆਦਿਵਾਸੀ ਭਾਈਚਾਰੇ", "ਮਿਸ਼ਰਤ / ਹੋਰ ਭਾਰਤੀ ਨਸਲ", "ਪਰਵਾਸੀ ਭਾਰਤੀ (NRI)", "ਹੋਰ"]
+      "question": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੀ ਨਸਲ ਚੁਣੋ:",
+      "answers": [
+        "ਪਠਾਨ (Pathan)",
+        "ਪਨੀਆ (Paniya)",
+        "ਓਂਗੇ (Onge)",
+        "ਵੈਸ਼ਯ (Vysya)",
+        "ਚੇਂਚੂ (Chenchu)",
+        "ਕਸ਼ਮੀਰੀ (Kashmiri)",
+        "ਬ੍ਰਾਹਮਣ (Brahmin)",
+        "ਖੱਤਰੀ (Kshatriya)",
+        "ਸਿੰਧੀ (Sindhi)",
+        "ਭੀਲ (Bhil)",
+        "ਚਮਾਰ (Chamar)",
+        "ਥਾਰੂ (Tharu)",
+        "ਵੇਲਮਾ (Velama)",
+        "ਮਾਲਾ (Mala)",
+        "ਮਾਦਿਗਾ (Madiga)",
+        "ਪੱਲਿਆਰ (Palliyar)",
+        "ਗੋਂਡ (Gond)",
+        "ਸੰਥਾਲ (Santhal)",
+        "ਹੋ (Ho)",
+        "ਆਓ ਨਾਗਾ (Ao Naga)",
+        "ਸ਼ੇਰਪਾ (Sherpa)",
+        "ਸਿੱਧੀ (Siddi)",
+        "ਯਹੂਦੀ (Jews)",
+        "ਵੇਦਾ (Vedda)",
+        "ਹੋਰ (Other)"
+      ]
     },
     "Q27": {
       "question": "ਕੀ ਤੁਸੀਂ ਕਦੇ ਛਾਤੀ ਦੀ ਜਾਂਚ (BE) ਕਰਵਾਈ ਹੈ?",

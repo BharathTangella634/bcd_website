@@ -99,14 +99,14 @@
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
+        { "key": "Q26", "type": "select", "required": true },
+        { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "हाँ" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "उदा., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
           { "key": "Q23", "type": "checkbox", "required": true },
-          { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "मृत्यु की आयु", "min": 1, "max": 120, "step": 1, "integerOnly": true}
-          ]},
-          { "key": "Q26", "type": "select", "required": true }
+          { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "नहीं" }, "subQuestions": [
+            { "key": "Q25", "type": "number", "placeholder": "मृत्यु की आयु", "min": 1, "max": 120, "step": 1 }
+          ]}
         ]}
       ]
     },
@@ -281,8 +281,34 @@
       "answers": []
     },
     "Q26": {
-      "question": "कृपया उनकी जातीयता चुनें:",
-      "answers": ["उत्तर भारतीय", "दक्षिण भारतीय", "पूर्वी भारतीय", "पश्चिमी भारतीय", "उत्तर-पूर्व भारतीय", "मध्य भारतीय / आदिवासी समुदाय", "मिश्रित / अन्य भारतीय समुदाय", "प्रवासी भारतीय (NRI)", "अन्य"]
+      "question": "कृपया अपनी जातीयता चुनें:",
+      "answers": [
+        "पठान (Pathan)",
+        "पनिया (Paniya)",
+        "ओन्गे (Onge)",
+        "वैश्य (Vysya)",
+        "चेन्चू (Chenchu)",
+        "कश्मीरी (Kashmiri)",
+        "ब्राह्मण (Brahmin)",
+        "क्षत्रिय (Kshatriya)",
+        "सिंधी (Sindhi)",
+        "भील (Bhil)",
+        "चमार (Chamar)",
+        "थारू (Tharu)",
+        "वेलमा (Velama)",
+        "माला (Mala)",
+        "मादिगा (Madiga)",
+        "पल्लियार (Palliyar)",
+        "गोंड (Gond)",
+        "संथाल (Santhal)",
+        "हो (Ho)",
+        "आओ नागा (Ao Naga)",
+        "शेरपा (Sherpa)",
+        "सिद्दी (Siddi)",
+        "यहूदी (Jews)",
+        "वेद्दा (Vedda)",
+        "अन्य (Other)"
+      ]
     },
     "Q27": {
       "question": "क्या आपने कभी स्तन परीक्षण (BE) कराया है?",
