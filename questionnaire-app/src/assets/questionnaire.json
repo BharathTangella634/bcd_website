@@ -268,9 +268,9 @@
       "answers": []
     },
     "Q23": {
-      "question": " was he/she diagnosed with?",
+      "question": "Please specify which types of cancer was he/she diagnosed with?",
       "answers": [
-        "Breast cancer", "Ovarian cancer", "Colon rectal cancer", "pancreatic cancer", "Uterine cancer", "Prostate cancer"
+        "Breast cancer", "Ovarian cancer", "Colon rectal cancer", "pancreatic cancer", "Uterine cancer", "Prostate cancer", "Other"
       ]
     },
     "Q24": {

@@ -562,14 +562,15 @@
       "answers": []
     },
     "Q23": {
-      "question": " was he/she diagnosed with?",
+      "question": "Please specify which types of cancer was he/she diagnosed with?",
       "answers": [
         "ସ୍ତନ କର୍କଟ",
         "ଡିମ୍ବାଶୟ କର୍କଟ",
         "କୋଲନ ରେକ୍ଟେଲ କର୍କଟ",
         "ଅଗ୍ନାଶୟ କର୍କଟ",
         "ଜରାୟୁ କର୍କଟ",
-        "ପ୍ରୋଷ୍ଟେଟ କର୍କଟ"
+        "ପ୍ରୋଷ୍ଟେଟ କର୍କଟ",
+        "Other"
       ]
     },
     "Q24": {

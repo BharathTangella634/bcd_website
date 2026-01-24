@@ -564,14 +564,15 @@
       "answers": []
     },
     "Q23": {
-      "question": " was he/she diagnosed with?",
+      "question": "Please specify which types of cancer was he/she diagnosed with?",
       "answers": [
         "రొమ్ము క్యాన్సర్",
         "డింభాశయ క్యాన్సర్",
         "కాలన్-రెక్టల్ క్యాన్సర్",
         "ప్యాంక్రియాటిక్ క్యాన్సర్",
         "గర్భాశయ క్యాన్సర్",
-        "ప్రోస్టేట్ క్యాన్సర్"
+        "ప్రోస్టేట్ క్యాన్సర్",
+        "Other"
       ]
     },
     "Q24": {

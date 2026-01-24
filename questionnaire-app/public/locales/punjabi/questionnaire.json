@@ -562,14 +562,15 @@
       "answers": []
     },
     "Q23": {
-      "question": " was he/she diagnosed with?",
+      "question": "Please specify which types of cancer was he/she diagnosed with?",
       "answers": [
         "ਛਾਤੀ ਦਾ ਕੈਂਸਰ",
         "ਅੰਡਕੋਸ਼ ਕੈਂਸਰ",
         "ਕੋਲੋਰੈਕਟਲ ਕੈਂਸਰ",
         "ਪੈਨਕ੍ਰੀਆਟਿਕ ਕੈਂਸਰ",
         "ਗਰੱਭਾਸ਼ਯ ਕੈਂਸਰ",
-        "ਪ੍ਰੋਸਟੇਟ ਕੈਂਸਰ"
+        "ਪ੍ਰੋਸਟੇਟ ਕੈਂਸਰ",
+        "Other"
       ]
     },
     "Q24": {

@@ -562,14 +562,15 @@
       "answers": []
     },
     "Q23": {
-      "question": " was he/she diagnosed with?",
+      "question": "Please specify which types of cancer was he/she diagnosed with?",
       "answers": [
         "സ്തനാർബുദം",
         "അണ്ഡാശയ അർബുദം",
         "വൻകുടൽ കാൻസർ",
         "പാൻക്രിയാറ്റിക് ക്യാൻസർ",
         "ഗർഭാശയ അർബുദം",
-        "പ്രോസ്റ്റേറ്റ് കാൻസർ"
+        "പ്രോസ്റ്റേറ്റ് കാൻസർ",
+        "Other"
       ]
     },
     "Q24": {

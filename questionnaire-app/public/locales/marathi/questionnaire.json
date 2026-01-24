@@ -562,14 +562,15 @@
       "answers": []
     },
     "Q23": {
-      "question": " was he/she diagnosed with?",
+      "question": "Please specify which types of cancer was he/she diagnosed with?",
       "answers": [
         "स्तनाचा कर्करोग",
         "अंडाशयाचा कर्करोग",
         "कोलोरेक्टल कर्करोग",
         "स्वादुपिंडाचा कर्करोग",
         "गर्भाशयाचा कर्करोग",
-        "प्रोस्टेट कर्करोग"
+        "प्रोस्टेट कर्करोग",
+        "Other"
       ]
     },
     "Q24": {

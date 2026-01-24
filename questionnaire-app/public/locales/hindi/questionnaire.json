@@ -562,14 +562,15 @@
       "answers": []
     },
     "Q23": {
-      "question": " was he/she diagnosed with?",
+      "question": "Please specify which types of cancer was he/she diagnosed with?",
       "answers": [
         "स्तन कैंसर",
         "ओवरी कैंसर",
         "कोलन रेक्टल कैंसर",
         "पैनक्रियाटिक कैंसर",
-        "यूटेरिन (गर्भाशय) कैंसर",
-        "प्रोस्टेट कैंसर"
+        "यूटेरิน (गर्भाशय) कैंसर",
+        "प्रोस्टेट कैंसर",
+        "Other"
       ]
     },
     "Q24": {
