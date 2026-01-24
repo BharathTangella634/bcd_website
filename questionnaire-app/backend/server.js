@@ -10,6 +10,7 @@ import questionnaireJson from './questionnaire.json' with { type: 'json' };
 
 
 const questionnaireData = questionnaireJson.questions; 
+const formStructure = questionnaireJson.formStructure;
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -120,28 +121,39 @@ app.post('/api/submit', async (req, res) => {
         connection = await pool.getConnection();
         await connection.beginTransaction();
 
+        // --- NEW: Helper to get ordered keys from formStructure ---
+        const getOrderedKeys = (structure) => {
+            const keys = [];
+            const traverse = (questions) => {
+                if (!Array.isArray(questions)) return;
+                questions.forEach(q => {
+                    const qKey = q.name || q.key;
+                    if (qKey) keys.push(qKey);
+                    if (q.otherOptionId) keys.push(q.otherOptionId);
+                    if (q.subQuestions) traverse(q.subQuestions);
+                });
+            };
+            structure.forEach(section => traverse(section.questions));
+            return keys;
+        };
 
-        const answerPromises = [];
-        for (const questionKey in formDataEn) {
+        const orderedKeys = getOrderedKeys(formStructure);
+        // Also add keys that might be in formDataEn but not in formStructure (like Q46 language)
+        const allKeys = [...new Set([...orderedKeys, ...Object.keys(formDataEn)])];
+
+        for (const questionKey of allKeys) {
             if (Object.prototype.hasOwnProperty.call(formDataEn, questionKey)) {
                 const answerValue = formDataEn[questionKey];
                 const sessionDataId = uuidv4();
                 const finalAnswer = Array.isArray(answerValue) ? answerValue.join(', ') : answerValue;
 
-                // --- ADD THIS LINE: Look up the full question text ---
-                // Use optional chaining and fallback to the key if text not found
+                // --- Look up the full question text ---
                 const questionText = questionnaireData[questionKey]?.question || questionKey;
-                // --- END ADDITION ---
 
-                // --- MODIFIED LINE: Use questionText instead of questionKey ---
                 const answerSql = 'INSERT INTO session_data_table (session_data_id, session_id, question, answer, created_at) VALUES (?, ?, ?, ?, ?)';
-                answerPromises.push(
-                    connection.query(answerSql, [sessionDataId, sessionId, questionText, finalAnswer, new Date()]) // Pass questionText here
-                );
-                // --- END MODIFICATION ---
+                await connection.query(answerSql, [sessionDataId, sessionId, questionText, finalAnswer, new Date()]);
             }
         }
-        await Promise.all(answerPromises);
         
         // --- MODIFIED: Update session_table with end_time AND the calculated risk ---
         const updateSessionSql = 'UPDATE session_table SET session_end_time = ?, snehita_lifetime_risk = ? WHERE session_id = ?';
