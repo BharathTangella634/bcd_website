@@ -343,49 +343,6 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     
     switch (qConfig.type) {
        case 'select':
-         return (
-           <select name={name} onChange={handleChange} value={formData[name] || ""} className="select-input">
-             <option value="" disabled>{t('ui.inputs.selectDefault')}</option>
-             {data.answers.map((ans, i) => <option key={i} value={ans}>{ans}</option>)}
-           </select>
-         );
-       case 'checkbox':
-         return (
-           <div className="checkbox-group vertical">
-             {data.answers.map((ans, i) => (
-               <label key={i}>
-                 <input 
-                   type="checkbox" name={name} value={ans} onChange={handleChange} 
-                   checked={formData[name]?.includes(ans) || false}
-                 /> {ans}
-               </label>
-             ))}
-           </div>
-         );
-       case 'checkbox-plus-text':
-          return (
-              <div className="checkbox-group vertical">
-                 {data.answers.map((ans, i) => (
-                     <label key={i}>
-                       <input 
-                         type="checkbox" name={name} value={ans} onChange={handleChange}
-                         checked={formData[name]?.includes(ans) || false}
-                       /> {ans}
-                     </label>
-                 ))}
-                 {(formDataEn[name]?.includes('Other') || formDataEn[name]?.includes('others')) && (
-                   <input 
-                     type="text" 
-                     name={qConfig.otherOptionId} 
-                     placeholder={qConfig.otherPlaceholder || t('ui.inputs.otherPlaceholder', 'Specify other')} 
-                     onChange={handleChange} 
-                     className="text-input" 
-                     value={formData[qConfig.otherOptionId] || ''}
-                     required={qConfig.required}
-                   />
-                 )}
-              </div>
-          );
        case 'select-plus-text':
          return (
            <>
@@ -393,7 +350,7 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
                <option value="" disabled>{t('ui.inputs.selectDefault')}</option>
                {data.answers.map((ans, i) => <option key={i} value={ans}>{ans}</option>)}
              </select>
-             {formDataEn[name] === 'Other' && (
+             {qConfig.type === 'select-plus-text' && formDataEn[name] === 'Other' && (
                <input 
                  type="text" 
                  name={qConfig.otherOptionId} 
@@ -405,6 +362,31 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
                />
              )}
            </>
+         );
+       case 'checkbox':
+       case 'checkbox-plus-text':
+         return (
+           <div className="checkbox-group vertical">
+             {data.answers.map((ans, i) => (
+               <label key={i}>
+                 <input 
+                   type="checkbox" name={name} value={ans} onChange={handleChange} 
+                   checked={formData[name]?.includes(ans) || false}
+                 /> {ans}
+               </label>
+             ))}
+             {qConfig.type === 'checkbox-plus-text' && (formDataEn[name]?.includes('Other') || formDataEn[name]?.includes('others')) && (
+               <input 
+                 type="text" 
+                 name={qConfig.otherOptionId} 
+                 placeholder={qConfig.otherPlaceholder || t('ui.inputs.otherPlaceholder', 'Specify other')} 
+                 onChange={handleChange} 
+                 className="text-input" 
+                 value={formData[qConfig.otherOptionId] || ''}
+                 required={qConfig.required}
+               />
+             )}
+           </div>
          );
        case 'radio':
        default:

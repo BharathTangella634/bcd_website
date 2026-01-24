@@ -86,25 +86,27 @@ const QuestionBlock = ({
 
     switch (config.type) {
       case 'select':
+      case 'select-plus-text':
         return (
-          <select name={qName} onChange={handleChange} value={formData[qName] || ""} className="select-input">
-            <option value="" disabled>{t('ui.inputs.selectDefault')}</option>
-            {qData.answers.map((ans, i) => <option key={i} value={ans}>{ans}</option>)}
-          </select>
+          <>
+            <select name={qName} onChange={handleChange} value={formData[qName] || ""} className="select-input">
+              <option value="" disabled>{t('ui.inputs.selectDefault')}</option>
+              {qData.answers.map((ans, i) => <option key={i} value={ans}>{ans}</option>)}
+            </select>
+            {config.type === 'select-plus-text' && formDataEn[qName] === 'Other' && (
+              <input
+                type="text"
+                name={config.otherOptionId}
+                placeholder={config.otherPlaceholder || t('ui.inputs.otherPlaceholder', 'Specify other')}
+                onChange={handleChange}
+                className="text-input"
+                value={formData[config.otherOptionId] || ''}
+                required={config.required}
+              />
+            )}
+          </>
         );
       case 'checkbox':
-        return (
-          <div className="checkbox-group vertical">
-            {qData.answers.map((ans, i) => (
-              <label key={i}>
-                <input
-                  type="checkbox" name={qName} value={ans} onChange={handleChange}
-                  checked={formData[qName]?.includes(ans) || false}
-                /> {ans}
-              </label>
-            ))}
-          </div>
-        );
       case 'checkbox-plus-text':
         return (
           <div className="checkbox-group vertical">
@@ -116,6 +118,17 @@ const QuestionBlock = ({
                 /> {ans}
               </label>
             ))}
+            {config.type === 'checkbox-plus-text' && (formDataEn[qName]?.includes('Other') || formDataEn[qName]?.includes('others')) && (
+              <input
+                type="text"
+                name={config.otherOptionId}
+                placeholder={config.otherPlaceholder || t('ui.inputs.otherPlaceholder', 'Specify other')}
+                onChange={handleChange}
+                className="text-input"
+                value={formData[config.otherOptionId] || ''}
+                required={config.required}
+              />
+            )}
           </div>
         );
       case 'radio':
