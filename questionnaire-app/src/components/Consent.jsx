@@ -124,7 +124,6 @@ function Consent({ onAccept }) {
       <div className="consent-header">
         <p><strong>{t('headernames.studyTitle')} :</strong> {t('header.studyTitle')}</p>
         <p><strong>{t('headernames.sponsor')} :</strong> {t('header.sponsor')}</p>
-        <p><strong>{t('headernames.programManager')} :</strong> {t('header.programManager')}</p>
         <p><strong>{t('headernames.iecApproval')} :</strong> {t('header.iecApproval')}</p>
       </div>
 

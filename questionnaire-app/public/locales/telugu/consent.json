@@ -7,14 +7,12 @@
   "headernames": {
     "studyTitle": "స్టడీ పేరు",
     "sponsor": "సహాయం అందిస్తున్నవారు",
-    "programManager": "ప్రోగ్రామ్ మేనేజర్",
     "iecApproval": "IEC అనుమతి"
   },
   "header": {
-    "studyTitle": "భారతీయ ప్రజల కోసం రొమ్ము క్యాన్సర్ స్క్రీనింగ్ సాధనం అభివృద్ధి",
+    "studyTitle": "AI enabled Breast Cancer Screening Tool",
     "sponsor": "TANUH Foundation",
-    "programManager": "డా. అశ్విన్ రాజ్ కుమార్ (ashwin.rajkumar@tanuh.ai)",
-    "iecApproval": "[IEC ప్రోటోకాల్ నంబర్ మరియు తేదీ]"
+    "iecApproval": "Ethics committee approval received from Clinicom vide letter no: 02434 dated 13-Jan-2026"
   },
   "sections": [
     {
@@ -78,6 +76,6 @@
       ]
     }
   ],
-  "checkboxLabel": "నేను పైన ఉన్న సమాచారాన్ని చదివాను, మరియు ఇష్టపూర్వకంగా ఈ స్టడీలో పాల్గొనడానికి అంగీకరిస్తున్నాను (లేదా ఒప్పుకుంటున్నాను).",
+  "checkboxLabel": "By checking this box, you confirm that you are 18 years of age or older, that you have read and understood the Participant Information Sheet, and that the information you provide for this study is given voluntarily.",
   "buttonText": "అంగీకరించండి మరియు ముందుకు వెళ్ళండి"
 }

@@ -7,14 +7,12 @@
   "headernames": {
     "studyTitle": "അധ്യയന ശീർഷകം",
     "sponsor": "സ്പോൺസർ",
-    "programManager": "പ്രോഗ്രാം മാനേജർ",
     "iecApproval": "IEC അംഗീകാരം"
   },
   "header": {
-    "studyTitle": "ഇന്ത്യൻ ജനസംഖ്യയ്ക്കായി ഒരു സ്തനാർബുദ സ്ക്രീനിംഗ് ഉപകരണം വികസിപ്പിക്കൽ",
+    "studyTitle": "AI enabled Breast Cancer Screening Tool",
     "sponsor": "TANUH Foundation",
-    "programManager": "ഡോ. അശ്വിൻ രാജ്കുമാർ (ashwin.rajkumar@tanuh.ai)",
-    "iecApproval": "[IEC പ്രോട്ടോക്കോൾ നമ്പറും തീയതിയും]"
+    "iecApproval": "Ethics committee approval received from Clinicom vide letter no: 02434 dated 13-Jan-2026"
   },
   "sections": [
     {
@@ -88,6 +86,6 @@
       ]
     }
   ],
-  "checkboxLabel": "മുകളിലുള്ള വിവരങ്ങൾ ഞാൻ വായിക്കുകയും ഈ പഠനത്തിൽ സ്വമേധയാ പങ്കെടുക്കാൻ സമ്മതിക്കുകയും ചെയ്യുന്നു.",
+  "checkboxLabel": "By checking this box, you confirm that you are 18 years of age or older, that you have read and understood the Participant Information Sheet, and that the information you provide for this study is given voluntarily.",
   "buttonText": "സ്വീകരിക്കുക & തുടരുക"
 }

@@ -7,14 +7,12 @@
   "headernames": {
     "studyTitle": "ਅਧਿਐਨ ਸਿਰਲੇਖ",
     "sponsor": "ਸਪਾਂਸਰ",
-    "programManager": "ਪ੍ਰੋਗਰਾਮ ਮੈਨੇਜਰ",
     "iecApproval": "IEC ਮਨਜ਼ੂਰੀ"
   },
   "header": {
-    "studyTitle": "ਭਾਰਤੀ ਆਬਾਦੀ ਲਈ ਛਾਤੀ ਕੈਂਸਰ ਸਕ੍ਰੀਨਿੰਗ ਸੰਦ ਦਾ ਵਿਕਾਸ",
+    "studyTitle": "AI enabled Breast Cancer Screening Tool",
     "sponsor": "TANUH Foundation",
-    "programManager": "ਡਾ. ਅਸ਼ਵਿਨ ਰਾਜਕੁਮਾਰ (ashwin.rajkumar@tanuh.ai)",
-    "iecApproval": "[IEC ਪ੍ਰੋਟੋਕੋਲ ਨੰਬਰ ਅਤੇ ਮਿਤੀ]"
+    "iecApproval": "Ethics committee approval received from Clinicom vide letter no: 02434 dated 13-Jan-2026"
   },
   "sections": [
     {
@@ -88,6 +86,6 @@
       ]
     }
   ],
-  "checkboxLabel": "ਮੈਂ ਉੱਪਰ ਦਿੱਤੀ ਜਾਣਕਾਰੀ ਪੜ੍ਹੀ ਹੈ ਅਤੇ ਮੈਂ ਸੁਚੇਤ ਤੌਰ 'ਤੇ ਇਸ ਅਧਿਐਨ ਵਿੱਚ ਭਾਗ ਲੈਣ ਲਈ ਸਹਿਮਤ ਹਾਂ।",
+  "checkboxLabel": "By checking this box, you confirm that you are 18 years of age or older, that you have read and understood the Participant Information Sheet, and that the information you provide for this study is given voluntarily.",
   "buttonText": "ਸਵੀਕਾਰ ਕਰੋ ਅਤੇ ਅੱਗੇ ਵਧੋ"
 }

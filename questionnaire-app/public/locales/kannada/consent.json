@@ -7,14 +7,12 @@
   "headernames": {
     "studyTitle": "ಅಧ್ಯಯನ ಶೀರ್ಷಿಕೆ",
     "sponsor": "ಪ್ರಾಯೋಜಕ",
-    "programManager": "ಕಾರ್ಯಕ್ರಮ ವ್ಯವಸ್ಥಾಪಕ",
     "iecApproval": "ಐಇಸಿ ಅನುಮೋದನೆ"
   },
   "header": {
-    "studyTitle": "ಭಾರತೀಯ ಜನಸಂಖ್ಯೆಗಾಗಿ ಸ್ತನ ಕ್ಯಾನ್ಸರ್ ತಪಾಸಣಾ ಸಾಧನದ ಅಭಿವೃದ್ಧಿ",
+    "studyTitle": "AI enabled Breast Cancer Screening Tool",
     "sponsor": "TANUH Foundation",
-    "programManager": "ಡಾ. ಅಶ್ವಿನ್ ರಾಜ್‌ಕುಮಾರ್ (ashwin.rajkumar@tanuh.ai)",
-    "iecApproval": "[ಐಇಸಿ ಪ್ರೋಟೋಕಾಲ್ ಸಂಖ್ಯೆ ಮತ್ತು ದಿನಾಂಕ]"
+    "iecApproval": "Ethics committee approval received from Clinicom vide letter no: 02434 dated 13-Jan-2026"
   },
   "sections": [
     {
@@ -88,6 +86,6 @@
       ]
     }
   ],
-  "checkboxLabel": "ಮೇಲಿನ ಮಾಹಿತಿಯನ್ನು ನಾನು ಓದಿದ್ದೇನೆ ಮತ್ತು ಈ ಅಧ್ಯಯನದಲ್ಲಿ ಸ್ವಯಂಪ್ರೇರಿತವಾಗಿ ಭಾಗವಹಿಸಲು ಒಪ್ಪುತ್ತೇನೆ.",
+  "checkboxLabel": "By checking this box, you confirm that you are 18 years of age or older, that you have read and understood the Participant Information Sheet, and that the information you provide for this study is given voluntarily.",
   "buttonText": "ಸ್ವೀಕರಿಸಿ ಮತ್ತು ಮುಂದುವರಿಯಿರಿ"
 }

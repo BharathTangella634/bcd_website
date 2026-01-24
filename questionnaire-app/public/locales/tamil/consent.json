@@ -7,14 +7,12 @@
   "headernames": {
     "studyTitle": "ஆய்வு தலைப்பு",
     "sponsor": "ஆதார நிறுவனம்",
-    "programManager": "பிரோக்ராம் மேலாளர்",
     "iecApproval": "IEC அங்கீகாரம்"
   },
   "header": {
-    "studyTitle": "இந்திய மக்களுக்கான மார்பகப் புற்றுநோய் திரையிடல் கருவி உருவாக்கம்",
+    "studyTitle": "AI enabled Breast Cancer Screening Tool",
     "sponsor": "TANUH Foundation",
-    "programManager": "டாக்டர் அஷ்வின் ராஜ்குமார் (ashwin.rajkumar@tanuh.ai)",
-    "iecApproval": "[IEC நெறிமுறை எண் மற்றும் தேதி]"
+    "iecApproval": "Ethics committee approval received from Clinicom vide letter no: 02434 dated 13-Jan-2026"
   },
   "sections": [
     {
@@ -88,6 +86,6 @@
       ]
     }
   ],
-  "checkboxLabel": "மேலே உள்ள தகவல்களைப் படித்து, தன்னார்வமாக இந்த ஆய்வில் பங்கேற்க சம்மதிக்கிறேன்.",
+  "checkboxLabel": "By checking this box, you confirm that you are 18 years of age or older, that you have read and understood the Participant Information Sheet, and that the information you provide for this study is given voluntarily.",
   "buttonText": "ஏற்கவும் & தொடரவும்"
 }
