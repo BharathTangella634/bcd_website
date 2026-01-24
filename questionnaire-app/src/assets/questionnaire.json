@@ -286,7 +286,33 @@
     },
     "Q26": {
       "question": "Please select your ethnicity:",
-      "answers": ["North Indian", "South Indian", "East Indian", "West Indian", "North-East Indian", "Central Indian / Tribal Communities", "Mixed / Other Indian Ethnicity", "Non-Resident Indian (NRI)", "Others"]
+      "answers": [
+        "Pathan",
+        "Paniya",
+        "Onge",
+        "Vysya",
+        "Chenchu",
+        "Kashmiri",
+        "Brahmin",
+        "Kshatriya",
+        "Sindhi",
+        "Bhil",
+        "Chamar",
+        "Tharu",
+        "Velama",
+        "Mala",
+        "Madiga",
+        "Palliyar",
+        "Gond",
+        "Santhal",
+        "Ho",
+        "Ao Naga",
+        "Sherpa",
+        "Siddi",
+        "Jews",
+        "Vedda",
+        "Other"
+      ]
     },
     "Q27": {
       "question": "Have you ever undergone a Breast Examination (BE)?",
