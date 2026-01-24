@@ -370,6 +370,14 @@
         "E: எனக்குத் தெரியாது / எனக்குத் தெரியவில்லை."
       ]
     },
+    "q26_other_specify": {
+      "question": "Ethnicity (Other):",
+      "answers": []
+    },
+    "q43_other_specify": {
+      "question": "Type of Cancer (Other):",
+      "answers": []
+    },
     "Q40": {
       "question": "நீங்கள் மார்பக செல் பயாப்ஸி செய்தீர்களா?",
       "answers": [ "ஆம்","இல்லை" ]

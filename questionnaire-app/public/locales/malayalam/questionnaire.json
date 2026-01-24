@@ -370,6 +370,14 @@
         "E: എനിക്കറിയില്ല / എനിക്ക് ഉറപ്പില്ല"
       ]
     },
+    "q26_other_specify": {
+      "question": "Ethnicity (Other):",
+      "answers": []
+    },
+    "q43_other_specify": {
+      "question": "Type of Cancer (Other):",
+      "answers": []
+    },
     "Q40": {
       "question": "നിങ്ങൾ ഒരു ബ്രെസ്റ്റ് ബയോപ്സി നടത്തിയിട്ടുണ്ടോ?",
       "answers": [ "അതെ","ഇല്ല" ]

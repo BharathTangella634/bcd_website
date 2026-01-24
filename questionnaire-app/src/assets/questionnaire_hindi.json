@@ -38,7 +38,7 @@
       "questions": [
         { "key": "Q44", "type": "text" },
         { "key": "Q45", "type": "text", "placeholder": "सार्वभौमिक" },
-        { "key": "Q1", "type": "number", "placeholder": "उदा., ३५", "required": true },
+        { "key": "Q1", "type": "number", "placeholder": "उदा., ३५", "required": true, "integerOnly": true },
         { "key": "Q2", "type": "number", "placeholder": "उदा., १६५", "required": true },
         { "key": "Q3", "type": "number", "placeholder": "उदा., ६०", "required": true },
         { "key": "Q4", "type": "select", "required": true },
@@ -47,19 +47,19 @@
         { "key": "Q7", "type": "radio", "required": true },
         { "key": "Q8", "type": "radio", "required": true },
         { "key": "Q9", "type": "radio", "required": true, "condition": { "key": "Q9", "value": "हाँ" }, "subQuestions": [
-          { "key": "Q10", "type": "number", "placeholder": "कृपया संख्या दर्ज करें - वर्ष", "required": true },
+          { "key": "Q10", "type": "number", "placeholder": "कृपया संख्या दर्ज करें - वर्ष", "required": true, "integerOnly": true },
           { "key": "Q11", "type": "radio", "required": true },
           { "key": "Q12", "type": "radio", "required": true }
         ]},
         { "key": "Q13", "type": "radio" },
         { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "हाँ" }, "subQuestions": [
-          { "key": "Q15", "type": "number", "placeholder": "कृपया एक संख्या दर्ज करें", "required": true },
+          { "key": "Q15", "type": "number", "placeholder": "कृपया एक संख्या दर्ज करें", "required": true, "integerOnly": true },
           { "key": "Q16", "type": "radio", "required": true },
           { "key": "Q17", "type": "radio", "required": true }
         ]},
         { "key": "Q18", "type": "radio", "required": true },
         { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q26", "type": "select", "required": true },
+        { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "हाँ" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
           { "key": "Q22", "type": "number", "placeholder": "उदा., ४५", "required": true },

@@ -273,6 +273,16 @@ const arePropsEqual = (prev, next) => {
       return false;
   }
 
+  // 5. Other specify field check
+  if (next.qConfig.otherOptionId) {
+    const otherKey = next.qConfig.otherOptionId;
+    if (prev.formData[otherKey] !== next.formData[otherKey]) return false;
+    // Also check if the "Other" selection itself changed, though it's likely covered by name
+  }
+
+  // 6. Check if English form data changed for this question (affects "Other" visibility)
+  if (prev.formDataEn[name] !== next.formDataEn[name]) return false;
+
   return true;
 };
 

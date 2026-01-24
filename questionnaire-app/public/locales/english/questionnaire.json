@@ -103,7 +103,7 @@
         { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
         { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "Yes" }, "subQuestions": [
           { "key": "Q21", "type": "radio", "required": true },
-          { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1,"integerOnly":true },
+          { "key": "Q22", "type": "number", "placeholder": "e.g., 45", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
           { "key": "Q23", "type": "checkbox", "required": true },
           { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "No" }, "subQuestions": [
             { "key": "Q25", "type": "number", "placeholder": "Enter age of death", "min": 1, "max": 120, "step": 1  }
@@ -370,6 +370,14 @@
         "D: Extremely dense (The breasts are almost entirely made of dense, fibrous, and glandular tissue. This can make it very difficult to see through the breast on a mammogram. This is also associated with a higher risk of breast cancer.)",
         "E: I don't know / I am not sure"
       ]
+    },
+    "q26_other_specify": {
+      "question": "Ethnicity (Other):",
+      "answers": []
+    },
+    "q43_other_specify": {
+      "question": "Type of Cancer (Other):",
+      "answers": []
     },
     "Q40": {
       "question": "Have you had a breast biopsy?",

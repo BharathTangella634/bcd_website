@@ -370,6 +370,14 @@
         "E: ମୁଁ ଜାଣିନାହିଁ / ମୁଁ ନିଶ୍ଚିତ ନୁହେଁ"
       ]
     },
+    "q26_other_specify": {
+      "question": "Ethnicity (Other):",
+      "answers": []
+    },
+    "q43_other_specify": {
+      "question": "Type of Cancer (Other):",
+      "answers": []
+    },
     "Q40": {
       "question": "ତୁମର ସ୍ତନ ବାୟୋପସି ଅଛି କି?",
       "answers": [ "ହଁ","ନା" ]

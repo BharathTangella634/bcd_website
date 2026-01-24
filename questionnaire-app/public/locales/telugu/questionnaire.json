@@ -370,7 +370,15 @@
         "E: నాకు తెలియదు / నాకు ఖచ్చితంగా తెలియదు"
       ] 
     },
-    "Q40": { 
+    "q26_other_specify": {
+      "question": "Ethnicity (Other):",
+      "answers": []
+    },
+    "q43_other_specify": {
+      "question": "Type of Cancer (Other):",
+      "answers": []
+    },
+    "Q40": {
       "question": "మీకు ఎప్పుడైనా రొమ్ము బయాప్సీ చేశారా?", 
       "answers": ["అవును", "కాదు"] 
     },

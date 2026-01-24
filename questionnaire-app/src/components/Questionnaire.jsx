@@ -155,7 +155,8 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     } else {
         const hindiAnswers = questionnaireData[name]?.answers || [];
         const englishAnswers = questionnaireDataEn[name]?.answers || [];
-        const englishValue = englishAnswers[hindiAnswers.indexOf(value)] || value;
+        const index = hindiAnswers.indexOf(value);
+        const englishValue = index !== -1 ? englishAnswers[index] : value;
 
         setFormData(prev => ({ ...prev, [name]: value }));
         setFormDataEn(prev => ({ ...prev, [name]: englishValue }));

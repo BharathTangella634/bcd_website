@@ -93,7 +93,7 @@
         },
         { "key": "Q13", "type": "radio" },
         { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "Yes" }, "subQuestions": [
-          { "key": "Q15", "type": "number", "placeholder": "કૃપા કરીને એક નંબર દાખલ કરો", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly":true },
+          { "key": "Q15", "type": "number", "placeholder": "મહેરબાની કરીને નંબર દાખલ કરો", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
           { "key": "Q16", "type": "radio", "required": true },
           { "key": "Q17", "type": "radio", "required": true }
         ]},
@@ -369,6 +369,14 @@
         "D: અત્યંત ગાઢ (સ્તનો લગભગ સંપૂર્ણપણે ગાઢ, તંતુમય અને ગ્રંથીયુકત પેશીઓથી બનેલા હોય છે. આનાથી મેમોગ્રામ પર સ્તનમાંથી બહાર નીકળવું ખૂબ મુશ્કેલ બની શકે છે. આ સ્તન કેન્સરના ઊંચા જોખમ સાથે પણ સંકળાયેલું છે.)",
         "E: મને ખબર નથી / મને ખાતરી નથી."
       ]
+    },
+    "q26_other_specify": {
+      "question": "Ethnicity (Other):",
+      "answers": []
+    },
+    "q43_other_specify": {
+      "question": "Type of Cancer (Other):",
+      "answers": []
     },
     "Q40": {
       "question": "શું તમે સ્તન બાયોપ્સી કરાવી છે?",

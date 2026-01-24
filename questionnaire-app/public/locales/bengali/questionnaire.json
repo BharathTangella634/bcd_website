@@ -94,7 +94,7 @@
         },
         { "key": "Q13", "type": "radio" },
         { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "Yes" }, "subQuestions": [
-          { "key": "Q15", "type": "number", "placeholder": "অনুগ্রহ করে একটি নম্বর লিখুন।", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly":true },
+          { "key": "Q15", "type": "number", "placeholder": "অনুগ্রহ করে একটি নম্বর লিখুন।", "required": true, "min": 1, "max": 120, "step": 1, "integerOnly": true },
           { "key": "Q16", "type": "radio", "required": true },
           { "key": "Q17", "type": "radio", "required": true }
         ]},
@@ -370,6 +370,14 @@
         "D: অত্যন্ত ঘন (স্তনগুলি প্রায় সম্পূর্ণরূপে ঘন, তন্তুযুক্ত এবং গ্রন্থিযুক্ত টিস্যু দিয়ে তৈরি। এর ফলে ম্যামোগ্রামে স্তনের মধ্য দিয়ে দেখা খুব কঠিন হয়ে পড়ে। এটি স্তন ক্যান্সারের ঝুঁকির সাথেও যুক্ত।)",
         "E: আমি জানি না / আমি নিশ্চিত নই।"
       ]
+    },
+    "q26_other_specify": {
+      "question": "Ethnicity (Other):",
+      "answers": []
+    },
+    "q43_other_specify": {
+      "question": "Type of Cancer (Other):",
+      "answers": []
     },
     "Q40": {
       "question": "আপনি একটি স্তন বায়োপসি আছে?",

@@ -370,6 +370,14 @@
         "E: ਮੈਨੂੰ ਨਹੀਂ ਪਤਾ / ਮੈਨੂੰ ਯਕੀਨ ਨਹੀਂ ਹੈ"
       ]
     },
+    "q26_other_specify": {
+      "question": "Ethnicity (Other):",
+      "answers": []
+    },
+    "q43_other_specify": {
+      "question": "Type of Cancer (Other):",
+      "answers": []
+    },
     "Q40": {
       "question": "ਕੀ ਤੁਸੀਂ ਛਾਤੀ ਦੀ ਬਾਇਓਪਸੀ ਕਰਵਾਈ ਹੈ?",
       "answers": [ "ਹਾਂ","ਨੰ" ]

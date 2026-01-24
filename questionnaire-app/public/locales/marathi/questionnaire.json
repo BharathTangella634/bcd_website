@@ -368,6 +368,14 @@
         "E: मला माहिती नाही / खात्री नाही"
       ]
     },
+    "q26_other_specify": {
+      "question": "Ethnicity (Other):",
+      "answers": []
+    },
+    "q43_other_specify": {
+      "question": "Type of Cancer (Other):",
+      "answers": []
+    },
     "Q40": {
       "question": "तुम्ही कधी स्तनाची बायोप्सी करून घेतली आहे का?",
       "answers": ["होय", "नाही"]

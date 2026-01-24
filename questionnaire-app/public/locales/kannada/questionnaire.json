@@ -370,6 +370,14 @@
         "E: ನನಗೆ ಗೊತ್ತಿಲ್ಲ / ಖಚಿತವಿಲ್ಲ"
       ]
     },
+    "q26_other_specify": {
+      "question": "Ethnicity (Other):",
+      "answers": []
+    },
+    "q43_other_specify": {
+      "question": "Type of Cancer (Other):",
+      "answers": []
+    },
     "Q40": {
       "question": "ನೀವು ಎಂದಾದರೂ ಸ್ತನ ಬಯಾಪ್ಸಿ ಮಾಡಿಸಿಕೊಂಡಿದ್ದೀರಾ?",
       "answers": [ "ಹೌದು", "ಇಲ್ಲ" ]
