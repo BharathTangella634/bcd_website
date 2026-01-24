@@ -182,10 +182,6 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
                 visibleRequired.push(q.otherOptionId);
               }
             }
-<<<<<<< HEAD
-
-=======
->>>>>>> refs/remotes/origin/ark/dev
             if (q.subQuestions && q.condition) {
                 const translatedConditionValue = getTranslatedConditionValue(q.condition);
                 if (formData[q.condition.key] === translatedConditionValue) {
@@ -293,7 +289,6 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     onSubmit(dataToSubmit, dataToSubmitEn);
   };
 
-<<<<<<< HEAD
   // renderInput - Modified to use translated data
   const renderInput = (qConfig) => { 
     // 'questionnaireData' is now a prop
@@ -543,8 +538,6 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     });
   };
 
-=======
->>>>>>> refs/remotes/origin/ark/dev
   let questionCounter = 0;
 
   // Loading check (important!)
