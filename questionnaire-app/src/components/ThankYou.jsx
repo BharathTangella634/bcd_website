@@ -12,7 +12,7 @@ import { useEffect } from 'react';
 // Helper function to determine the risk level based on the score (Unchanged)
 const getRiskLevel = (score, t) => {
     const rows = t('interpretation.data', { returnObjects: true });
-    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["Normal Risk", "Moderate Risk", "High Risk", "Very High Risk"];
+    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["No Risk", "Low Risk", "Moderate Risk", "High Risk"];
 
     const numScore = parseFloat(score);
     if (isNaN(numScore)) return null;
@@ -40,10 +40,10 @@ const getRiskLevel = (score, t) => {
 const getRiskLevelEn = (score) => {
     const numScore = parseFloat(score);
     if (isNaN(numScore)) return null;
-    if (numScore < 0.4004) return "Normal Risk";
-    if (numScore >= 0.4004 && numScore < 0.574) return "Moderate Risk";
-    if (numScore >= 0.574 && numScore < 0.795) return "High Risk";
-    if (numScore >= 0.795) return "Very High Risk";
+    if (numScore < 0.4004) return "No Risk";
+    if (numScore >= 0.4004 && numScore < 0.574) return "Low Risk";
+    if (numScore >= 0.574 && numScore < 0.795) return "Moderate Risk";
+    if (numScore >= 0.795) return "High Risk";
     return null;
 };
 
