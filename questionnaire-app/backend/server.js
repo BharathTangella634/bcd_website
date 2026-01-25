@@ -175,12 +175,29 @@ app.post('/api/submit', async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`🚀 Server is running on http://0.0.0.0:${PORT}`);
+// Health check endpoints
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ success: true, message: 'Backend is healthy!' });
 });
 
-app.get('/api/health', (req, res) => {
-  res.status(200).json({ message: 'Backend is healthy!' });
+app.get('/health', (req, res) => {
+    res.status(200).json({ success: true, message: 'Backend is healthy!' });
+});
+
+// Test DB connection endpoint
+app.get('/api/db-test', async (req, res) => {
+    try {
+        const pool = getPool();
+        const [rows] = await pool.query('SELECT 1 AS ok');
+        res.status(200).json({ success: true, message: 'Database connected!', result: rows });
+    } catch (err) {
+        console.error('❌ DB Test Error:', err);
+        res.status(500).json({ success: false, message: 'Database connection failed.', error: err.message });
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`🚀 Server is running on http://0.0.0.0:${PORT}`);
 });
 
 // app.listen(PORT, '0.0.0.0', () => {
