@@ -104,6 +104,13 @@ if (process.env.MYSQL_SSL_CA || process.env.MYSQL_SSL_CERT || process.env.MYSQL_
   if (process.env.MYSQL_SSL_CERT) sslConfig.cert = resolveSslFile('MYSQL_SSL_CERT');
   if (process.env.MYSQL_SSL_KEY) sslConfig.key = resolveSslFile('MYSQL_SSL_KEY');
   
+  // Fix for DeprecationWarning: Setting the TLS ServerName to an IP address is not permitted by RFC 6066
+  // If the host is an IP address, we should set servername to false or a specific hostname.
+  const isIP = (host) => /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/.test(host) || host.includes(':');
+  if (config.host && isIP(config.host)) {
+    sslConfig.servername = process.env.MYSQL_SSL_SERVERNAME || false;
+  }
+  
   if (Object.keys(sslConfig).length > 0) {
     extra.ssl = sslConfig;
   }
