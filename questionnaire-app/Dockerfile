@@ -106,7 +106,8 @@ RUN sed -i 's%^#\?LoadModule rewrite_module modules/mod_rewrite.so%LoadModule re
   && sed -i 's%^#\?LoadModule proxy_module modules/mod_proxy.so%LoadModule proxy_module modules/mod_proxy.so%' /usr/local/apache2/conf/httpd.conf \
   && sed -i 's%^#\?LoadModule proxy_http_module modules/mod_proxy_http.so%LoadModule proxy_http_module modules/mod_proxy_http.so%' /usr/local/apache2/conf/httpd.conf \
   && sed -i 's/AllowOverride None/AllowOverride All/i' /usr/local/apache2/conf/httpd.conf \
-  && echo "ServerName localhost" >> /usr/local/apache2/conf/httpd.conf
+  && echo "ServerName localhost" >> /usr/local/apache2/conf/httpd.conf \
+  && echo "Include conf/extra/logfilter.conf" >> /usr/local/apache2/conf/httpd.conf
 
 COPY apache/logfilter.conf /usr/local/apache2/conf/extra/logfilter.conf
 COPY --from=builder /app/dist/ /usr/local/apache2/htdocs/

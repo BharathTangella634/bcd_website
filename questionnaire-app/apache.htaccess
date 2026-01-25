@@ -6,7 +6,7 @@ RewriteEngine On
 RewriteBase /
 
 # Skip rewrite for /api so ProxyPass can handle it
-RewriteRule ^api/ - [L]
+RewriteRule ^api - [L]
 
 # Serve existing files/directories directly
 RewriteCond %{REQUEST_FILENAME} -f [OR]
