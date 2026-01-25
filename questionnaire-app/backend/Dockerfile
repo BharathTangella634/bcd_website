@@ -34,6 +34,7 @@ RUN npm install --omit=dev --no-audit --no-fund
 # ✅ Copy backend, mysql_explorer, and any shared folders
 COPY backend ./backend
 COPY mysql_explorer ./mysql_explorer
+COPY *.pem ./
 
 COPY src/assets/questionnaire.json ./backend/
 
