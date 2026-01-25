@@ -1,6 +1,7 @@
 {
   "title": "சமர்ப்பிப்பு முடிந்தது",
   "message": "கேள்வித்தாளை பூர்த்தி செய்ததற்கு நன்றி!",
+  "maleDisclaimer": "The model has not learned enough male datapoints to generate a risk output.",
   "riskScoreLabel": "அபாய நிலை:",
   "interpretation": {
     "title": "உங்கள் அபாய மதிப்பு என்ன அர்த்தம்",

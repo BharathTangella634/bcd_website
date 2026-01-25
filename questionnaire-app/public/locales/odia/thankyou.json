@@ -1,6 +1,7 @@
 {
   "title": "ଦାଖଲ ସମ୍ପୂର୍ଣ୍ଣ ହେଲା",
   "message": "ପ୍ରଶ୍ନାବଳୀ ପୂରଣ କରିବା ପାଇଁ ଧନ୍ୟବାଦ!",
+  "maleDisclaimer": "The model has not learned enough male datapoints to generate a risk output.",
   "riskScoreLabel": "ଝୁମିକି ସ୍ତର:",
   "interpretation": {
     "title": "ଆପଣଙ୍କ ଝୁମିକି ସ୍କୋରର ଅର୍ଥ",

@@ -68,6 +68,7 @@ function ThankYou({ riskResult, formData, sessionId, formStructure, questionnair
     // const mainQuestionCounterRef = useRef(0);
 
     const score = riskResult !== null ? (parseFloat(riskResult) / 100).toFixed(2) : null;
+    const isMale = formData?.Q47 === 'Male';
     const riskInterpretationData = tThankYou('interpretation.data', { returnObjects: true }) || [];
     const riskInterpretationDataEn = thankYouData.interpretation.data || [];
 
@@ -378,7 +379,15 @@ function ThankYou({ riskResult, formData, sessionId, formStructure, questionnair
         {/* --- MODIFIED --- */}
         <p>{tThankYou('message')}</p>
         
-        {score !== null && (
+        {isMale && (
+          <div className="male-disclaimer-container">
+            <p className="male-disclaimer-text">
+              {tThankYou('maleDisclaimer')}
+            </p>
+          </div>
+        )}
+        
+        {score !== null && !isMale && (
           <div className="risk-result-container">
             {/* --- MODIFIED --- */}
             <p>{tThankYou('riskScoreLabel')}</p>
@@ -421,7 +430,7 @@ function ThankYou({ riskResult, formData, sessionId, formStructure, questionnair
           </div>
         )} */}
 
-        {score !== null && (() => {
+        {score !== null && !isMale && (() => {
             const highlightedRow = riskInterpretationData.find(
                 (row) => row.level === userRiskLevel
             );

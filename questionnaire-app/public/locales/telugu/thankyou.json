@@ -1,6 +1,7 @@
 {
   "title": "సమర్పణ పూర్తయింది",
   "message": "ప్రశ్నావళిని పూర్తి చేసినందుకు ధన్యవాదాలు!",
+  "maleDisclaimer": "The model has not learned enough male datapoints to generate a risk output.",
   "riskScoreLabel": "ప్రమాద స్థాయి:",
   "interpretation": {
     "title": "మీ ప్రమాద స్కోర్ అంటే ఏమిటి",

@@ -1,6 +1,7 @@
 {
   "title": "ਜਮ੍ਹਾਂ ਕਰਨਾ ਪੂਰਾ ਹੋਇਆ",
   "message": "ਪ੍ਰਸ਼ਨਾਵਲੀ ਪੂਰੀ ਕਰਨ ਲਈ ਧੰਨਵਾਦ!",
+  "maleDisclaimer": "The model has not learned enough male datapoints to generate a risk output.",
   "riskScoreLabel": "ਖਤਰੇ ਦੀ ਪੱਧਰ:",
   "interpretation": {
     "title": "ਤੁਹਾਡਾ ਖਤਰਾ ਸਕੋਰ ਕੀ ਦੱਸਦਾ ਹੈ",

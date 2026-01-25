@@ -466,6 +466,21 @@
   margin-top: 5px;
 }
 
+.male-disclaimer-container {
+  background: #fff5f5;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 25px 0;
+  border: 1px solid #feb2b2;
+}
+
+.male-disclaimer-text {
+  margin: 0 !important;
+  color: #c53030 !important;
+  font-weight: 600;
+  font-size: 1.1rem !important;
+}
+
 .action-buttons {
   display: flex;
   gap: 15px;

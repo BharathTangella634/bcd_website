@@ -1,6 +1,7 @@
 {
   "title": "सबमिशन पूर्ण",
   "message": "प्रश्नावली भरने के लिए धन्यवाद!",
+  "maleDisclaimer": "The model has not learned enough male datapoints to generate a risk output.",
   "riskScoreLabel": "जोखिम स्तर:",
   "interpretation": {
     "title": "आपके जोखिम स्कोर का मतलब",

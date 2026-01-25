@@ -1,6 +1,7 @@
 {
   "title": "জমা সম্পূর্ণ হয়েছে",
   "message": "প্রশ্নাবলী পূরণ করার জন্য ধন্যবাদ!",
+  "maleDisclaimer": "The model has not learned enough male datapoints to generate a risk output.",
   "riskScoreLabel": "ঝুঁকির স্তর:",
   "interpretation": {
     "title": "আপনার ঝুঁকি স্কোরের অর্থ কী",

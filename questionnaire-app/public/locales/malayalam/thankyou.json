@@ -1,6 +1,7 @@
 {
   "title": "സമർപ്പണം പൂർത്തിയായി",
   "message": "പ്രശ്നാവലി പൂരിപ്പിച്ചതിന് നന്ദി!",
+  "maleDisclaimer": "The model has not learned enough male datapoints to generate a risk output.",
   "riskScoreLabel": "അപകടനില:",
   "interpretation": {
     "title": "നിങ്ങളുടെ അപകട സ്‌കോർ എന്ത് സൂചിപ്പിക്കുന്നു",
