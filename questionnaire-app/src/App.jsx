@@ -17,7 +17,7 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [riskResult, setRiskResult] = useState(null);
   const [finalFormData, setFinalFormData] = useState(null);
-  const API_URL = import.meta.env.VITE_API_URL || '';
+  const API_URL = (import.meta.env.VITE_API_URL || '').replace(/^["'](.+)["']$/, '$1');
 
   const safeFetch = async (url, options) => {
     const res = await fetch(url, options);
