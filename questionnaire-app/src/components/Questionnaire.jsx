@@ -569,6 +569,13 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
               const data = questionnaireData[qConfig.key];
               if (!data) return null;
               
+              // NEW: Check for top-level condition (like gender-based hiding)
+              if (qConfig.condition) {
+                if (formDataEn[qConfig.condition.key] !== qConfig.condition.value) {
+                  return null;
+                }
+              }
+
               questionCounter++;
               const displayNumber = `${questionCounter}.`;
               const name = qConfig.name || qConfig.key;
