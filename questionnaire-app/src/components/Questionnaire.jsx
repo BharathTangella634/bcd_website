@@ -16,7 +16,7 @@ const generateRandomId = (length = 8) => {
 
 
 // NEW: Accept formStructure and questionnaireData as props
-function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireData, questionnaireDataEn, diagnostics }) {
+function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireData, questionnaireDataEn }) {
   
   // NEW: Initialize i18next hook *only* for UI text
 
@@ -25,19 +25,6 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
   // NEW: Load 'ui' text from the hook
   const ui = t('ui', { returnObjects: true });
 
-  const [diagResult, setDiagResult] = useState(null);
-
-  const runDiagnostic = async (type) => {
-    if (!diagnostics) return;
-    setDiagResult(`Running ${type}...`);
-    try {
-      const endpoint = type === 'health' ? '/api/health' : '/api/db-test';
-      const result = await diagnostics.safeFetch(`${diagnostics.API_URL}${endpoint}`);
-      setDiagResult(JSON.stringify(result, null, 2));
-    } catch (e) {
-      setDiagResult(`Error: ${e.message}`);
-    }
-  };
 
   // State hooks
   const [formData, setFormData] = useState(() => ({
@@ -573,12 +560,6 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
             <span style={{ color: "#d93025", fontWeight: 600 }}>{t('ui.header.mandatorySymbol')}</span>
             {t('ui.header.mandatoryPost')}
           </p>
-          <div style={{ marginTop: '10px', padding: '10px', border: '1px dashed #ccc', fontSize: '12px' }}>
-            <strong>Connectivity Diagnostics:</strong>
-            <button type="button" onClick={() => runDiagnostic('health')} style={{ marginLeft: '10px', padding: '2px 5px' }}>Check Backend</button>
-            <button type="button" onClick={() => runDiagnostic('db')} style={{ marginLeft: '10px', padding: '2px 5px' }}>Check DB</button>
-            {diagResult && <pre style={{ marginTop: '5px', background: '#f0f0f0', padding: '5px', overflowX: 'auto' }}>{diagResult}</pre>}
-          </div>
         </div>
         
         {formStructure.map((section, index) => (

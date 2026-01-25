@@ -148,7 +148,6 @@ function App() {
             formStructure={formStructure}
             questionnaireData={questionnaireData}
             questionnaireDataEn={questionnaireDataEn}
-            diagnostics={{ API_URL, safeFetch }}
           />
         )}
         {appState === 'submitted' && (
