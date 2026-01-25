@@ -20,8 +20,20 @@ function App() {
   const API_URL = (import.meta.env.VITE_API_URL || '').replace(/^["'](.+)["']$/, '$1');
 
   const safeFetch = async (url, options) => {
-    const res = await fetch(url, options);
+    let res;
+    try {
+      res = await fetch(url, options);
+    } catch (e) {
+      console.error(`❌ Network error fetching ${url}:`, e);
+      throw new Error(`Network error: ${e.message}`);
+    }
+
     const text = await res.text();
+
+    if (!res.ok) {
+      console.error(`❌ HTTP error ${res.status} from ${url}:`, text.slice(0, 200));
+      throw new Error(`Server returned ${res.status}: ${text.slice(0, 100)}`);
+    }
 
     try {
       return JSON.parse(text);
@@ -52,6 +64,7 @@ function App() {
 
   const handleConsent = async () => {
     try {
+      console.log(`Starting session via: ${API_URL}/api/session/start`);
       const data = await safeFetch(`${API_URL}/api/session/start`, { method: 'POST' });
       
       if (data.success && data.sessionId) {
@@ -59,11 +72,15 @@ function App() {
         setAppState('questionnaire');
         window.scrollTo(0, 0);
       } else {
+        console.error('Session start failed:', data);
         alert(t('consent:errors.sessionStart', 'Could not start a session. Please try again.'));
       }
     } catch (error) {
       console.error('Error starting session:', error);
-      alert(t('consent:errors.sessionConnect', 'Could not connect to the server to start a session.'));
+      // Enhanced diagnostic info
+      const diagnosticMsg = `Error: ${error.message}. API_URL: "${API_URL}".`;
+      console.error(diagnosticMsg);
+      alert(`${t('consent:errors.sessionConnect', 'Could not connect to the server to start a session.')}\n\nTechnical details: ${error.message}`);
     }
   };
 
@@ -117,7 +134,7 @@ function App() {
   }
   // --- END NEW LOADING CHECK ---
 
-  // --- Pass data down as props ---
+  // --- Passing diagnostics to Questionnaire ---
   return (
     <div className="app-container">
       {appState === 'consent' && <Consent onAccept={handleConsent} />}
@@ -131,6 +148,7 @@ function App() {
             formStructure={formStructure}
             questionnaireData={questionnaireData}
             questionnaireDataEn={questionnaireDataEn}
+            diagnostics={{ API_URL, safeFetch }}
           />
         )}
         {appState === 'submitted' && (
