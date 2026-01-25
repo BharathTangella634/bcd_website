@@ -1,6 +1,7 @@
 {
   "title": "Submission Complete",
   "message": "Thank you for completing the questionnaire!",
+  "maleDisclaimer": "The model has not learned enough male datapoints to generate a risk output.",
   "riskScoreLabel": "Risk Level:",
   "interpretation": {
     "title": "What Your Risk Score Means",
@@ -12,25 +13,25 @@
     },
     "data": [
       {
-        "level": "Normal Risk",
+        "level": "No Risk",
         "range": "Below 0.4004",
         "meaning": "Your risk is lower than most women (below the 50th percentile).",
         "action": "Keep up with routine checkups, like yearly breast exams by a doctor from 30 years of age."
       },
       {
-        "level": "Moderate Risk",
+        "level": "Low Risk",
         "range": "0.4004 to 0.574",
         "meaning": "Your risk is average or slightly higher (50th to 75th percentile).",
-        "action": "Consider breast exams every 6 months from 30 years of age and talk to your doctor about prevention."
+        "action": "Consider breast exams every year from 30 years of age and talk to your doctor about prevention."
+      },
+      {
+        "level": "Moderate Risk",
+        "range": "0.574 to 0.795",
+        "meaning": "Your risk is higher (75th to 95th percentile).",
+        "action": "Get breast exams every 4-6 months from 30 years of age and possibly imaging (like mammograms) as advised by your doctor."
       },
       {
         "level": "High Risk",
-        "range": "0.574 to 0.795",
-        "meaning": "Your risk is higher (75th to 95th percentile).",
-        "action": "Get breast exams every 4-6 months from 25 years of age and possibly imaging (like mammograms) as advised by your doctor."
-      },
-      {
-        "level": "Very High Risk",
         "range": "0.795 and above",
         "meaning": "Your risk is very high (top 5% of women).",
         "action": "Be extra vigilant with breast exams every 4 months from at least 25 years of age and more frequent imaging as per your doctor's advice."
