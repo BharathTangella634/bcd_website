@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
 import { v4 as uuidv4 } from 'uuid';
 import { getPool } from '../mysql_explorer/db.js';
 // import questionnaireData from '../src/assets/questionnaire.json' with { type: 'json' };
@@ -15,14 +16,15 @@ const formStructure = questionnaireJson.formStructure;
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use(morgan('combined'));
 app.use(cors());
 app.use(express.json());
 app.set('trust proxy', true);
 
 
 function calculateSnehithaRisk(formData) {
-    // console.log('--- Starting Snehitha Risk Calculation ---');
-    // console.log('Received Form Data:', formData);
+    console.log('--- Starting Snehitha Risk Calculation ---');
+    console.log('Received Form Data:', JSON.stringify(formData, null, 2));
 
     // --- 1. Map form answers to variables (with defaults) ---
     // Safely parse numbers, defaulting to 0 if they are missing or not a number.
@@ -75,8 +77,8 @@ function calculateSnehithaRisk(formData) {
         riskPercentage = "0.00";
     }
     
-    // console.log(`Final Calculation: Logit(p)=${logitP.toFixed(4)}, Probability=${probability.toFixed(4)}, Risk=${riskPercentage}%`);
-    // console.log('--- Risk Calculation Finished ---');
+    console.log(`Final Calculation: Logit(p)=${logitP.toFixed(4)}, Probability=${probability.toFixed(4)}, Risk=${riskPercentage}%`);
+    console.log('--- Risk Calculation Finished ---');
     return riskPercentage;
 }
 
@@ -106,11 +108,11 @@ app.post('/api/session/start', async (req, res) => {
 // Endpoint to submit answers
 app.post('/api/submit', async (req, res) => {
     const { sessionId, formDataEn } = req.body; 
+    console.log(`🚀 Received submission for session ID: ${sessionId}`);
     if (!sessionId || !formDataEn) {
+        console.warn('⚠️ Missing sessionId or formDataEn in request body');
         return res.status(400).json({ success: false, message: 'Session ID and form data are required.' });
     }
-    // console.log(`🚀 Data answers for session ID: ${sessionId}`);
-    // console.log('Received Form Data:', formData);
     const pool = getPool();
     let connection;
 
