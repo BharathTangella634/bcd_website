@@ -570,7 +570,9 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
               if (!data) return null;
               
               // NEW: Check for top-level condition (like gender-based hiding)
-              if (qConfig.condition) {
+              // FIX: Only hide if the condition is based on ANOTHER question.
+              // If condition.key === qConfig.key, it's a self-referencing condition used for subquestions.
+              if (qConfig.condition && qConfig.condition.key !== qConfig.key) {
                 if (formDataEn[qConfig.condition.key] !== qConfig.condition.value) {
                   return null;
                 }
