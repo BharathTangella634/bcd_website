@@ -143,6 +143,9 @@ app.post('/api/submit', async (req, res) => {
         // Also add keys that might be in formDataEn but not in formStructure (like Q46 language)
         const allKeys = [...new Set([...orderedKeys, ...Object.keys(formDataEn)])];
 
+        // --- Use a common timestamp and increment it for each answer to ensure uniqueness and sequence ---
+        let currentTimestamp = new Date();
+
         for (const questionKey of allKeys) {
             if (Object.prototype.hasOwnProperty.call(formDataEn, questionKey)) {
                 const answerValue = formDataEn[questionKey];
@@ -153,7 +156,10 @@ app.post('/api/submit', async (req, res) => {
                 const questionText = questionnaireData[questionKey]?.question || questionKey;
 
                 const answerSql = 'INSERT INTO session_data_table (session_data_id, session_id, question, answer, created_at) VALUES (?, ?, ?, ?, ?)';
-                await connection.query(answerSql, [sessionDataId, sessionId, questionText, finalAnswer, new Date()]);
+                await connection.query(answerSql, [sessionDataId, sessionId, questionText, finalAnswer, new Date(currentTimestamp)]);
+                
+                // Increment timestamp by 1 second for each question to ensure they are unique and sequential in the DB
+                currentTimestamp.setSeconds(currentTimestamp.getSeconds() + 1);
             }
         }
         
