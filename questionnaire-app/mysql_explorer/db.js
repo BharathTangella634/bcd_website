@@ -67,6 +67,48 @@ function parseExtraOptions(query) {
 
 const extra = parseExtraOptions(process.env.MYSQL_QUERY || '');
 
+// SSL configuration
+if (process.env.MYSQL_SSL_CA || process.env.MYSQL_SSL_CERT || process.env.MYSQL_SSL_KEY) {
+  const sslConfig = {};
+  
+  // Try to find the files in common locations:
+  // 1. Path as provided (absolute or relative to CWD)
+  // 2. Relative to questionnaire-app/ (project root for this app)
+  
+  const resolveSslFile = (envVar) => {
+    const filePath = process.env[envVar];
+    if (!filePath) return null;
+    
+    // 1. Try path as provided (relative to CWD or absolute)
+    if (fs.existsSync(filePath)) {
+      return fs.readFileSync(filePath);
+    }
+    
+    // 2. Try relative to the app root (one level up from this file)
+    const appRootPath = path.resolve(__dirname, '..', filePath);
+    if (fs.existsSync(appRootPath)) {
+      return fs.readFileSync(appRootPath);
+    }
+
+    // 3. Try relative to /app (common in Docker)
+    const dockerPath = path.resolve('/app', filePath);
+    if (fs.existsSync(dockerPath)) {
+      return fs.readFileSync(dockerPath);
+    }
+    
+    console.warn(`⚠️ Warning: SSL file not found for ${envVar}: ${filePath}`);
+    return null;
+  };
+
+  if (process.env.MYSQL_SSL_CA) sslConfig.ca = resolveSslFile('MYSQL_SSL_CA');
+  if (process.env.MYSQL_SSL_CERT) sslConfig.cert = resolveSslFile('MYSQL_SSL_CERT');
+  if (process.env.MYSQL_SSL_KEY) sslConfig.key = resolveSslFile('MYSQL_SSL_KEY');
+  
+  if (Object.keys(sslConfig).length > 0) {
+    extra.ssl = sslConfig;
+  }
+}
+
 let pool;
 
 function ensureConfig() {
