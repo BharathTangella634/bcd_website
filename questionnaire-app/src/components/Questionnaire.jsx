@@ -515,23 +515,19 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
   // renderSubQuestions - Corrected to handle both Q12 (Fork) and Q24 (Self-Trigger)
   // renderSubQuestions - "Look-Ahead" Version to fix empty bars
   // renderSubQuestions - Optimized to use formDataEn for reliable condition checks
-  const renderSubQuestions = (subQuestions, parentNumber) => {
+  const renderSubQuestions = (subQuestions, parentNumber, currentQuestionnaireData, currentQuestionnaireDataEn, currentFormData, currentFormDataEn, currentValidationErrors) => {
     if (!Array.isArray(subQuestions)) return null;
 
     return subQuestions.map((subQConfig, index) => {
-      const subQData = questionnaireData[subQConfig.key];
+      const subQData = currentQuestionnaireData[subQConfig.key];
       if (!subQData) return null;
 
       const subQKey = subQConfig.name || subQConfig.key;
       const conditionKey = subQConfig.condition ? subQConfig.condition.key : null;
 
       // --- LOGIC 1: SHOULD THIS QUESTION (THE PARENT) RENDER? ---
-      // Check: Is this question dependent on a previous question?
-      // (e.g., Q11 depends on Q12_Current)
       if (subQConfig.condition && conditionKey !== subQKey) {
-         // FIX: Check against formDataEn directly. This matches the "value": "Yes" in your JSON
-         // regardless of the current UI language or missing translation keys.
-         if (formDataEn[conditionKey] !== subQConfig.condition.value) {
+         if (currentFormDataEn[conditionKey] !== subQConfig.condition.value) {
              return null; 
          }
       }
@@ -540,35 +536,33 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
 
       // --- LOGIC 2: PRE-CALCULATE CHILDREN ---
       let renderedChildren = null;
-      
-      // Check if this question allows children (Self-Trigger Logic, e.g. Q24="No")
       let allowChildren = true;
       if (subQConfig.condition && conditionKey === subQKey) {
-          // FIX: Check against formDataEn directly.
-          if (formDataEn[subQKey] !== subQConfig.condition.value) {
+          if (currentFormDataEn[subQKey] !== subQConfig.condition.value) {
               allowChildren = false;
           }
       }
 
-      // Recursively generate children if allowed
       if (subQConfig.subQuestions && allowChildren) {
-          renderedChildren = renderSubQuestions(subQConfig.subQuestions, displayNumber.slice(0,-1));
+          renderedChildren = renderSubQuestions(subQConfig.subQuestions, displayNumber.slice(0,-1), currentQuestionnaireData, currentQuestionnaireDataEn, currentFormData, currentFormDataEn, currentValidationErrors);
       }
 
-      // --- LOGIC 3: CHECK FOR VALID CHILDREN ---
       const hasValidChildren = Array.isArray(renderedChildren) && renderedChildren.some(child => child !== null);
 
       return (
         <React.Fragment key={subQKey}>
-          <div className={`question-block ${validationErrors.includes(subQKey) ? 'error' : ''}`}>
-            <label>
-                {displayNumber} {subQData.question}
-                {subQConfig.required && <span className="required-asterisk">*</span>}
-            </label>
-            {renderInput(subQConfig)}
-          </div>
-          
-          {/* Only render the container DIV if we actually have valid children to show */}
+          <QuestionBlock
+            qConfig={subQConfig}
+            questionnaireData={currentQuestionnaireData}
+            questionnaireDataEn={currentQuestionnaireDataEn}
+            formData={currentFormData}
+            formDataEn={currentFormDataEn}
+            validationErrors={currentValidationErrors}
+            handleChange={handleChange}
+            t={t}
+            displayNumber={displayNumber}
+            randomPatientId={randomPatientId}
+          />
           {hasValidChildren && (
             <div className="sub-question-container visible">
               {renderedChildren}
@@ -642,24 +636,33 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
               const noValueQ27 = t('questions.Q27.answers.1'); 
               const isQ27No = qConfig.key === "Q27" && formData[name] === noValueQ27;
               
+              const children = qConfig.subQuestions ? renderSubQuestions(qConfig.subQuestions, displayNumber, questionnaireData, questionnaireDataEn, formData, formDataEn, validationErrors) : null;
+              const hasValidChildren = Array.isArray(children) && children.some(child => child !== null);
+
               return (
-                <QuestionBlock
-                  key={name}
-                  qConfig={qConfig}
-                  questionnaireData={questionnaireData}
-                  questionnaireDataEn={questionnaireDataEn}
-                  formData={formData}
-                  formDataEn={formDataEn}
-                  validationErrors={validationErrors}
-                  handleChange={handleChange}
-                  t={t}
-                  displayNumber={displayNumber}
-                  isQ27No={isQ27No}
-                  showQ27VideoPrompt={showQ27VideoPrompt}
-                  q27VideoConfirmed={q27VideoConfirmed}
-                  setQ27VideoConfirmed={setQ27VideoConfirmed}
-                  randomPatientId={randomPatientId} // FIX: Pass prop
-                />
+                <React.Fragment key={name}>
+                  <QuestionBlock
+                    qConfig={qConfig}
+                    questionnaireData={questionnaireData}
+                    questionnaireDataEn={questionnaireDataEn}
+                    formData={formData}
+                    formDataEn={formDataEn}
+                    validationErrors={validationErrors}
+                    handleChange={handleChange}
+                    t={t}
+                    displayNumber={displayNumber}
+                    isQ27No={isQ27No}
+                    showQ27VideoPrompt={showQ27VideoPrompt}
+                    q27VideoConfirmed={q27VideoConfirmed}
+                    setQ27VideoConfirmed={setQ27VideoConfirmed}
+                    randomPatientId={randomPatientId}
+                  />
+                  {hasValidChildren && (
+                    <div className="sub-question-container visible">
+                      {children}
+                    </div>
+                  )}
+                </React.Fragment>
               );
             })}
           </div>
