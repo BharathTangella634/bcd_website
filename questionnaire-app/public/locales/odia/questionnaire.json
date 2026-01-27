@@ -210,15 +210,16 @@
         {
           "key": "Q20",
           "type": "radio",
-          "condition": {
-            "key": "Q20",
-            "value": "Yes"
-          },
+          "required": true,
           "subQuestions": [
             {
               "key": "Q21",
               "type": "radio",
-              "required": true
+              "required": true,
+              "condition": {
+                "key": "Q20",
+                "value": "Yes"
+              }
             },
             {
               "key": "Q22",
@@ -228,19 +229,27 @@
               "min": 1,
               "max": 120,
               "step": 1,
-              "integerOnly": true
+              "integerOnly": true,
+              "condition": {
+                "key": "Q20",
+                "value": "Yes"
+              }
             },
             {
               "key": "Q23",
               "type": "checkbox",
-              "required": true
+              "required": true,
+              "condition": {
+                "key": "Q20",
+                "value": "Yes"
+              }
             },
             {
               "key": "Q24",
               "type": "radio",
               "condition": {
-                "key": "Q24",
-                "value": "No"
+                "key": "Q20",
+                "value": "Yes"
               },
               "subQuestions": [
                 {
@@ -249,7 +258,11 @@
                   "placeholder": "Enter age of death",
                   "min": 1,
                   "max": 120,
-                  "step": 1
+                  "step": 1,
+                  "condition": {
+                    "key": "Q24",
+                    "value": "No"
+                  }
                 }
               ]
             }
@@ -263,31 +276,40 @@
         {
           "key": "Q27",
           "type": "radio",
-          "condition": {
-            "key": "Q27",
-            "value": "Yes"
-          },
+          "required": true,
           "videoUrlOnNo": "https://www.youtube.com/embed/nKVjF3u3CNg?autoplay=1&rel=0&start=0",
           "subQuestions": [
             {
               "key": "Q28",
-              "type": "radio"
+              "type": "radio",
+              "condition": {
+                "key": "Q27",
+                "value": "Yes"
+              }
             },
             {
               "key": "Q29",
-              "type": "radio"
+              "type": "radio",
+              "condition": {
+                "key": "Q27",
+                "value": "Yes"
+              }
             },
             {
               "key": "Q36",
               "type": "radio",
               "condition": {
-                "key": "Q36",
+                "key": "Q27",
                 "value": "Yes"
               },
               "subQuestions": [
                 {
                   "key": "Q37",
-                  "type": "checkbox"
+                  "type": "checkbox",
+                  "condition": {
+                    "key": "Q36",
+                    "value": "Yes"
+                  }
                 }
               ]
             }
@@ -296,36 +318,46 @@
         {
           "key": "Q30",
           "type": "radio",
-          "condition": {
-            "key": "Q30",
-            "value": "Yes"
-          },
+          "required": true,
           "subQuestions": [
             {
               "key": "Q31",
-              "type": "radio"
+              "type": "radio",
+              "condition": {
+                "key": "Q30",
+                "value": "Yes"
+              }
             },
             {
               "key": "Q32",
-              "type": "radio"
+              "type": "radio",
+              "condition": {
+                "key": "Q30",
+                "value": "Yes"
+              }
             },
             {
               "key": "Q33",
-              "type": "radio"
+              "type": "radio",
+              "condition": {
+                "key": "Q30",
+                "value": "Yes"
+              }
             }
           ]
         },
         {
           "key": "Q34",
           "type": "radio",
-          "condition": {
-            "key": "Q34",
-            "value": "Yes"
-          },
+          "required": true,
           "subQuestions": [
             {
               "key": "Q35",
-              "type": "radio"
+              "type": "radio",
+              "condition": {
+                "key": "Q34",
+                "value": "Yes"
+              }
             }
           ]
         }
@@ -337,35 +369,28 @@
         {
           "key": "Q38",
           "type": "radio",
-          "condition": {
-            "key": "Q38",
-            "value": "Yes"
-          }
+          "required": true
         },
         {
           "key": "Q40",
           "type": "radio",
-          "required": true,
-          "condition": {
-            "key": "Q40",
-            "value": "Yes"
-          }
+          "required": true
         },
         {
           "key": "Q42",
           "type": "radio",
           "required": true,
-          "condition": {
-            "key": "Q42",
-            "value": "Yes"
-          },
           "subQuestions": [
             {
               "key": "Q43",
               "type": "checkbox-plus-text",
               "otherOptionId": "q43_other_specify",
               "otherPlaceholder": "Please specify",
-              "required": true
+              "required": true,
+              "condition": {
+                "key": "Q42",
+                "value": "Yes"
+              }
             }
           ]
         }
