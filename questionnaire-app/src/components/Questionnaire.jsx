@@ -512,7 +512,7 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
   //     );
   //   });
   // };
-  // renderSubQuestions - Corrected to handle both Q12 (Fork) and Q24 (Self-Trigger)
+  // renderSubQuestions - Corrected to handle Q24 (Self-Trigger)
   // renderSubQuestions - "Look-Ahead" Version to fix empty bars
   // renderSubQuestions - Optimized to use formDataEn for reliable condition checks
   const renderSubQuestions = (subQuestions, parentNumber, currentQuestionnaireData, currentQuestionnaireDataEn, currentFormData, currentFormDataEn, currentValidationErrors) => {

@@ -32,7 +32,7 @@ function calculateSnehithaRisk(formData) {
     const ageAtMenarche = parseInt(formData.Q10, 10) || 0; // From sub-question of Q9
     
     // Convert text answers to 0 or 1 based on the exact text from questionnaire.json
-    const irregularCycles = formData.Q11 === 'Irregular' ? 1 : 0;
+    const irregularCycles = formData.Q12_Current === 'No' ? 1 : 0;
     const breastfeeding24M = formData.Q17 === 'greater than 24 months' ? 1 : 0;
     const firstDegreeRelatives = formData.Q21 === 'First Order (Mother, Sibling, Father)' ? 1 : 0;
     const previousBiopsy = formData.Q40 === 'Yes' ? 1 : 0;
@@ -49,7 +49,7 @@ function calculateSnehithaRisk(formData) {
     console.log('Interpreted Variables:');
     console.log(`  - Age: ${age}`);
     console.log(`  - Age at Menarche: ${ageAtMenarche}`);
-    console.log(`  - Irregular Cycles: ${irregularCycles} (from '${formData.Q11}')`);
+    console.log(`  - Irregular Cycles: ${irregularCycles} (from '${formData.Q12_Current}')`);
     console.log(`  - Breastfeeding >24M: ${breastfeeding24M} (from '${formData.Q17}')`);
     console.log(`  - First-Degree Relatives: ${firstDegreeRelatives} (from '${formData.Q21}')`);
     console.log(`  - Previous Biopsy: ${previousBiopsy} (from '${formData.Q40}')`);
