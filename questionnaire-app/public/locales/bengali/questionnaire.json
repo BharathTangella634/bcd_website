@@ -39,7 +39,7 @@
   },
   "formStructure": [
     {
-      "title": "বিভাগ 1: সাধারণ তথ্য",
+      "title": "Section 1: General Information",
       "questions": [
         {
           "key": "Q44",
@@ -48,7 +48,7 @@
         {
           "key": "Q45",
           "type": "text",
-          "placeholder": "সর্বজনীন"
+          "placeholder": "Universal"
         },
         {
           "key": "Q47",
@@ -58,7 +58,7 @@
         {
           "key": "Q1",
           "type": "number",
-          "placeholder": "যেমন., 35",
+          "placeholder": "e.g., 35",
           "required": true,
           "min": 18,
           "max": 120,
@@ -68,7 +68,7 @@
         {
           "key": "Q2",
           "type": "number",
-          "placeholder": "যেমন., 165",
+          "placeholder": "e.g., 165",
           "required": true,
           "min": 100,
           "max": 300,
@@ -77,7 +77,7 @@
         {
           "key": "Q3",
           "type": "number",
-          "placeholder": "যেমন., 60",
+          "placeholder": "e.g., 60",
           "required": true,
           "min": 30,
           "max": 500,
@@ -125,7 +125,7 @@
               "max": 100,
               "step": 1,
               "integerOnly": true,
-              "placeholder": "বছরে বয়স লিখুন",
+              "placeholder": "Enter age in years",
               "condition": {
                 "key": "Q9",
                 "value": "Yes"
@@ -135,6 +135,10 @@
               "key": "Q12_Current",
               "type": "radio",
               "required": true,
+              "condition": {
+                "key": "Q9",
+                "value": "Yes"
+              },
               "subQuestions": [
                 {
                   "key": "Q11",
@@ -154,11 +158,7 @@
                     "value": "No"
                   }
                 }
-              ],
-              "condition": {
-                "key": "Q9",
-                "value": "Yes"
-              }
+              ]
             }
           ]
         },
@@ -179,7 +179,7 @@
             {
               "key": "Q15",
               "type": "number",
-              "placeholder": "অনুগ্রহ করে একটি নম্বর লিখুন।",
+              "placeholder": "Please enter a number",
               "required": true,
               "min": 1,
               "max": 120,
@@ -243,7 +243,7 @@
             {
               "key": "Q22",
               "type": "number",
-              "placeholder": "যেমন., 45",
+              "placeholder": "e.g., 45",
               "required": true,
               "min": 1,
               "max": 120,
@@ -266,7 +266,7 @@
                 {
                   "key": "Q25",
                   "type": "number",
-                  "placeholder": "মৃত্যুর বয়স লিখুন",
+                  "placeholder": "Enter age of death",
                   "min": 1,
                   "max": 120,
                   "step": 1
@@ -278,7 +278,7 @@
       ]
     },
     {
-      "title": "বিভাগ 2: স্তন পরীক্ষা (BE)",
+      "title": "Section 2: Breast Examination (BE)",
       "questions": [
         {
           "key": "Q27",
@@ -352,7 +352,7 @@
       ]
     },
     {
-      "title": "বিভাগ 3: বিই-এর বাইরে",
+      "title": "Section 3: Beyond BE",
       "questions": [
         {
           "key": "Q38",
