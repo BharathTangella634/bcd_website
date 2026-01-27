@@ -484,8 +484,7 @@
       "question": "Have you had a menstrual period?",
       "answers": [
         "Yes",
-        "No",
-        "I don't know"
+        "No"
       ]
     },
     "Q10": {
