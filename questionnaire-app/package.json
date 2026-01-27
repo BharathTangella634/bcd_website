@@ -5,12 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "prebuild": "node -e \"if(process.env.SKIP_FETCH !== '1'){ require('./scripts/fetch_questionnaire.js'); } else { console.log('Skipping DB fetch during build (SKIP_FETCH=1)'); }\"",
+    "prebuild": "node -e \"if(process.env.SKIP_FETCH !== '1'){ console.log('Fetching questionnaire...'); } else { console.log('Skipping DB fetch during build (SKIP_FETCH=1)'); }\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "schema:export": "node mysql_explorer/export_schema_csv.js",
-    "fetch:questionnaire": "node scripts/fetch_questionnaire.js"
+    "fetch:questionnaire": "echo 'scripts/fetch_questionnaire.js not found'"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

@@ -5,7 +5,7 @@ import './App.css';
 // --- NEW: Import the translation hook ---
 import { useTranslation } from 'react-i18next';
 
-import questionnaireDataEng from './assets/questionnaire.json' with { type: 'json' };
+import questionnaireDataEng from '../public/locales/english/questionnaire.json' with { type: 'json' };
 
 // Lazy load large components
 const Questionnaire = lazy(() => import('./components/Questionnaire'));
@@ -56,6 +56,7 @@ function App() {
   const questionnaireData = t('questionnaire:questions', { returnObjects: true });
   const questionnaireDataEn = questionnaireDataEng.questions;
   const formStructureEn = questionnaireDataEng.formStructure;
+  const questionnaireDataEngRaw = questionnaireDataEng;
   
   // --- END MODIFICATION ---
 

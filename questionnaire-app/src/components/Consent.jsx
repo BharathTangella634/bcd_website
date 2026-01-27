@@ -44,7 +44,7 @@
 
 // import React, { useState } from 'react';
 // import './Consent.css';
-// import consentData from '../assets/consent_form.json' with { type: 'json' };
+// import consentData from '../../public/locales/english/consent.json' with { type: 'json' };
 
 // function Consent({ onAccept }) {
 //   const [isChecked, setIsChecked] = useState(false);
