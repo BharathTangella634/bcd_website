@@ -118,7 +118,21 @@
           },
           "subQuestions": [
             {
-              "key": "Q9",
+              "key": "Q10",
+              "type": "number",
+              "required": true,
+              "min": 8,
+              "max": 100,
+              "step": 1,
+              "integerOnly": true,
+              "placeholder": "Enter age in years",
+              "condition": {
+                "key": "Q9",
+                "value": "Yes"
+              }
+            },
+            {
+              "key": "Q12_Current",
               "type": "radio",
               "required": true,
               "condition": {
@@ -127,39 +141,22 @@
               },
               "subQuestions": [
                 {
-                  "key": "Q10",
-                  "type": "number",
-                  "required": true,
-                  "min": 8,
-                  "max": 100,
-                  "step": 1,
-                  "integerOnly": true,
-                  "placeholder": "Enter age in years"
-                },
-                {
-                  "key": "Q12_Current",
+                  "key": "Q11",
                   "type": "radio",
                   "required": true,
-                  "subQuestions": [
-                    {
-                      "key": "Q11",
-                      "type": "radio",
-                      "required": true,
-                      "condition": {
-                        "key": "Q12_Current",
-                        "value": "Yes"
-                      }
-                    },
-                    {
-                      "key": "Q12",
-                      "type": "radio",
-                      "required": true,
-                      "condition": {
-                        "key": "Q12_Current",
-                        "value": "No"
-                      }
-                    }
-                  ]
+                  "condition": {
+                    "key": "Q12_Current",
+                    "value": "Yes"
+                  }
+                },
+                {
+                  "key": "Q12",
+                  "type": "radio",
+                  "required": true,
+                  "condition": {
+                    "key": "Q12_Current",
+                    "value": "No"
+                  }
                 }
               ]
             }
@@ -180,35 +177,36 @@
           },
           "subQuestions": [
             {
-              "key": "Q14",
+              "key": "Q15",
+              "type": "number",
+              "placeholder": "Please enter a number",
+              "required": true,
+              "min": 1,
+              "max": 120,
+              "step": 1,
+              "integerOnly": true,
+              "condition": {
+                "key": "Q14",
+                "value": "Yes"
+              }
+            },
+            {
+              "key": "Q16",
               "type": "radio",
               "required": true,
               "condition": {
                 "key": "Q14",
                 "value": "Yes"
-              },
-              "subQuestions": [
-                {
-                  "key": "Q15",
-                  "type": "number",
-                  "placeholder": "Please enter a number",
-                  "required": true,
-                  "min": 1,
-                  "max": 120,
-                  "step": 1,
-                  "integerOnly": true
-                },
-                {
-                  "key": "Q16",
-                  "type": "radio",
-                  "required": true
-                },
-                {
-                  "key": "Q17",
-                  "type": "radio",
-                  "required": true
-                }
-              ]
+              }
+            },
+            {
+              "key": "Q17",
+              "type": "radio",
+              "required": true,
+              "condition": {
+                "key": "Q14",
+                "value": "Yes"
+              }
             }
           ]
         },
