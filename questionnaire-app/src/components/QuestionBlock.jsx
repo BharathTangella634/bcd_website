@@ -148,61 +148,6 @@ const QuestionBlock = ({
     }
   };
 
-  // --- renderSubQuestions Logic ---
-  const renderSubQuestions = (subQuestions, parentNumber) => {
-    if (!Array.isArray(subQuestions)) return null;
-
-    return subQuestions.map((subQConfig, index) => {
-      const subQData = questionnaireData[subQConfig.key];
-      if (!subQData) return null;
-
-      const subQKey = subQConfig.name || subQConfig.key;
-      const conditionKey = subQConfig.condition ? subQConfig.condition.key : null;
-
-      if (subQConfig.condition && conditionKey !== subQKey) {
-        if (formDataEn[conditionKey] !== subQConfig.condition.value) {
-          return null;
-        }
-      }
-
-      const subDisplayNumber = `${parentNumber}${String.fromCharCode(97 + index)}.`;
-
-      let allowChildren = true;
-      if (subQConfig.condition && conditionKey === subQKey) {
-        if (formDataEn[subQKey] !== subQConfig.condition.value) {
-          allowChildren = false;
-        }
-      }
-
-      return (
-        <QuestionBlock
-          key={subQKey}
-          qConfig={{ ...subQConfig, subQuestions: allowChildren ? subQConfig.subQuestions : null }}
-          questionnaireData={questionnaireData}
-          questionnaireDataEn={questionnaireDataEn}
-          formData={formData}
-          formDataEn={formDataEn}
-          validationErrors={validationErrors}
-          handleChange={handleChange}
-          t={t}
-          displayNumber={subDisplayNumber}
-          randomPatientId={randomPatientId}
-        />
-      );
-    });
-  };
-
-  let showSubquestions = false;
-  if (qConfig.subQuestions && qConfig.condition) {
-      if (formDataEn[qConfig.condition.key] === qConfig.condition.value) {
-          showSubquestions = true;
-      }
-  }
-
-  const children = renderSubQuestions(qConfig.subQuestions, displayNumber);
-  const hasValidChildren = Array.isArray(children) && children.some(child => child !== null);
-
-
   return (
     <React.Fragment>
       <div className={`question-block ${validationErrors.includes(name) ? 'error' : ''}`}>
@@ -212,12 +157,6 @@ const QuestionBlock = ({
         </label>
         {renderInput(qConfig)}
       </div>
-
-      {hasValidChildren && showSubquestions && (
-        <div className={`sub-question-container visible`}>
-          {children}
-        </div>
-      )}
 
       {qConfig.key === "Q27" && isQ27No && (
         <>
@@ -269,9 +208,8 @@ const arePropsEqual = (prev, next) => {
   }
 
   // 4. Subquestions check
-  if (next.qConfig.subQuestions && next.qConfig.subQuestions.length > 0) {
-      return false;
-  }
+  // Removed recursive subquestions check because QuestionBlock no longer renders them.
+  // Instead, Questionnaire.jsx handles the tree.
 
   // 5. Other specify field check
   if (next.qConfig.otherOptionId) {
