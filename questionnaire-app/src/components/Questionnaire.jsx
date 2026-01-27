@@ -194,6 +194,14 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
         if (!Array.isArray(questions)) return;
         for (const q of questions) {
             const qKey = q.name || q.key;
+
+            // NEW: Check if this question (the parent) should be visible
+            if (q.condition && q.condition.key !== qKey) {
+              if (formDataEn[q.condition.key] !== q.condition.value) {
+                continue;
+              }
+            }
+
             if (q.required) {
                 visibleRequired.push(qKey);
             }
@@ -206,10 +214,19 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
                 visibleRequired.push(q.otherOptionId);
               }
             }
+            
             if (q.subQuestions && q.condition) {
-                const translatedConditionValue = getTranslatedConditionValue(q.condition);
-                if (formData[q.condition.key] === translatedConditionValue) {
-                     traverseQuestions(q.subQuestions);
+                // If it's a fork (condition is on another question)
+                if (q.condition.key !== qKey) {
+                  if (formDataEn[q.condition.key] === q.condition.value) {
+                    traverseQuestions(q.subQuestions);
+                  }
+                } else {
+                  // It's a self-trigger (condition is on this question)
+                  const translatedConditionValue = getTranslatedConditionValue(q.condition);
+                  if (formData[q.condition.key] === translatedConditionValue) {
+                      traverseQuestions(q.subQuestions);
+                  }
                 }
             }
         }
@@ -217,6 +234,7 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     if (Array.isArray(formStructure)) {
       formStructure.forEach(section => traverseQuestions(section.questions));
     }
+    // console.log('Visible Required Keys:', visibleRequired);
     return visibleRequired;
   };
   // Helper: validate numeric rules and return array of failing keys
@@ -229,6 +247,14 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
       if (!Array.isArray(questions)) return;
       for (const q of questions) {
         const key = q.name || q.key;
+
+        // NEW: Check if this question (the parent) should be visible
+        if (q.condition && q.condition.key !== key) {
+          if (formDataEn[q.condition.key] !== q.condition.value) {
+            continue;
+          }
+        }
+
         // Only validate numeric fields that have value
         if (q.type === 'number') {
           const raw = data[key];
@@ -251,12 +277,21 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
               failures.push(key);
               continue;
             }
-          } else if (q.required) {
-            // if required and empty, will be caught by missingFields too; optional
           }
         }
         // Recurse into subQuestions
-        if (q.subQuestions) traverse(q.subQuestions);
+        if (q.subQuestions && q.condition) {
+           if (q.condition.key !== key) {
+             if (formDataEn[q.condition.key] === q.condition.value) {
+               traverse(q.subQuestions);
+             }
+           } else {
+             const translatedConditionValue = getTranslatedConditionValue(q.condition);
+             if (data[q.condition.key] === translatedConditionValue) {
+               traverse(q.subQuestions);
+             }
+           }
+        }
       }
     };
 

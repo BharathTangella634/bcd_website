@@ -167,7 +167,8 @@
         },
         {
           "key": "Q13",
-          "type": "radio"
+          "type": "radio",
+          "required": true
         },
         {
           "key": "Q14",
