@@ -39,7 +39,7 @@
   },
   "formStructure": [
     {
-      "title": "വിഭാഗം 1: പൊതുവിവരങ്ങൾ",
+      "title": "Section 1: General Information",
       "questions": [
         {
           "key": "Q44",
@@ -125,7 +125,7 @@
               "max": 100,
               "step": 1,
               "integerOnly": true,
-              "placeholder": "വയസ്സ് വർഷങ്ങളിൽ നൽകുക",
+              "placeholder": "Enter age in years",
               "condition": {
                 "key": "Q9",
                 "value": "Yes"
@@ -135,6 +135,10 @@
               "key": "Q12_Current",
               "type": "radio",
               "required": true,
+              "condition": {
+                "key": "Q9",
+                "value": "Yes"
+              },
               "subQuestions": [
                 {
                   "key": "Q11",
@@ -154,11 +158,7 @@
                     "value": "No"
                   }
                 }
-              ],
-              "condition": {
-                "key": "Q9",
-                "value": "Yes"
-              }
+              ]
             }
           ]
         },
@@ -179,7 +179,7 @@
             {
               "key": "Q15",
               "type": "number",
-              "placeholder": "ദയവായി ഒരു നമ്പർ നൽകുക",
+              "placeholder": "Please enter a number",
               "required": true,
               "min": 1,
               "max": 120,
@@ -266,7 +266,7 @@
                 {
                   "key": "Q25",
                   "type": "number",
-                  "placeholder": "മരണ പ്രായം നൽകുക",
+                  "placeholder": "Enter age of death",
                   "min": 1,
                   "max": 120,
                   "step": 1
@@ -278,7 +278,7 @@
       ]
     },
     {
-      "title": "വിഭാഗം 2: സ്തന പരിശോധന (BE)",
+      "title": "Section 2: Breast Examination (BE)",
       "questions": [
         {
           "key": "Q27",
@@ -352,7 +352,7 @@
       ]
     },
     {
-      "title": "വിഭാഗം 3: BE-യ്ക്ക് അപ്പുറം",
+      "title": "Section 3: Beyond BE",
       "questions": [
         {
           "key": "Q38",
@@ -484,8 +484,7 @@
       "question": "നിങ്ങൾക്ക് എപ്പോഴെങ്കിലും ആർത്തവം (Menstrual Period) വന്നിട്ടുണ്ടോ?",
       "answers": [
         "അതെ",
-        "ഇല്ല",
-        "എനിക്കറിയില്ല"
+        "ഇല്ല"
       ]
     },
     "Q10": {
