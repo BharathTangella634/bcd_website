@@ -55,10 +55,10 @@
   "Q5": {
     "question": "What is your approximate annual household income?",
     "answers": [
-      "Less than ₹2,00,000 per annum",
-      "Between ₹2,00,000 and ₹5,00,000 per annum",
-      "Between ₹5,00,000 and ₹10,00,000 per annum",
-      "Greater than ₹10,00,000 per annum"
+      "Less than \u20b92,00,000 per annum",
+      "Between \u20b92,00,000 and \u20b95,00,000 per annum",
+      "Between \u20b95,00,000 and \u20b910,00,000 per annum",
+      "Greater than \u20b910,00,000 per annum"
     ]
   },
   "Q6": {
@@ -220,17 +220,17 @@
     "question": "When was the last BE performed?",
     "answers": [
       "Within 1 year",
-      "1–3 years",
+      "1\u20133 years",
       "More than 3 years ago"
     ]
   },
   "Q29": {
     "question": "What was the result of BE?",
     "answers": [
-      "Normal – No abnormal findings",
-      "Benign – Non-cancerous features (e.g., fibroadenoma, cyst)",
-      "Suspicious – Unclear/possibly malignant features, needs further tests",
-      "Malignant features – Strongly suggestive of breast cancer"
+      "Normal \u2013 No abnormal findings",
+      "Benign \u2013 Non-cancerous features (e.g., fibroadenoma, cyst)",
+      "Suspicious \u2013 Unclear/possibly malignant features, needs further tests",
+      "Malignant features \u2013 Strongly suggestive of breast cancer"
     ]
   },
   "Q30": {
@@ -252,7 +252,7 @@
     "question": "Size (approximate if known):",
     "answers": [
       "<1 cm",
-      "1–2 cm",
+      "1\u20132 cm",
       ">2 cm"
     ]
   },
@@ -299,16 +299,6 @@
     "answers": [
       "Yes",
       "No"
-    ]
-  },
-  "Q39": {
-    "question": "Which of these best describes your breast density?",
-    "answers": [
-      "A: Almost entirely fatty (The breasts are almost all fat, with very little fibrous and glandular tissue. This makes it easy to see through the breast and find abnormal changes on a mammogram.)",
-      "B: Scattered fibroglandular densities (There are some scattered areas of fibrous and glandular tissue, but the majority of the breast is fatty. A small mass would be visible on a mammogram.)",
-      "C: Heterogeneously dense (There are many areas of fibrous and glandular tissue, which makes it hard to find small masses on a mammogram. This may obscure small cancers.)",
-      "D: Extremely dense (The breasts are almost entirely made of dense, fibrous, and glandular tissue. This can make it very difficult to see through the breast on a mammogram. This is also associated with a higher risk of breast cancer.)",
-      "E: I don't know / I am not sure"
     ]
   },
   "Q40": {
