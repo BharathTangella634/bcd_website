@@ -4,7 +4,7 @@ import './ThankYou.css';
 import jsPDF from 'jspdf';
 import { Download, CheckCircle } from 'lucide-react';
 // --- MODIFICATION: Import the new JSON file ---
-import thankYouData from '../assets/thankyou.json' with { type: 'json' };
+import thankYouData from '../../public/locales/english/thankyou.json' with { type: 'json' };
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';   
 
