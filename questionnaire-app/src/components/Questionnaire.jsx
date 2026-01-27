@@ -75,21 +75,43 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
   const progress = useMemo(() => {
     if (!Array.isArray(formStructure)) return 0;
 
-    const getVisibleQuestionKeys = (currentFormData) => {
+    const getVisibleQuestionKeys = (currentFormData, currentFormDataEn) => {
       const visibleKeys = new Set();
       const traverse = (questions) => {
           if (!Array.isArray(questions)) return; // Safety check
           questions.forEach(q => {
               const qKey = q.name || q.key;
+
+              // NEW: Check if this question (the parent) should be visible
+              if (q.condition && q.condition.key !== qKey) {
+                if (currentFormDataEn[q.condition.key] !== q.condition.value) {
+                  return;
+                }
+              }
+
               visibleKeys.add(qKey); 
               if (q.otherOptionId) {
-                   visibleKeys.add(q.otherOptionId);
+                const valEn = currentFormDataEn[qKey];
+                const isOtherSelected = Array.isArray(valEn) 
+                  ? (valEn.includes('Other') || valEn.includes('others'))
+                  : (valEn === 'Other');
+                if (isOtherSelected) {
+                  visibleKeys.add(q.otherOptionId);
+                }
               }
               
               if (q.subQuestions && q.condition) {
-                  const translatedConditionValue = getTranslatedConditionValue(q.condition);
-                  if (currentFormData[q.condition.key] === translatedConditionValue) {
+                  // If it's a fork (condition is on another question)
+                  if (q.condition.key !== qKey) {
+                    if (currentFormDataEn[q.condition.key] === q.condition.value) {
                       traverse(q.subQuestions);
+                    }
+                  } else {
+                    // It's a self-trigger (condition is on this question)
+                    const translatedConditionValue = getTranslatedConditionValue(q.condition);
+                    if (currentFormData[q.condition.key] === translatedConditionValue) {
+                        traverse(q.subQuestions);
+                    }
                   }
               }
           });
@@ -109,12 +131,12 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
         return answeredCount;
     };
 
-    const visibleKeysSet = getVisibleQuestionKeys(formData);
+    const visibleKeysSet = getVisibleQuestionKeys(formData, formDataEn);
     const answeredCount = countAnsweredVisibleQuestions(formData, visibleKeysSet);
     const totalVisible = visibleKeysSet.size;
     const newProgress = totalVisible > 0 ? Math.round((answeredCount / totalVisible) * 100) : 0;
     return Math.min(newProgress, 100);
-  }, [formData, formStructure, getTranslatedConditionValue]);
+  }, [formData, formDataEn, formStructure, getTranslatedConditionValue]);
 
 
   // handleChange - Refactored to avoid side effects
