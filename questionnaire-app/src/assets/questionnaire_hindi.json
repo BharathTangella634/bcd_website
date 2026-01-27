@@ -36,77 +36,249 @@
     {
       "title": "अनुभाग १: सामान्य जानकारी",
       "questions": [
-        { "key": "Q44", "type": "text" },
-        { "key": "Q45", "type": "text", "placeholder": "सार्वभौमिक" },
-        { "key": "Q1", "type": "number", "placeholder": "उदा., ३५", "required": true, "integerOnly": true },
-        { "key": "Q2", "type": "number", "placeholder": "उदा., १६५", "required": true },
-        { "key": "Q3", "type": "number", "placeholder": "उदा., ६०", "required": true },
-        { "key": "Q4", "type": "select", "required": true },
-        { "key": "Q5", "type": "radio", "required": true },
-        { "key": "Q6", "type": "radio", "required": true },
-        { "key": "Q7", "type": "radio", "required": true },
-        { "key": "Q8", "type": "radio", "required": true },
-        { "key": "Q9", "type": "radio", "required": true, "condition": { "key": "Q9", "value": "हाँ" }, "subQuestions": [
-          { "key": "Q10", "type": "number", "placeholder": "कृपया संख्या दर्ज करें - वर्ष", "required": true, "integerOnly": true },
-          { "key": "Q11", "type": "radio", "required": true },
-          { "key": "Q12", "type": "radio", "required": true }
-        ]},
-        { "key": "Q13", "type": "radio" },
-        { "key": "Q14", "type": "radio", "required": true, "condition": { "key": "Q14", "value": "हाँ" }, "subQuestions": [
-          { "key": "Q15", "type": "number", "placeholder": "कृपया एक संख्या दर्ज करें", "required": true, "integerOnly": true },
-          { "key": "Q16", "type": "radio", "required": true },
-          { "key": "Q17", "type": "radio", "required": true }
-        ]},
-        { "key": "Q18", "type": "radio", "required": true },
-        { "key": "Q19", "type": "radio", "required": true },
-        { "key": "Q26", "type": "select-plus-text", "otherOptionId": "q26_other_specify", "otherPlaceholder": "Please specify", "required": true },
-        { "key": "Q20", "type": "radio", "condition": { "key": "Q20", "value": "हाँ" }, "subQuestions": [
-          { "key": "Q21", "type": "radio", "required": true },
-          { "key": "Q22", "type": "number", "placeholder": "उदा., ४५", "required": true },
-          { "key": "Q23", "type": "checkbox", "required": true },
-          { "key": "Q24", "type": "radio", "condition": { "key": "Q24", "value": "नहीं" }, "subQuestions": [
-            { "key": "Q25", "type": "number", "placeholder": "मृत्यु की आयु" }
-          ]}
-        ]}
+        {
+          "key": "Q44",
+          "type": "text"
+        },
+        {
+          "key": "Q45",
+          "type": "text",
+          "placeholder": "सार्वभौमिक"
+        },
+        {
+          "key": "Q1",
+          "type": "number",
+          "placeholder": "उदा., ३५",
+          "required": true,
+          "integerOnly": true
+        },
+        {
+          "key": "Q2",
+          "type": "number",
+          "placeholder": "उदा., १६५",
+          "required": true
+        },
+        {
+          "key": "Q3",
+          "type": "number",
+          "placeholder": "उदा., ६०",
+          "required": true
+        },
+        {
+          "key": "Q4",
+          "type": "select",
+          "required": true
+        },
+        {
+          "key": "Q5",
+          "type": "radio",
+          "required": true
+        },
+        {
+          "key": "Q6",
+          "type": "radio",
+          "required": true
+        },
+        {
+          "key": "Q7",
+          "type": "radio",
+          "required": true
+        },
+        {
+          "key": "Q8",
+          "type": "radio",
+          "required": true
+        },
+        {
+          "key": "Q9",
+          "type": "radio",
+          "required": true,
+          "condition": {
+            "key": "Q9",
+            "value": "हाँ"
+          },
+          "subQuestions": [
+            {
+              "key": "Q10",
+              "type": "number",
+              "placeholder": "कृपया संख्या दर्ज करें - वर्ष",
+              "required": true,
+              "integerOnly": true
+            },
+            {
+              "key": "Q11",
+              "type": "radio",
+              "required": true
+            },
+            {
+              "key": "Q12",
+              "type": "radio",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "Q13",
+          "type": "radio"
+        },
+        {
+          "key": "Q14",
+          "type": "radio",
+          "required": true,
+          "condition": {
+            "key": "Q14",
+            "value": "हाँ"
+          },
+          "subQuestions": [
+            {
+              "key": "Q15",
+              "type": "number",
+              "placeholder": "कृपया एक संख्या दर्ज करें",
+              "required": true,
+              "integerOnly": true
+            },
+            {
+              "key": "Q16",
+              "type": "radio",
+              "required": true
+            },
+            {
+              "key": "Q17",
+              "type": "radio",
+              "required": true
+            }
+          ]
+        },
+        {
+          "key": "Q18",
+          "type": "radio",
+          "required": true
+        },
+        {
+          "key": "Q19",
+          "type": "radio",
+          "required": true
+        },
+        {
+          "key": "Q26",
+          "type": "select-plus-text",
+          "otherOptionId": "q26_other_specify",
+          "otherPlaceholder": "Please specify",
+          "required": true
+        },
+        {
+          "key": "Q20",
+          "type": "radio",
+          "condition": {
+            "key": "Q20",
+            "value": "हाँ"
+          },
+          "subQuestions": [
+            {
+              "key": "Q21",
+              "type": "radio",
+              "required": true
+            },
+            {
+              "key": "Q22",
+              "type": "number",
+              "placeholder": "उदा., ४५",
+              "required": true
+            },
+            {
+              "key": "Q23",
+              "type": "checkbox",
+              "required": true
+            },
+            {
+              "key": "Q24",
+              "type": "radio",
+              "condition": {
+                "key": "Q24",
+                "value": "नहीं"
+              },
+              "subQuestions": [
+                {
+                  "key": "Q25",
+                  "type": "number",
+                  "placeholder": "मृत्यु की आयु"
+                }
+              ]
+            }
+          ]
+        }
       ]
     },
     {
       "title": "अनुभाग २: स्तन परीक्षण (BE)",
       "questions": [
-        { 
+        {
           "key": "Q27",
-          "type": "radio", 
-          "condition": {"key": "Q27", "value": "हाँ"}, 
-          "videoUrlOnNo": "https://www.youtube.com/embed/wI71TXaoMp8?autoplay=1&rel=0&start=0", 
+          "type": "radio",
+          "condition": {
+            "key": "Q27",
+            "value": "हाँ"
+          },
+          "videoUrlOnNo": "https://www.youtube.com/embed/wI71TXaoMp8?autoplay=1&rel=0&start=0",
           "subQuestions": [
-            { "key": "Q28", "type": "radio" },
-            { "key": "Q29", "type": "radio" },
-            { 
-              "key": "Q36", 
-              "type": "radio", 
-              "condition": {"key": "Q36", "value": "हाँ"}, 
+            {
+              "key": "Q28",
+              "type": "radio"
+            },
+            {
+              "key": "Q29",
+              "type": "radio"
+            },
+            {
+              "key": "Q36",
+              "type": "radio",
+              "condition": {
+                "key": "Q36",
+                "value": "हाँ"
+              },
               "subQuestions": [
-                { "key": "Q37", "type": "checkbox" }
+                {
+                  "key": "Q37",
+                  "type": "checkbox"
+                }
               ]
             }
           ]
         },
-        { 
+        {
           "key": "Q30",
-          "type": "radio", 
-          "condition": {"key": "Q30", "value": "हाँ"}, 
+          "type": "radio",
+          "condition": {
+            "key": "Q30",
+            "value": "हाँ"
+          },
           "subQuestions": [
-            { "key": "Q31", "type": "radio" },
-            { "key": "Q32", "type": "radio" },
-            { "key": "Q33", "type": "radio" }
+            {
+              "key": "Q31",
+              "type": "radio"
+            },
+            {
+              "key": "Q32",
+              "type": "radio"
+            },
+            {
+              "key": "Q33",
+              "type": "radio"
+            }
           ]
         },
-        { 
-          "key": "Q34", 
-          "type": "radio", 
-          "condition": {"key": "Q34", "value": "हाँ"}, 
+        {
+          "key": "Q34",
+          "type": "radio",
+          "condition": {
+            "key": "Q34",
+            "value": "हाँ"
+          },
           "subQuestions": [
-            { "key": "Q35", "type": "radio" }
+            {
+              "key": "Q35",
+              "type": "radio"
+            }
           ]
         }
       ]
@@ -114,15 +286,48 @@
     {
       "title": "अनुभाग ३: BE के बाद",
       "questions": [
-        { "key": "Q38", "type": "radio", "condition": {"key": "Q38", "value": "हाँ"}, "subQuestions": [
-          { "key": "Q39", "type": "radio", "required": true }
-        ]},
-        { "key": "Q40", "type": "radio", "required": true, "condition": {"key": "Q40", "value": "हाँ"}, "subQuestions": [
-          { "key": "Q41", "type": "radio" }
-        ]},
-        { "key": "Q42", "type": "radio", "required": true, "condition": {"key": "Q42", "value": "हाँ"}, "subQuestions": [
-          { "key": "Q43", "type": "checkbox-plus-text", "otherOptionId": "q43_other_specify", "otherPlaceholder": "कृपया अन्य कैंसर बताइए", "required": true }
-        ]}
+        {
+          "key": "Q38",
+          "type": "radio",
+          "condition": {
+            "key": "Q38",
+            "value": "हाँ"
+          },
+          "subQuestions": []
+        },
+        {
+          "key": "Q40",
+          "type": "radio",
+          "required": true,
+          "condition": {
+            "key": "Q40",
+            "value": "हाँ"
+          },
+          "subQuestions": [
+            {
+              "key": "Q41",
+              "type": "radio"
+            }
+          ]
+        },
+        {
+          "key": "Q42",
+          "type": "radio",
+          "required": true,
+          "condition": {
+            "key": "Q42",
+            "value": "हाँ"
+          },
+          "subQuestions": [
+            {
+              "key": "Q43",
+              "type": "checkbox-plus-text",
+              "otherOptionId": "q43_other_specify",
+              "otherPlaceholder": "कृपया अन्य कैंसर बताइए",
+              "required": true
+            }
+          ]
+        }
       ]
     }
   ],
@@ -179,15 +384,27 @@
     },
     "Q7": {
       "question": "क्या आपको मधुमेह (डायबिटीज) निदान हुआ है?",
-      "answers": [ "हाँ", "नहीं", "मुझे नहीं पता" ]
+      "answers": [
+        "हाँ",
+        "नहीं",
+        "मुझे नहीं पता"
+      ]
     },
     "Q8": {
       "question": "क्या आपको उच्च रक्तचाप (हाइपरटेंशन) निदान हुआ है?",
-      "answers": [ "हाँ", "नहीं", "मुझे नहीं पता" ]
+      "answers": [
+        "हाँ",
+        "नहीं",
+        "मुझे नहीं पता"
+      ]
     },
     "Q9": {
       "question": "क्या आपने मासिक धर्म अनुभव किया है?",
-      "answers": [ "हाँ", "नहीं", "मुझे नहीं पता" ]
+      "answers": [
+        "हाँ",
+        "नहीं",
+        "मुझे नहीं पता"
+      ]
     },
     "Q10": {
       "question": "जब आपकी पहली मासिक धर्म हुई थी तब आपकी आयु कितनी थी?",
@@ -195,7 +412,10 @@
     },
     "Q11": {
       "question": "क्या आपके मासिक चक्र नियमित हैं या अनियमित?",
-      "answers": [ "नियमित", "अनियमित" ]
+      "answers": [
+        "नियमित",
+        "अनियमित"
+      ]
     },
     "Q12": {
       "question": "इनमें से कौन सा आपके मेनोपॉज़ (रजोनिवृत्ति) की स्थिति का वर्णन करता है?",
@@ -207,11 +427,17 @@
     },
     "Q13": {
       "question": "आपकी वैवाहिक स्थिति क्या है?",
-      "answers": [ "विवाहित", "कभी विवाहित नहीं" ]
+      "answers": [
+        "विवाहित",
+        "कभी विवाहित नहीं"
+      ]
     },
     "Q14": {
       "question": "क्या आपने एक या अधिक बच्चों को जन्म दिया है?",
-      "answers": [ "हाँ", "नहीं" ]
+      "answers": [
+        "हाँ",
+        "नहीं"
+      ]
     },
     "Q15": {
       "question": "कृपया उन बच्चों की संख्या दर्ज करें जिन्हें आपने जन्म दिया है?",
@@ -219,23 +445,42 @@
     },
     "Q16": {
       "question": "कृपया अपने पहले बच्चे के जन्म की आयु चुनें?",
-      "answers": [ "२५ वर्ष से कम", "२५ से २९ वर्ष", "३० वर्ष के बाद" ]
+      "answers": [
+        "२५ वर्ष से कम",
+        "२५ से २९ वर्ष",
+        "३० वर्ष के बाद"
+      ]
     },
     "Q17": {
       "question": "कुल स्तनपान की अवधि क्या है?",
-      "answers": [ "२४ महीने से कम", "२४ महीने से अधिक" ]
+      "answers": [
+        "२४ महीने से कम",
+        "२४ महीने से अधिक"
+      ]
     },
     "Q18": {
       "question": "क्या आपने सिगरेट, बीड़ी, या किसी अन्य प्रकार के तम्बाकू (जैसे चबाने वाला तम्बाकू) का उपयोग किया है?",
-      "answers": [ "हाँ", "नहीं", "उत्तर नहीं देना चाहें" ]
+      "answers": [
+        "हाँ",
+        "नहीं",
+        "उत्तर नहीं देना चाहें"
+      ]
     },
     "Q19": {
       "question": "क्या आप शराब का सेवन करते हैं?",
-      "answers": [ "हाँ", "नहीं", "उत्तर नहीं देना चाहें" ]
+      "answers": [
+        "हाँ",
+        "नहीं",
+        "उत्तर नहीं देना चाहें"
+      ]
     },
     "Q20": {
       "question": "क्या किसी रिश्तेदार को किसी प्रकार का कैंसर निदान हुआ है?",
-      "answers": [ "हाँ", "नहीं", "मुझे नहीं पता" ]
+      "answers": [
+        "हाँ",
+        "नहीं",
+        "मुझे नहीं पता"
+      ]
     },
     "Q21": {
       "question": "कृपया रिश्ते का प्रकार बताइए?",
@@ -262,7 +507,10 @@
     },
     "Q24": {
       "question": "क्या वह व्यक्ति जीवित है?",
-      "answers": [ "हाँ", "नहीं" ]
+      "answers": [
+        "हाँ",
+        "नहीं"
+      ]
     },
     "Q25": {
       "question": "मृत्यु की आयु",
@@ -274,11 +522,18 @@
     },
     "Q27": {
       "question": "क्या आपने कभी स्तन परीक्षण (BE) कराया है?",
-      "answers": [ "हाँ", "नहीं" ]
+      "answers": [
+        "हाँ",
+        "नहीं"
+      ]
     },
     "Q28": {
       "question": "अंतिम BE कब किया गया था?",
-      "answers": [ "१ वर्ष के भीतर", "१–३ वर्ष", "३ वर्ष से अधिक पहले" ]
+      "answers": [
+        "१ वर्ष के भीतर",
+        "१–३ वर्ष",
+        "३ वर्ष से अधिक पहले"
+      ]
     },
     "Q29": {
       "question": "BE का परिणाम क्या था?",
@@ -291,53 +546,78 @@
     },
     "Q30": {
       "question": "क्या BE के दौरान आपके स्तन में कोई गांठ या द्रव्यमान पाया गया था?",
-      "answers": [ "हाँ", "नहीं" ]
+      "answers": [
+        "हाँ",
+        "नहीं"
+      ]
     },
     "Q31": {
       "question": "यदि हाँ, स्थान बताइए:",
-      "answers": [ "बायाँ", "दायाँ", "दोनों" ]
+      "answers": [
+        "बायाँ",
+        "दायाँ",
+        "दोनों"
+      ]
     },
     "Q32": {
       "question": "आकार (यदि ज्ञात हो तो अनुमानित):",
-      "answers": [ "<१ सेमी", "१–२ सेमी", ">२ सेमी" ]
+      "answers": [
+        "<१ सेमी",
+        "१–२ सेमी",
+        ">२ सेमी"
+      ]
     },
     "Q33": {
       "question": "संगति (Consistency):",
-      "answers": [ "नरम", "ठोस", "कठोर" ]
+      "answers": [
+        "नरम",
+        "ठोस",
+        "कठोर"
+      ]
     },
     "Q34": {
       "question": "क्या आपने परीक्षण के दौरान स्तन में दर्द या कोमलता महसूस की?",
-      "answers": [ "हाँ", "नहीं" ]
+      "answers": [
+        "हाँ",
+        "नहीं"
+      ]
     },
     "Q35": {
       "question": "यदि हाँ, क्या यह स्थानीय (एक जगह) था या सामान्यीकृत (एक विस्तृत क्षेत्र में फैला हुआ)?",
-      "answers": [ "स्थानीय (एक जगह)", "सामान्यीकृत (विस्तृत क्षेत्र)" ]
+      "answers": [
+        "स्थानीय (एक जगह)",
+        "सामान्यीकृत (विस्तृत क्षेत्र)"
+      ]
     },
     "Q36": {
       "question": "BE के बाद क्या आपको आगे की जांच या फॉलो-अप की सलाह दी गई थी?",
-      "answers": [ "हाँ", "नहीं" ]
+      "answers": [
+        "हाँ",
+        "नहीं"
+      ]
     },
     "Q37": {
       "question": "यदि हाँ, कृपया बताएं आगे क्या सलाह दी गई थी:",
-      "answers": [ "अल्ट्रासाउंड", "मैमोग्राम", "बायोप्सी", "अन्य" ]
+      "answers": [
+        "अल्ट्रासाउंड",
+        "मैमोग्राम",
+        "बायोप्सी",
+        "अन्य"
+      ]
     },
     "Q38": {
       "question": "क्या आपने मैमोग्राम करवाया है?",
-      "answers": [ "हाँ", "नहीं" ]
-    },
-    "Q39": {
-      "question": "इनमें से कौन सा आपके स्तन घनत्व का सबसे अच्छा वर्णन करता है?",
       "answers": [
-        "A: लगभग पूरी तरह वसाह्रित (स्तन लगभग पूरी तरह वसा से बने होते हैं, फाइब्रस और ग्रंथि ऊतक बहुत कम होता है। यह मैमोग्राम पर असामान्य परिवर्तनों को देखना आसान बनाता है.)[...]",
-        "B: विखंडित फाइब्रोग्रंथीय घनत्व (कुछ विकेन्द्रित फाइब्रस और ग्रंथि ऊतक हैं, पर अधिकांश स्तन वसाह्रित है। छोटी गांठ मैमोग्राम पर दिखाई दे सकती है.)[...]",
-        "C: असमान रूप से घना (कई क्षेत्रों में फाइब्रस और ग्रंथि ऊतक हैं, जो मैमोग्राम पर छोटी गांठों को ढक सकते हैं.)",
-        "D: अत्यधिक घना (स्तन लगभग पूरी तरह घने, फाइब्रस और ग्रंथि ऊतक से भरे होते हैं, जिससे मैमोग्राम पर ढाँकना कठिन होता है.)[...]",
-        "E: मुझे पता नहीं / मैं सुनिश्चित नहीं हूँ"
+        "हाँ",
+        "नहीं"
       ]
     },
     "Q40": {
       "question": "क्या आपकी स्तन की बायोप्सी हुई है?",
-      "answers": [ "हाँ", "नहीं" ]
+      "answers": [
+        "हाँ",
+        "नहीं"
+      ]
     },
     "Q41": {
       "question": "बायोप्सी का परिणाम (BIRAD आकलन)",
@@ -350,7 +630,10 @@
     },
     "Q42": {
       "question": "क्या कभी आपको किसी प्रकार का कैंसर निदान किया गया है?",
-      "answers": [ "हाँ", "नहीं" ]
+      "answers": [
+        "हाँ",
+        "नहीं"
+      ]
     },
     "Q43": {
       "question": "कृपया बताइए किस प्रकार का कैंसर था?",

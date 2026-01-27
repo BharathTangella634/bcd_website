@@ -14,8 +14,16 @@
           "text": "2. What is your height and weight?",
           "type": "inline-inputs",
           "inputs": [
-            { "id": "q2_height_cm", "placeholder": "Height (cm)", "type": "number" },
-            { "id": "q2_weight_kg", "placeholder": "Weight (kg)", "type": "number" }
+            {
+              "id": "q2_height_cm",
+              "placeholder": "Height (cm)",
+              "type": "number"
+            },
+            {
+              "id": "q2_weight_kg",
+              "placeholder": "Weight (kg)",
+              "type": "number"
+            }
           ]
         },
         {
@@ -23,7 +31,43 @@
           "text": "3. Which state or union territory best represents the place where you have lived for a significant part of your life?",
           "type": "select",
           "options": [
-            "Select your state/UT", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
+            "Select your state/UT",
+            "Andhra Pradesh",
+            "Arunachal Pradesh",
+            "Assam",
+            "Bihar",
+            "Chhattisgarh",
+            "Goa",
+            "Gujarat",
+            "Haryana",
+            "Himachal Pradesh",
+            "Jharkhand",
+            "Karnataka",
+            "Kerala",
+            "Madhya Pradesh",
+            "Maharashtra",
+            "Manipur",
+            "Meghalaya",
+            "Mizoram",
+            "Nagaland",
+            "Odisha",
+            "Punjab",
+            "Rajasthan",
+            "Sikkim",
+            "Tamil Nadu",
+            "Telangana",
+            "Tripura",
+            "Uttar Pradesh",
+            "Uttarakhand",
+            "West Bengal",
+            "Andaman and Nicobar Islands",
+            "Chandigarh",
+            "Dadra and Nagar Haveli and Daman and Diu",
+            "Delhi",
+            "Jammu and Kashmir",
+            "Ladakh",
+            "Lakshadweep",
+            "Puducherry"
           ]
         },
         {
@@ -31,7 +75,10 @@
           "text": "4. Please indicate your family's approximate annual household income range?",
           "type": "radio",
           "options": [
-            "Less than ₹2,00,000 per annum", "Between ₹2,00,000 and ₹5,00,000 per annum", "Between ₹5,00,000 and ₹10,00,000 per annum", "Greater than ₹10,00,000 per annum"
+            "Less than \u20b92,00,000 per annum",
+            "Between \u20b92,00,000 and \u20b95,00,000 per annum",
+            "Between \u20b95,00,000 and \u20b910,00,000 per annum",
+            "Greater than \u20b910,00,000 per annum"
           ]
         },
         {
@@ -39,26 +86,40 @@
           "text": "5. What is your highest educational qualification?",
           "type": "radio",
           "options": [
-            "No formal education", "<10 years of Schooling", "Intermediate Education", "Graduation & Above"
+            "No formal education",
+            "<10 years of Schooling",
+            "Intermediate Education",
+            "Graduation & Above"
           ]
         },
         {
           "id": "q6_diabetes",
           "text": "6. Have you been diagnosed with diabetes?",
           "type": "radio",
-          "options": ["Yes", "No", "I don't know"]
+          "options": [
+            "Yes",
+            "No",
+            "I don't know"
+          ]
         },
         {
           "id": "q7_hypertension",
           "text": "7. Have you been diagnosed with high blood pressure (hypertension)?",
           "type": "radio",
-          "options": ["Yes", "No", "I don't know"]
+          "options": [
+            "Yes",
+            "No",
+            "I don't know"
+          ]
         },
         {
           "id": "q8_menstrual_period",
           "text": "8. Have you had a menstrual period?",
           "type": "radio",
-          "options": ["Yes", "No"],
+          "options": [
+            "Yes",
+            "No"
+          ],
           "subQuestions": [
             {
               "id": "q8a_first_period_age",
@@ -70,7 +131,12 @@
               "id": "q8b_menopausal_status",
               "text": "8b. Which of these best describes your menopausal status?",
               "type": "radio",
-              "options": ["Premenopausal (still having periods) - regular cycles", "Premenopausal (still having periods) - irregular cycles", "Perimenopausal (periods are irregular or have stopped for less than 12 months)", "Postmenopausal (periods have stopped for 12 consecutive months or more)"]
+              "options": [
+                "Premenopausal (still having periods) - regular cycles",
+                "Premenopausal (still having periods) - irregular cycles",
+                "Perimenopausal (periods are irregular or have stopped for less than 12 months)",
+                "Postmenopausal (periods have stopped for 12 consecutive months or more)"
+              ]
             }
           ]
         },
@@ -78,13 +144,19 @@
           "id": "q9_marital_status",
           "text": "9. What is your Marital Status?",
           "type": "radio",
-          "options": ["Married", "Never Married"]
+          "options": [
+            "Married",
+            "Never Married"
+          ]
         },
         {
           "id": "q10_given_birth",
           "text": "10. Have you given birth to one or more children?",
           "type": "radio",
-          "options": ["Yes", "No"],
+          "options": [
+            "Yes",
+            "No"
+          ],
           "subQuestions": [
             {
               "id": "q10a_children_number",
@@ -107,22 +179,31 @@
           ]
         },
         {
-            "id": "q11_tobacco",
-            "text": "11. Have you smoked cigarettes, bidis, or used any other form of tobacco?",
-            "type": "radio",
-            "options": ["Yes", "No"]
+          "id": "q11_tobacco",
+          "text": "11. Have you smoked cigarettes, bidis, or used any other form of tobacco?",
+          "type": "radio",
+          "options": [
+            "Yes",
+            "No"
+          ]
         },
         {
-            "id": "q12_alcohol",
-            "text": "12. Do you consume alcohol?",
-            "type": "radio",
-            "options": ["Yes", "No"]
+          "id": "q12_alcohol",
+          "text": "12. Do you consume alcohol?",
+          "type": "radio",
+          "options": [
+            "Yes",
+            "No"
+          ]
         },
         {
           "id": "q13_relatives_cancer",
           "text": "13. Have any relatives been diagnosed with any type of cancer?",
           "type": "radio",
-          "options": ["Yes", "No"],
+          "options": [
+            "Yes",
+            "No"
+          ],
           "subQuestions": [
             {
               "id": "q13a_relation",
@@ -140,26 +221,39 @@
               "id": "q13c_cancer_types",
               "text": "13c. Please specify which types of cancer",
               "type": "checkbox-plus-text",
-              "options": ["Breast cancer", "Ovarian cancer", "Colon, rectal, or pancreatic cancer", "Uterine cancer", "Prostate cancer"],
+              "options": [
+                "Breast cancer",
+                "Ovarian cancer",
+                "Colon, rectal, or pancreatic cancer",
+                "Uterine cancer",
+                "Prostate cancer"
+              ],
               "otherOptionId": "q13c_other_cancer_specify"
             },
             {
               "id": "q13d_person_alive",
               "text": "13d. Is the person alive?",
               "type": "radio",
-              "options": ["Yes", "No"]
+              "options": [
+                "Yes",
+                "No"
+              ]
             },
             {
               "id": "q13e_age_of_death",
               "text": "13e. Age of death",
               "type": "select",
-              "options": ["Select age"]
+              "options": [
+                "Select age"
+              ]
             },
             {
               "id": "q13f_ethnicity",
               "text": "13f. Please select your ethnicity:",
               "type": "select",
-              "options": ["Select your ethnicity"]
+              "options": [
+                "Select your ethnicity"
+              ]
             }
           ]
         }
@@ -172,19 +266,31 @@
           "id": "q14_had_be",
           "text": "14. Have you ever undergone a Breast Examination (BE)?",
           "type": "radio",
-          "options": ["Yes", "No"],
+          "options": [
+            "Yes",
+            "No"
+          ],
           "subQuestions": [
-             {
+            {
               "id": "q14a_last_be_time",
               "text": "14a. When was the last BE performed?",
               "type": "radio",
-              "options": ["Within 1 year", "1-3 years", "More than 3 years ago"]
+              "options": [
+                "Within 1 year",
+                "1-3 years",
+                "More than 3 years ago"
+              ]
             },
             {
               "id": "q14b_be_result",
               "text": "14b. Result of BE?",
               "type": "radio",
-              "options": ["Normal – No abnormal findings", "Benign – Non-cancerous features (e.g., fibroadenoma, cyst)", "Suspicious – Unclear/possibly malignant features, needs further tests", "Malignant features – Strongly suggestive of breast cancer"]
+              "options": [
+                "Normal \u2013 No abnormal findings",
+                "Benign \u2013 Non-cancerous features (e.g., fibroadenoma, cyst)",
+                "Suspicious \u2013 Unclear/possibly malignant features, needs further tests",
+                "Malignant features \u2013 Strongly suggestive of breast cancer"
+              ]
             }
           ]
         },
@@ -192,25 +298,40 @@
           "id": "q15_lump_detected",
           "text": "15. During BE, was any lump or mass detected in your breast?",
           "type": "radio",
-          "options": ["Yes", "No"],
+          "options": [
+            "Yes",
+            "No"
+          ],
           "subQuestions": [
             {
               "id": "q15a_lump_location",
               "text": "15a. Specify location",
               "type": "checkbox",
-              "options": ["Left", "Right", "Both"]
+              "options": [
+                "Left",
+                "Right",
+                "Both"
+              ]
             },
             {
               "id": "q15b_lump_size",
               "text": "15b. Size (approximate if known):",
               "type": "radio",
-              "options": ["<1 cm", "1-2 cm", ">2 cm"]
+              "options": [
+                "<1 cm",
+                "1-2 cm",
+                ">2 cm"
+              ]
             },
             {
               "id": "q15c_lump_consistency",
               "text": "15c. Consistency:",
               "type": "radio",
-              "options": ["Soft", "Firm", "Hard"]
+              "options": [
+                "Soft",
+                "Firm",
+                "Hard"
+              ]
             }
           ]
         },
@@ -218,13 +339,19 @@
           "id": "q16_pain_during_exam",
           "text": "16. Did you experience breast pain or tenderness during examination?",
           "type": "radio",
-          "options": ["Yes", "No"],
+          "options": [
+            "Yes",
+            "No"
+          ],
           "subQuestions": [
-             {
+            {
               "id": "q16a_pain_location",
               "text": "16a. If yes, was it localized (in one specific spot) or generalized (spread across a wider area of the breast)?",
               "type": "radio",
-              "options": ["Localized (in one specific spot)", "Generalized (spread across a wider area)"]
+              "options": [
+                "Localized (in one specific spot)",
+                "Generalized (spread across a wider area)"
+              ]
             }
           ]
         },
@@ -232,13 +359,21 @@
           "id": "q17_follow_up",
           "text": "17. After the BE, were you advised for further investigation or follow-up?",
           "type": "radio",
-          "options": ["Yes", "No"],
+          "options": [
+            "Yes",
+            "No"
+          ],
           "subQuestions": [
-             {
+            {
               "id": "q17a_follow_up_type",
               "text": "17a. If Yes, specify:",
               "type": "checkbox",
-              "options": ["Ultrasound", "Mammogram", "Biopsy", "Other"]
+              "options": [
+                "Ultrasound",
+                "Mammogram",
+                "Biopsy",
+                "Other"
+              ]
             }
           ]
         }
@@ -251,33 +386,31 @@
           "id": "q18_mammogram",
           "text": "18. Have you undergone a mammogram?",
           "type": "radio",
-          "options": ["Yes", "No"],
-          "subQuestions": [
-            {
-              "id": "q18a_breast_density",
-              "text": "18a. Which of these best describes your breast density?",
-              "type": "radio-long",
-              "options": [
-                {"value": "A", "label": "A: Almost entirely fatty:", "description": "(The breasts are almost all fat, with very little fibrous and glandular tissue. This makes it easy to see any abnormality on the mammogram.)"},
-                {"value": "B", "label": "B: Scattered fibroglandular densities:", "description": "(There are areas of scattered dense or fibrous and glandular tissue, but the majority of the breast is fatty. A small mass would be visible on a mammogram.)"},
-                {"value": "C", "label": "C: Heterogeneously dense:", "description": "(There are many areas of fibrous and glandular tissue, which makes it hard to find small masses on a mammogram. This may obscure small cancers.)"},
-                {"value": "D", "label": "D: Extremely dense:", "description": "(The breasts are almost entirely made of dense, fibrous, and glandular tissue. This can make it very difficult to see through the breast on a mammogram. This is also associated with a higher risk of breast cancer.)"},
-                {"value": "E", "label": "E: I don't know / I am not sure", "description": ""}
-              ]
-            }
-          ]
+          "options": [
+            "Yes",
+            "No"
+          ],
+          "subQuestions": []
         },
         {
           "id": "q19_biopsy",
           "text": "19. Have you had a breast biopsy?",
           "type": "radio",
-          "options": ["Yes", "No"],
+          "options": [
+            "Yes",
+            "No"
+          ],
           "subQuestions": [
             {
               "id": "q19a_biopsy_result",
               "text": "19a. Result of Biopsy (BIRAD Assessment)",
               "type": "radio",
-              "options": ["N (1) Negative", "B (2) Benign", "P (3) Probably benign", "M (6) Malignancy"]
+              "options": [
+                "N (1) Negative",
+                "B (2) Benign",
+                "P (3) Probably benign",
+                "M (6) Malignancy"
+              ]
             }
           ]
         },
@@ -285,13 +418,21 @@
           "id": "q20_cancer_diagnosis",
           "text": "20. Have you ever been diagnosed with any type of cancer?",
           "type": "radio",
-          "options": ["Yes", "No"],
+          "options": [
+            "Yes",
+            "No"
+          ],
           "subQuestions": [
             {
               "id": "q20a_cancer_types",
               "text": "20a. Please specify which types of cancer:",
               "type": "checkbox-plus-text",
-              "options": ["Breast cancer", "Ovarian cancer", "Colon, rectal, or pancreatic cancer", "Uterine cancer"],
+              "options": [
+                "Breast cancer",
+                "Ovarian cancer",
+                "Colon, rectal, or pancreatic cancer",
+                "Uterine cancer"
+              ],
               "otherOptionId": "q20a_other_cancer_specify"
             }
           ]
