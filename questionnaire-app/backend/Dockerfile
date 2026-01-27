@@ -36,10 +36,7 @@ COPY backend ./backend
 COPY mysql_explorer ./mysql_explorer
 COPY *.pem ./
 
-COPY src/assets/questionnaire.json ./backend/
-
-
-# Expose backend port
+# ✅ Expose backend port
 EXPOSE 3001
 
 # ✅ Start backend with correct path
@@ -71,7 +68,6 @@ CMD ["node", "backend/server.js"]
 # # This copies the JSON file from your project's src/assets folder
 # # INTO the /app/backend/ folder inside the container, where server.js
 # # is now looking for it.
-# COPY src/assets/questionnaire.json ./backend/
 # # --- END ADDITION ---
 
 # # Expose backend port
