@@ -183,7 +183,7 @@ const Stats = () => {
                 <Pie 
                   data={data.riskBins} 
                   cx="50%" cy="50%" 
-                  outerRadius={110} 
+                  outerRadius="80%" 
                   fill="#8884d8" 
                   dataKey="value"
                   labelLine={false}
@@ -211,17 +211,17 @@ const Stats = () => {
           <h3>Age Distribution</h3>
           <div className="chart-wrapper">
             <ResponsiveContainer width="100%" height="100%">
-               <BarChart data={data.ageBins} margin={{ top: 20, right: 30, left: 20, bottom: 20 }}>
-                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#14868C" strokeOpacity={0.1} />
-                 <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#14868C', fontFamily: 'Poppins', fontWeight: 500 }} axisLine={{ stroke: '#14868C', strokeOpacity: 0.2 }} />
-                 <YAxis tick={{ fontSize: 12, fill: '#14868C', fontFamily: 'Poppins', fontWeight: 500 }} axisLine={{ stroke: '#14868C', strokeOpacity: 0.2 }} />
-                 <Tooltip content={<CustomTooltip />} />
-                 <Legend verticalAlign="top" height={36} content={<CustomLegend />} />
-                 <Bar dataKey="no_risk" name="No Risk" stackId="a" fill="#3b82f6" />
-                 <Bar dataKey="low" name="Low Risk" stackId="a" fill="#10b981" />
-                 <Bar dataKey="moderate" name="Moderate Risk" stackId="a" fill="#facc15" />
-                 <Bar dataKey="high" name="High Risk" stackId="a" fill="#ef4444" radius={[4, 4, 0, 0]} />
-               </BarChart>
+                <BarChart data={data.ageBins} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#14868C" strokeOpacity={0.1} />
+                  <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#14868C', fontFamily: 'Poppins', fontWeight: 500 }} axisLine={{ stroke: '#14868C', strokeOpacity: 0.2 }} />
+                  <YAxis tick={{ fontSize: 12, fill: '#14868C', fontFamily: 'Poppins', fontWeight: 500 }} axisLine={{ stroke: '#14868C', strokeOpacity: 0.2 }} />
+                  <Tooltip content={<CustomTooltip />} />
+                  <Legend verticalAlign="bottom" height={36} content={<CustomLegend />} />
+                  <Bar dataKey="no_risk" name="No Risk" stackId="a" fill="#3b82f6" />
+                  <Bar dataKey="low" name="Low Risk" stackId="a" fill="#10b981" />
+                  <Bar dataKey="moderate" name="Moderate Risk" stackId="a" fill="#facc15" />
+                  <Bar dataKey="high" name="High Risk" stackId="a" fill="#ef4444" radius={[4, 4, 0, 0]} />
+                </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
@@ -237,7 +237,7 @@ const Stats = () => {
                    name: b.name === 'Shanmuga Hospital Limited' ? 'SHL' : 
                          b.name === 'Sri Chamundeshwari Medical College Hospital & Research Institute' ? 'SCMCHRI' : b.name
                  }))} 
-                 margin={{ top: 20, right: 30, left: 20, bottom: 50 }}
+                 margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
                >
                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#14868C" strokeOpacity={0.1} />
                  <XAxis 
@@ -251,7 +251,7 @@ const Stats = () => {
                  />
                  <YAxis tick={{ fontSize: 12, fill: '#14868C', fontFamily: 'Poppins', fontWeight: 500 }} axisLine={{ stroke: '#14868C', strokeOpacity: 0.2 }} />
                  <Tooltip content={<CustomTooltip />} />
-                 <Legend verticalAlign="top" height={36} content={<CustomLegend />} />
+                 <Legend verticalAlign="bottom" height={36} content={<CustomLegend />} />
                  <Bar dataKey="no_risk" name="No Risk" stackId="a" fill="#3b82f6" />
                  <Bar dataKey="low" name="Low Risk" stackId="a" fill="#10b981" />
                  <Bar dataKey="moderate" name="Moderate Risk" stackId="a" fill="#facc15" />
