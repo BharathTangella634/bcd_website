@@ -5,8 +5,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
-  /* A subtle, professional lavender gradient for the entire page background */
-  background: linear-gradient(170deg, #f7f5ff 0%, #ede9ff 100%);
+  /* A professional teal blue gradient for the entire page background */
+  background: linear-gradient(170deg, #F5FFFF 0%, #DAF3F4 100%);
   min-height: 100vh;
 }
 

@@ -112,8 +112,11 @@ function Consent({ onAccept }) {
   return (
     <div className="consent-container">
 
-      <img src="/tanuh.png" alt={t('logos.tanuhAlt')} className="logo tanuh-logo" />
-      <img src="/IISc_logo.png" alt={t('logos.iiscAlt')} className="logo iisc-logo" />
+      <div className="stats-logos-container">
+        <img src="/tanuh.png" alt={t('logos.tanuhAlt')} className="stats-logo" />
+        <img src="/IISc_logo.png" alt={t('logos.iiscAlt')} className="stats-logo iisc-img" />
+        <img src="/moe.png" alt={t('logos.moeAlt')} className="stats-logo moe-img" />
+      </div>
 
       {/* --- ADD LANGUAGE SWITCHER HERE --- */}
       <LanguageSwitcher />

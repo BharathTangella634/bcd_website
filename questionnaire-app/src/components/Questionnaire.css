@@ -3,13 +3,13 @@
 
 
 .questionnaire-container {
-  background-color: #ffffff;
+  background-color: #FDFCFC;
   border-radius: 16px;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
   padding: 30px 40px 40px;
   max-width: 800px;
   width: 100%;
-  border-top: 6px solid #6200EE;
+  border: 1px solid rgba(0, 0, 0, 0.05); border-top: 6px solid #14868C;
 
 }
 
@@ -38,10 +38,10 @@
 
 .form-section h2 {
   font-size: 1.5rem;
-  color: #6200EE; 
+  color: #14868C; 
   margin-bottom: 30px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #f0e6ff;
+  border-bottom: 2px solid #f0fafb;
 }
 
 .question-block {
@@ -69,8 +69,8 @@
 
 .text-input:focus, .select-input:focus {
   outline: none;
-  border-color: #6200EE;
-  background-color: #ffffff;
+  border-color: #14868C;
+  background-color: #FDFCFC;
   box-shadow: 0 0 0 3px rgba(98, 0, 238, 0.15);
 }
 
@@ -89,7 +89,7 @@
 }
 
 .radio-group label:hover, .checkbox-group label:hover {
-  background-color: #f8f0ff; 
+  background-color: #f0fafb; 
 }
 
 .radio-group.vertical, .checkbox-group.vertical {
@@ -101,7 +101,7 @@
 
 .radio-group input, .checkbox-group input {
   margin-right: 12px;
-  accent-color: #6200EE;
+  accent-color: #14868C;
   width: 18px;
   height: 18px;
   flex-shrink: 0;
@@ -109,7 +109,7 @@
 
 .sub-question-container {
   background-color: #f8f9fa;
-  border-left: 4px solid #b392d8;
+  border-left: 4px solid #66b2b6;
   padding: 0 25px;
   margin-top: 20px;
   border-radius: 0 8px 8px 0;
@@ -180,7 +180,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: white;
+  background-color: #FDFCFC;
   animation: bounce-dots 1.4s infinite ease-in-out both;
 }
 
@@ -209,17 +209,17 @@
   font-size: 1.1rem;
   font-weight: bold;
   color: white;
-  background: linear-gradient(45deg, #6200EE, #7e3ff2);
+  background: linear-gradient(45deg, #14868C, #0e6a6f);
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  box-shadow: 0 4px 20px rgba(98, 0, 238, 0.25);
+  box-shadow: 0 4px 20px rgba(20, 134, 140, 0.25);
 }
 
 .submit-button:hover:not(:disabled) {
   transform: translateY(-3px);
-  box-shadow: 0 7px 25px rgba(98, 0, 238, 0.35);
+  box-shadow: 0 7px 25px rgba(20, 134, 140, 0.35);
 }
 
 .checkbox-group.vertical .text-input {
@@ -230,13 +230,13 @@
 
 
 .questionnaire-container {
-  background-color: #ffffff;
+  background-color: #FDFCFC;
   border-radius: 16px;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
   padding: 30px 40px 40px;
   max-width: 800px;
   width: 100%;
-  border-top: 6px solid #6200EE;
+  border: 1px solid rgba(0, 0, 0, 0.05); border-top: 6px solid #14868C;
   /* NEW: Add margin to prevent overlap with fixed progress bar */
   margin-top: 70px; /* Adjust if progress bar height changes */
 }
@@ -265,10 +265,10 @@
 
 .form-section h2 {
   font-size: 1.5rem;
-  color: #6200EE; /* Purple for section titles */
+  color: #14868C; /* Teal for section titles */
   margin-bottom: 30px;
   padding-bottom: 10px;
-  border-bottom: 2px solid #f0e6ff; /* Light lavender underline */
+  border-bottom: 2px solid #f0fafb; /* Light teal underline */
 }
 
 .question-block {
@@ -296,9 +296,9 @@
 
 .text-input:focus, .select-input:focus {
   outline: none;
-  border-color: #6200EE;
-  background-color: #ffffff;
-  box-shadow: 0 0 0 3px rgba(98, 0, 238, 0.15);
+  border-color: #14868C;
+  background-color: #FDFCFC;
+  box-shadow: 0 0 0 3px rgba(20, 134, 140, 0.15);
 }
 
 .inline-inputs {
@@ -316,7 +316,7 @@
 }
 
 .radio-group label:hover, .checkbox-group label:hover {
-  background-color: #f8f0ff;
+  background-color: #f0fafb;
 }
 
 .radio-group.vertical, .checkbox-group.vertical {
@@ -328,7 +328,7 @@
 
 .radio-group input, .checkbox-group input {
   margin-right: 12px;
-  accent-color: #6200EE;
+  accent-color: #14868C;
   width: 18px;
   height: 18px;
   flex-shrink: 0;
@@ -336,7 +336,7 @@
 
 .sub-question-container {
   background-color: #f8f9fa;
-  border-left: 4px solid #b392d8;
+  border-left: 4px solid #66b2b6;
   padding: 0 25px;
   margin-top: 20px;
   border-radius: 0 8px 8px 0;
@@ -406,7 +406,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: white;
+  background-color: #FDFCFC;
   animation: bounce-dots 1.4s infinite ease-in-out both;
 }
 
@@ -434,17 +434,17 @@
   font-size: 1.1rem;
   font-weight: bold;
   color: white;
-  background: linear-gradient(45deg, #6200EE, #7e3ff2);
+  background: linear-gradient(45deg, #14868C, #0e6a6f);
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  box-shadow: 0 4px 20px rgba(98, 0, 238, 0.25);
+  box-shadow: 0 4px 20px rgba(20, 134, 140, 0.25);
 }
 
 .submit-button:hover:not(:disabled) {
   transform: translateY(-3px);
-  box-shadow: 0 7px 25px rgba(98, 0, 238, 0.35);
+  box-shadow: 0 7px 25px rgba(20, 134, 140, 0.35);
 }
 
 .checkbox-group.vertical .text-input {
@@ -463,7 +463,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  background-color: #ffffff; /* Use white background to match header */
+  background-color: #FDFCFC; /* Use white background to match header */
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 100; /* Ensure it's above other content */
@@ -489,7 +489,7 @@
 
 .progress-bar-fill {
   height: 100%;
-  background-color: #6200EE; /* Purple theme color */
+  background-color: #14868C; /* Teal theme color */
   border-radius: 5px;
   transition: width 0.4s ease-in-out; /* Smooth animation */
   width: 0%; /* Initial width */
@@ -498,8 +498,8 @@
 
 /* --- Styles for Video Prompt --- */
 .video-prompt-container {
-  background-color: #f8f0ff; /* Light lavender background */
-  border-left: 4px solid #6200EE; /* Purple accent */
+  background-color: #f0fafb; /* Light teal background */
+  border-left: 4px solid #14868C; /* Teal accent */
   padding: 15px 20px;
   margin-top: 15px;
   margin-bottom: 25px; /* Add margin below */
@@ -521,7 +521,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: white;
-  background-color: #6200EE;
+  background-color: #14868C;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -529,7 +529,7 @@
 }
 
 .video-prompt-button:hover {
-  background-color: #5a00d1;
+  background-color: #0e6a6f;
 }
 
 
@@ -546,26 +546,43 @@
 .questionnaire-container, 
 .thank-you-dialog {
   position: relative; 
-  padding-top: 140px; 
+  padding-top: 40px; /* Reduced from 140px as logos are now in flex flow */
 }
 
-.questionnaire-container .logo {
-  position: absolute;
-  top: 20px;       
-  height: 80px !important;    /* Increased base height with stronger specificity */
-  width: auto;     
+
+.stats-logos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
-.questionnaire-container .tanuh-logo {
-  left: 30px;       
+.stats-logo {
+  height: 65px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
-.questionnaire-container .iisc-logo {
-  right: 30px;     
-  background-color: transparent; /* Removed background */
-  padding: 0;                /* Removed padding */
-  border-radius: 0;          /* Removed border-radius */
-  height: 100px !important;              /* Match increased height with stronger specificity */
-  top: 20px;                 /* Matched top to .logo */
-  /* filter: invert(100%);     */
+.stats-logo:hover {
+  transform: scale(1.05);
 }
+
+.stats-logo.iisc-img {
+  height: 75px;
+}
+
+.stats-logo.moe-img {
+  height: 60px;
+}
+
+
+
+
+
+
+
+
+

@@ -16,7 +16,7 @@ i18n
     // Preload all languages. This fetches all JSON files
     // on the initial load, so they are instantly available when
     // you switch components. This prevents the "Loading..." state.
-    preload: ['english', 'hindi', 'telugu', 'kannada', 'tamil', 'malayalam', 'bengali', 'marathi', 'gujarati', 'punjabi'],
+    preload: ['english', 'hindi', 'telugu', 'kannada', 'tamil', 'malayalam', 'bengali', 'marathi', 'gujarati', 'punjabi', 'assamese', 'odia'],
     // --- END FIX ---
     
     fallbackLng: 'english', // Use English if the detected language is missing

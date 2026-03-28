@@ -1,14 +1,14 @@
 /* 
 
 .consent-container {
-  background: #ffffff; 
+  background: #FDFCFC; 
   border-radius: 16px;
   box-shadow: 0 12px 50px -10px rgba(98, 0, 238, 0.15);
   padding: 40px 50px;
   max-width: 800px;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.05); 
-  border-top: 6px solid #6200EE; 
+  border-top: 6px solid #14868C; 
   animation: fadeIn 0.5s ease-out;
 }
 
@@ -28,7 +28,7 @@
   font-weight: 600;
   margin-top: 30px;
   margin-bottom: 15px;
-  border-left: 4px solid #6200EE;
+  border-left: 4px solid #14868C;
   padding-left: 15px;
 }
 
@@ -52,7 +52,7 @@
   margin-right: 12px;
   width: 20px;
   height: 20px;
-  accent-color: #6200EE; 
+  accent-color: #14868C; 
   cursor: pointer;
 }
 
@@ -69,7 +69,7 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: white;
-  background-color: #6200EE;
+  background-color: #14868C;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -103,14 +103,14 @@
 
 
 .consent-container {
-  background: #ffffff;
+  background: #FDFCFC;
   border-radius: 16px;
-  box-shadow: 0 12px 50px -10px rgba(98, 0, 238, 0.15);
+  box-shadow: 0 12px 50px -10px rgba(20, 134, 140, 0.15);
   padding: 40px 50px;
   max-width: 800px;
   width: 100%;
   border: 1px solid rgba(0, 0, 0, 0.05);
-  border-top: 6px solid #6200EE;
+  border-top: 6px solid #14868C;
   animation: fadeIn 0.5s ease-out;
 }
 
@@ -131,7 +131,7 @@
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 15px;
-  border-left: 4px solid #6200EE;
+  border-left: 4px solid #14868C;
   padding-left: 15px;
 }
 
@@ -144,7 +144,7 @@
 
 /* NEW: Style for the study information header */
 .consent-header {
-  background-color: #f8f7fa;
+  background-color: #f0fafb; /* Light teal background */
   padding: 15px 20px;
   border-radius: 8px;
   border: 1px solid #e9ecef;
@@ -190,7 +190,7 @@
   margin-top: 40px;
   display: flex;
   align-items: center;
-  background-color: #f8f7fa;
+  background-color: #f0fafb;
   padding: 15px 20px;
   border-radius: 8px;
   border: 1px solid #e9ecef;
@@ -200,7 +200,7 @@
   margin-right: 12px;
   width: 20px;
   height: 20px;
-  accent-color: #6200EE;
+  accent-color: #14868C;
   cursor: pointer;
 }
 
@@ -218,18 +218,18 @@
   font-size: 1.1rem;
   font-weight: 600;
   color: white;
-  background-color: #6200EE;
+  background-color: #14868C;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  box-shadow: 0 4px 15px rgba(98, 0, 238, 0.2);
+  box-shadow: 0 4px 15px rgba(20, 134, 140, 0.2);
 }
 
 .consent-container button:hover:not(:disabled) {
-  background-color: #5a00d1;
+  background-color: #0e6a6f;
   transform: translateY(-3px);
-  box-shadow: 0 7px 25px rgba(98, 0, 238, 0.3);
+  box-shadow: 0 7px 25px rgba(20, 134, 140, 0.3);
 }
 
 .consent-container button:disabled {
@@ -253,30 +253,47 @@
 /* --- Logo Styles (Add to each CSS file) --- */
 /* --- Logo Styles --- */
 
- .consent-container, 
+.consent-container, 
 .questionnaire-container, 
 .thank-you-dialog {
   position: relative; 
-  padding-top: 140px; 
+  padding-top: 40px; /* Reduced from 140px since logos are now in flex flow */
 }
 
-.consent-container .logo {
-  position: absolute;
-  top: 20px;       
-  height: 80px !important;    /* Increased base height with stronger specificity */
-  width: auto;     
+/* --- Logo Styles (Consistent with Dashboard) --- */
+.stats-logos-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
 
-.consent-container .tanuh-logo {
-  left: 30px;       
+.stats-logo {
+  height: 65px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
-.consent-container .iisc-logo {
-  right: 30px;     
-  background-color: transparent; /* Removed background */
-  padding: 0;                /* Removed padding */
-  border-radius: 0;          /* Removed border-radius */
-  height: 100px !important;              /* Match increased height with stronger specificity */
-  top: 20px;                 /* Matched top to .logo */
-  /* filter: invert(100%);    */
+.stats-logo:hover {
+  transform: scale(1.05);
 }
+
+.stats-logo.iisc-img {
+  height: 75px;
+}
+
+.stats-logo.moe-img {
+  height: 60px;
+}
+
+
+
+
+
+
+
+
+

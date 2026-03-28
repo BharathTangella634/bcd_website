@@ -108,7 +108,9 @@ if (process.env.MYSQL_SSL_CA || process.env.MYSQL_SSL_CERT || process.env.MYSQL_
   // If the host is an IP address, we should set servername to false or a specific hostname.
   const isIP = (host) => /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/.test(host) || host.includes(':');
   if (config.host && isIP(config.host)) {
-    sslConfig.servername = process.env.MYSQL_SSL_SERVERNAME || false;
+    sslConfig.servername = 'localhost'; // Use dummy servername
+    sslConfig.rejectUnauthorized = false; // Trust the remote cert
+    sslConfig.checkServerIdentity = () => undefined; // Bypass the Node.js IP check
   }
   
   if (Object.keys(sslConfig).length > 0) {

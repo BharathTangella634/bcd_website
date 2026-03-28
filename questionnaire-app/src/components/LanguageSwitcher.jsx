@@ -13,6 +13,8 @@ const languages = [
   { code: 'marathi', name: 'मराठी' },
   { code: 'gujarati', name: 'ગુજરાતી' },
   { code: 'punjabi', name: 'ਪੰਜਾਬੀ' },
+  { code: 'assamese', name: 'অসমীয়া' },
+  { code: 'odia', name: 'ଓଡ଼ିଆ' },
 ];
 
 function LanguageSwitcher() {

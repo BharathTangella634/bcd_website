@@ -1,12 +1,13 @@
 .language-switcher {
   display: flex;
+  justify-content: center; /* Center horizontally */
   align-items: center;
   gap: 8px;
   margin-bottom: 20px; /* Space below the switcher */
   padding: 8px 12px;
-  background-color: #f8f0ff; /* Light purple background */
+  background-color: #FDFCFC; /* Updated background color */
   border-radius: 8px;
-  border: 1px solid #e0cffc;
+  border: 1px solid #FDFCFC;
 }
 
 .language-switcher label {
@@ -18,7 +19,7 @@
 .language-switcher select {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #6200EE; /* Theme color */
+  color: #14868C; /* Theme teal color */
   background-color: transparent;
   border: none;
   border-radius: 4px;
@@ -28,5 +29,5 @@
 
 .language-switcher select:focus {
   outline: none;
-  box-shadow: 0 0 0 2px rgba(98, 0, 238, 0.2);
+  box-shadow: 0 0 0 2px rgba(20, 134, 140, 0.2);
 }
