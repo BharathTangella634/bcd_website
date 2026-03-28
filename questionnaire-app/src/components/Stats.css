@@ -271,7 +271,66 @@
 }
 
 @media (max-width: 768px) {
+  .stats-container {
+    margin: 1rem auto;
+    padding: 1rem;
+    border-top-width: 4px;
+  }
+
+  .stats-header-branding {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .stats-logos-container {
+    gap: 1.5rem;
+  }
+
+  .stats-logo {
+    height: 45px;
+  }
+  .stats-logo.iisc-img { height: 55px; }
+  .stats-logo.moe-img { height: 40px; }
+
+  .stats-main-title { font-size: 1.4rem; }
+  .stats-subtitle-container h2 { font-size: 1.6rem; }
+  .stats-subtitle-container p { font-size: 0.95rem; }
+
+  .summary-section { gap: 1rem; margin-bottom: 2rem; }
+  .summary-card { padding: 1.2rem; }
+  .big-number { font-size: 2.8rem; }
+  .summary-card h3 { font-size: 1rem; }
+
   .charts-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
+
+  .chart-card {
+    padding: 1rem;
+  }
+
+  .chart-wrapper {
+    height: 300px;
+  }
+  .pie-wrapper {
+    height: 350px;
+  }
+
+  .custom-legend {
+    gap: 10px;
+    margin-top: 5px;
+  }
+  
+  .legend-item {
+    font-size: 0.8rem;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .big-number { font-size: 2.4rem; }
+  .stats-subtitle-container h2 { font-size: 1.4rem; }
+  .chart-wrapper { height: 260px; }
+  .pie-wrapper { height: 320px; }
 }
