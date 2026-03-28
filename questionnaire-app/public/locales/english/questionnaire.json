@@ -5,7 +5,7 @@
       "iiscAlt": "IISC Logo"
     },
     "header": {
-      "title": "Breast Cancer Risk Questionnaire",
+      "title": "AI enabled Breast Cancer Risk Prediction Tool",
       "instructions": "Please answer the following questions to the best of your ability.",
       "mandatoryPre": "Fields marked with ",
       "mandatorySymbol": "*",

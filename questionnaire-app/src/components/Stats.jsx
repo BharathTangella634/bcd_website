@@ -211,7 +211,7 @@ const Stats = () => {
           <h3>Age Distribution</h3>
           <div className="chart-wrapper">
             <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={data.ageBins} margin={{ top: 20, right: 30, left: 20, bottom: 60 }}>
+                <BarChart data={data.ageBins} margin={{ top: 20, right: 30, left: 20, bottom: 80 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#14868C" strokeOpacity={0.1} />
                   <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#14868C', fontFamily: 'Poppins', fontWeight: 500 }} axisLine={{ stroke: '#14868C', strokeOpacity: 0.2 }} />
                   <YAxis tick={{ fontSize: 12, fill: '#14868C', fontFamily: 'Poppins', fontWeight: 500 }} axisLine={{ stroke: '#14868C', strokeOpacity: 0.2 }} />
@@ -237,7 +237,7 @@ const Stats = () => {
                    name: b.name === 'Shanmuga Hospital Limited' ? 'SHL' : 
                          b.name === 'Sri Chamundeshwari Medical College Hospital & Research Institute' ? 'SCMCHRI' : b.name
                  }))} 
-                 margin={{ top: 20, right: 30, left: 20, bottom: 80 }}
+                 margin={{ top: 20, right: 30, left: 20, bottom: 100 }}
                >
                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#14868C" strokeOpacity={0.1} />
                  <XAxis 

@@ -939,3 +939,132 @@
     border-left: 1px dashed #ddd;
     margin-top: 5px;
 }
+
+/* --- Added from Demo.css --- */
+/* Riskometer Gauge Styles */
+.riskometer-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  margin: 1.5rem auto;
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem 1.5rem 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.riskometer-gauge {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  overflow: hidden; /* Hide the bottom half */
+}
+
+.gauge-background {
+  position: absolute;
+  top: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 270deg,
+    #81C784 0deg,
+    #81C784 45deg,
+    #FFD54F 45deg,
+    #FFD54F 90deg,
+    #FFB74D 90deg,
+    #FFB74D 135deg,
+    #E57373 135deg,
+    #E57373 180deg,
+    transparent 180deg
+  );
+  mask: radial-gradient(farthest-side, transparent 70%, blue 71%);
+  -webkit-mask: radial-gradient(farthest-side, transparent 70%, blue 71%);
+}
+
+.riskometer-needle {
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 2px);
+  width: 4px;
+  height: 80px;
+  background: #333;
+  transform-origin: bottom center;
+  transform: rotate(-90deg); /* Start at No Risk (LEFT) */
+  transition: transform 1.5s ease-out;
+  border-radius: 4px;
+}
+
+.riskometer-center {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: #333;
+  border-radius: 50%;
+  border: 3px solid white;
+}
+
+.gauge-labels {
+  display: flex;
+  width: 100%;
+  max-width: 240px;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 0 5px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #6c757d;
+}
+
+.gauge-labels span {
+    flex: 1;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.gauge-labels span.active-level {
+    color: #14868C;
+    transform: scale(1.15);
+}
+
+.demo-result-header-centered {
+  text-align: center;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.demo-thank-you-msg {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.demo-risk-status-hero {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.risk-status-text {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #14868C;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.fade-in { animation: fadeIn 0.4s ease forwards; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

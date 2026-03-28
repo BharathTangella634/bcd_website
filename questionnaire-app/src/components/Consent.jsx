@@ -118,10 +118,12 @@ function Consent({ onAccept }) {
         <img src="/moe.png" alt={t('logos.moeAlt')} className="stats-logo moe-img" />
       </div>
 
+      {/* Use the 't' function to get the text */}
+      <h2 style={{ textAlign: "center", borderBottom: "none", paddingBottom: 0 }}>{t('mainTitle')}</h2>
+
       {/* --- ADD LANGUAGE SWITCHER HERE --- */}
       <LanguageSwitcher />
 
-      {/* Use the 't' function to get the text */}
       <h2>{t('title')}</h2>
 
       <div className="consent-header">
