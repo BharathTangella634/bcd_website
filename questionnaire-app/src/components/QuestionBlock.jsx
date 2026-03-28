@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { CheckCircle } from 'lucide-react';
 
 // Optimization: Extracted this component to apply React.memo.
 // The Questionnaire component renders many of these blocks.
@@ -133,6 +134,43 @@ const QuestionBlock = ({
         );
       case 'radio':
       default:
+        const englishAnswers = questionnaireDataEn[config.key]?.answers || [];
+        if (englishAnswers.includes('Yes') || englishAnswers.includes('No')) {
+           return (
+               <div className="mock-binary-icons" style={{ flexWrap: 'wrap' }}>
+                  {qData.answers.map((ans, i) => {
+                      const ansEn = englishAnswers[i];
+                      const isSelected = formData[qName] === ans;
+                      
+                      if (ansEn === 'Yes') {
+                          return (
+                              <label key={i} className={`binary-icon-box yes ${isSelected ? 'selected' : ''}`}>
+                                  <input type="radio" name={qName} value={ans} onChange={handleChange} checked={isSelected} className="hidden-radio" />
+                                  <CheckCircle size={24} />
+                                  <span>{ans}</span>
+                              </label>
+                          );
+                      } else if (ansEn === 'No') {
+                          return (
+                              <label key={i} className={`binary-icon-box no ${isSelected ? 'selected' : ''}`}>
+                                  <input type="radio" name={qName} value={ans} onChange={handleChange} checked={isSelected} className="hidden-radio" />
+                                  <div className="close-icon-wrap">✕</div>
+                                  <span>{ans}</span>
+                              </label>
+                          );
+                      } else {
+                          return (
+                              <label key={i} className={`mock-radio-label ${isSelected ? 'mock-selected' : ''}`}>
+                                <input type="radio" name={qName} value={ans} onChange={handleChange} checked={isSelected} className="hidden-radio" />
+                                <span>{ans}</span>
+                              </label>
+                          );
+                      }
+                  })}
+               </div>
+           );
+        }
+
         return (
           <div className="radio-group vertical">
             {qData.answers.map((ans, i) => (

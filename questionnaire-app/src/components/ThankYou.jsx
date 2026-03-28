@@ -6,7 +6,7 @@ import { Download, CheckCircle } from 'lucide-react';
 // --- MODIFICATION: Import the new JSON file ---
 import thankYouData from '../../public/locales/english/thankyou.json' with { type: 'json' };
 import { useTranslation } from 'react-i18next';
-import { useEffect } from 'react';   
+import { useEffect, useState } from 'react';   
 
 
 // Helper function to determine the risk level based on the score (Unchanged)
@@ -57,6 +57,39 @@ const getRiskLevelEn = (score) => {
 //     if (numScore >= 0.795) return "Be extra vigilant with breast exams every 4 months from at least 25 years of age and more frequent imaging as per your doctor's advice.";
 //     return null;
 // };
+
+const Riskometer = ({ riskLevel }) => {
+    const [needleRotation, setNeedleRotation] = useState(-90);
+    
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            const angles = {
+                "No Risk": -67.5,
+                "Low Risk": -22.5,
+                "Moderate Risk": 22.5,
+                "High Risk": 67.5
+            };
+            setNeedleRotation(angles[riskLevel] || 67.5);
+        }, 800);
+        return () => clearTimeout(timer);
+    }, [riskLevel]);
+
+    return (
+        <div className="riskometer-container fade-in">
+            <div className="riskometer-gauge">
+                <div className="gauge-background"></div>
+                <div className="riskometer-needle" style={{ transform: `rotate(${needleRotation}deg)` }}></div>
+                <div className="riskometer-center"></div>
+            </div>
+            <div className="gauge-labels">
+                <span className={riskLevel === "No Risk" ? "active-level" : ""}>No</span>
+                <span className={riskLevel === "Low Risk" ? "active-level" : ""}>Low</span>
+                <span className={riskLevel === "Moderate Risk" ? "active-level" : ""}>Mod</span>
+                <span className={riskLevel === "High Risk" ? "active-level" : ""}>High</span>
+            </div>
+        </div>
+    );
+};
 
 function ThankYou({ riskResult, formData, sessionId, formStructure, questionnaireData }) {
 
@@ -365,70 +398,33 @@ function ThankYou({ riskResult, formData, sessionId, formStructure, questionnair
     return (
     <div className="thank-you-overlay">
       <div className="thank-you-dialog">
-        {/* --- MODIFIED (but still commented out) ---
-        <img src="/tanuh.png" alt={thankYouData.logos.tanuhAlt} className="logo tanuh-logo" />
-        <img src="/IISc_logo.png" alt={thankYouData.logos.iiscAlt} className="logo iisc-logo" />
-        */}
-
         <button className="close-button" onClick={() => window.location.reload()}>&times;</button>
-        <div className="thank-you-header">
-          <CheckCircle className="success-icon" size={40} /> 
-          {/* --- MODIFIED --- */}
-          <h3>{tThankYou('title')}</h3>
+        
+        <div className="demo-result-header-centered">
+          <div className="thank-you-header">
+            <CheckCircle className="success-icon" size={48} /> 
+            <h3>{tThankYou('title')}</h3>
+          </div>
+          <p className="demo-thank-you-msg">{tThankYou('message')}</p>
+          
+          {isMale && (
+            <div className="male-disclaimer-container">
+              <p className="male-disclaimer-text">
+                {tThankYou('maleDisclaimer')}
+              </p>
+            </div>
+          )}
+          
+          {score !== null && !isMale && (
+            <div className="demo-risk-status-hero">
+              <h2 className="risk-status-text">{userRiskLevel}</h2> 
+            </div>
+          )}
         </div>
-        {/* --- MODIFIED --- */}
-        <p>{tThankYou('message')}</p>
-        
-        {isMale && (
-          <div className="male-disclaimer-container">
-            <p className="male-disclaimer-text">
-              {tThankYou('maleDisclaimer')}
-            </p>
-          </div>
-        )}
-        
-        {score !== null && !isMale && (
-          <div className="risk-result-container">
-            {/* --- MODIFIED --- */}
-            <p>{tThankYou('riskScoreLabel')}</p>
-            <h2 className="risk-score">{userRiskLevel}</h2> 
-          </div>
-        )}
 
-        {/* {score !== null && (
-          <div className="interpretation-container">
-            <h4>{tThankYou('interpretation.title')}</h4>
-            <table className="risk-interpretation-table">
-              <thead>
-                <tr>
-                  <th>{tThankYou('interpretation.headers.level')}</th>
-                  <th>{tThankYou('interpretation.headers.range')}</th>
-                  <th>{tThankYou('interpretation.headers.meaning')}</th>
-                  <th>{tThankYou('interpretation.headers.action')}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {riskInterpretationData.map((row, index) => (
-                  <tr 
-                    key={index} 
-                    className={row.level === userRiskLevel ? 'highlighted-risk-row' : ''}
-                  >
-                    <td data-label={tThankYou('interpretation.headers.level')}>{row.level}</td>
-                    <td data-label={tThankYou('interpretation.headers.range')}>{row.range}</td>
-                    <td data-label={tThankYou('interpretation.headers.meaning')}>{row.meaning}</td>
-                    <td data-label={tThankYou('interpretation.headers.action')}>{row.action}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            
-            <p className="disclaimer-text">
-              <span className="disclaimer-asterisk">{tThankYou('disclaimer.asterisk')}</span>
-              <strong>{tThankYou('disclaimer.title')}</strong>:
-              {' '}{tThankYou('disclaimer.text')}
-            </p>
-          </div>
-        )} */}
+        {score !== null && !isMale && (
+            <Riskometer riskLevel={userRiskLevelEn || userRiskLevel} />
+        )}
 
         {score !== null && !isMale && (() => {
             const highlightedRow = riskInterpretationData.find(
@@ -449,6 +445,12 @@ function ThankYou({ riskResult, formData, sessionId, formStructure, questionnair
                 </div>
             );
         })()}
+
+        <p className="disclaimer-text" style={{ textAlign: 'left', marginTop: '20px', marginBottom: '30px' }}>
+          <span className="disclaimer-asterisk">{tThankYou('disclaimer.asterisk')}</span>
+          <strong>{tThankYou('disclaimer.title')}</strong>:
+          {' '}{tThankYou('disclaimer.text')}
+        </p>
 
 
 

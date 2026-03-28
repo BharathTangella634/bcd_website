@@ -1,4 +1,5 @@
 {
+  "mainTitle": "AI enabled Breast Cancer Risk Prediction Tool",
   "title": "E-Consent",
   "logos": {
     "tanuhAlt": "TANUH Logo",
@@ -10,7 +11,7 @@
     "iecApproval": "IEC Approval"
   },
   "header": {
-    "studyTitle": "AI enabled Breast Cancer Screening Tool",
+    "studyTitle": "AI enabled Breast Cancer Risk Prediction Tool",
     "sponsor": "TANUH Foundation",
     "iecApproval": "Ethics committee approval received from Clinicom vide letter no: 02434 dated 13-Jan-2026"
   },
