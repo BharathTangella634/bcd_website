@@ -600,8 +600,11 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
       </div>
 
       <form className="questionnaire-container" onSubmit={handleSubmit} noValidate>
-        <img src="/tanuh.png" alt={t('ui.logos.tanuhAlt')} className="logo tanuh-logo" />
-        <img src="/IISc_logo.png" alt={t('ui.logos.iiscAlt')} className="logo iisc-logo" />
+        <div className="stats-logos-container">
+          <img src="/tanuh.png" alt={t('ui.logos.tanuhAlt')} className="stats-logo" />
+          <img src="/IISc_logo.png" alt={t('ui.logos.iiscAlt')} className="stats-logo iisc-img" />
+          <img src="/moe.png" alt={t('ui.logos.moeAlt')} className="stats-logo moe-img" />
+        </div>
         
         <div className="form-header">
           <h1>{t('ui.header.title')}</h1>

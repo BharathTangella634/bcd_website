@@ -3,11 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import { v4 as uuidv4 } from 'uuid';
 import { getPool } from '../mysql_explorer/db.js';
-// import questionnaireData from '../src/assets/questionnaire.json' with { type: 'json' };
-// import questionnaireData from './questionnaire.json' with { type: 'json' };
-
-// import questionnaireJson from '../src/assets/questionnaire.json' with { type: 'json' };
-import questionnaireJson from './questionnaire.json' with { type: 'json' };
+import questionnaireJson from '../public/locales/english/questionnaire.json' with { type: 'json' };
 
 
 const questionnaireData = questionnaireJson.questions; 
@@ -180,6 +176,141 @@ app.post('/api/submit', async (req, res) => {
         res.status(500).json({ success: false, message: 'Database submission failed' });
     } finally {
         if (connection) connection.release();
+    }
+});
+
+// === NEW ENDPOINT: Stats Dashboard ===
+app.get('/api/stats', async (req, res) => {
+    const pool = getPool();
+    try {
+        // 1. Total Subjects Captured (only those with a final score and from empanelled institutes)
+        const [totalRes] = await pool.query(`
+            SELECT COUNT(DISTINCT s.session_id) as total 
+            FROM session_table s
+            JOIN (
+                SELECT session_id, MAX(answer) as answer
+                FROM session_data_table 
+                WHERE question IN ('Institute Name', 'Enter the Hospital ID(If any, else leave):')
+                  AND answer NOT IN ('Other', 'Test')
+                  AND answer IS NOT NULL AND answer != ''
+                GROUP BY session_id
+            ) sd ON s.session_id = sd.session_id
+            WHERE s.snehita_lifetime_risk IS NOT NULL
+        `);
+        const totalSubjects = totalRes[0].total;
+
+        // NEW: Institutions Empanelled (from questionnaire JSON)
+        const allInstitutes = questionnaireJson.questions.Q45?.answers || [];
+        const institutionsEmpanelled = allInstitutes.filter(name => name !== 'Other' && name !== 'Test').length;
+
+        // 2. Bin by Risk (matching logic from getRiskLevel, filtered by institute)
+        const [riskRes] = await pool.query(`
+            SELECT 
+              SUM(CASE WHEN s.snehita_lifetime_risk < 0.4004 THEN 1 ELSE 0 END) as no_risk,
+              SUM(CASE WHEN s.snehita_lifetime_risk >= 0.4004 AND s.snehita_lifetime_risk < 0.574 THEN 1 ELSE 0 END) as low_risk,
+              SUM(CASE WHEN s.snehita_lifetime_risk >= 0.574 AND s.snehita_lifetime_risk < 0.795 THEN 1 ELSE 0 END) as moderate_risk,
+              SUM(CASE WHEN s.snehita_lifetime_risk >= 0.795 THEN 1 ELSE 0 END) as high_risk
+            FROM session_table s
+            JOIN (
+                SELECT session_id, MAX(answer) as answer
+                FROM session_data_table 
+                WHERE question IN ('Institute Name', 'Enter the Hospital ID(If any, else leave):')
+                  AND answer NOT IN ('Other', 'Test')
+                  AND answer IS NOT NULL AND answer != ''
+                GROUP BY session_id
+            ) sd ON s.session_id = sd.session_id
+            WHERE s.snehita_lifetime_risk IS NOT NULL
+        `);
+        const riskBins = [
+            { name: 'No Risk', value: Number(riskRes[0].no_risk) || 0 },
+            { name: 'Low Risk', value: Number(riskRes[0].low_risk) || 0 },
+            { name: 'Moderate Risk', value: Number(riskRes[0].moderate_risk) || 0 },
+            { name: 'High Risk', value: Number(riskRes[0].high_risk) || 0 }
+        ];
+
+        // 3. Bin by Institute (Stacked by Risk)
+        const [instituteRes] = await pool.query(`
+            SELECT 
+                sd.answer as institute,
+                SUM(CASE WHEN s.snehita_lifetime_risk < 0.4004 THEN 1 ELSE 0 END) as no_risk,
+                SUM(CASE WHEN s.snehita_lifetime_risk >= 0.4004 AND s.snehita_lifetime_risk < 0.574 THEN 1 ELSE 0 END) as low,
+                SUM(CASE WHEN s.snehita_lifetime_risk >= 0.574 AND s.snehita_lifetime_risk < 0.795 THEN 1 ELSE 0 END) as moderate,
+                SUM(CASE WHEN s.snehita_lifetime_risk >= 0.795 THEN 1 ELSE 0 END) as high
+            FROM session_table s
+            JOIN (
+                SELECT session_id, MAX(answer) as answer
+                FROM session_data_table 
+                WHERE question IN ('Institute Name', 'Enter the Hospital ID(If any, else leave):')
+                  AND answer NOT IN ('Other', 'Test')
+                  AND answer IS NOT NULL AND answer != ''
+                GROUP BY session_id
+            ) sd ON s.session_id = sd.session_id
+            WHERE s.snehita_lifetime_risk IS NOT NULL
+            GROUP BY sd.answer
+        `);
+        const hospitalBins = instituteRes.map(row => ({
+            name: row.institute === 'Universal' || !row.institute ? 'Universal' : row.institute,
+            no_risk: Number(row.no_risk) || 0,
+            low: Number(row.low) || 0,
+            moderate: Number(row.moderate) || 0,
+            high: Number(row.high) || 0
+        }));
+
+        // 4. Bin by Age Range (Stacked by Risk)
+        const [ageStackRes] = await pool.query(`
+            SELECT 
+                CASE 
+                    WHEN CAST(sd_age.answer AS UNSIGNED) BETWEEN 18 AND 29 THEN '18-29'
+                    WHEN CAST(sd_age.answer AS UNSIGNED) BETWEEN 30 AND 39 THEN '30-39'
+                    WHEN CAST(sd_age.answer AS UNSIGNED) BETWEEN 40 AND 49 THEN '40-49'
+                    WHEN CAST(sd_age.answer AS UNSIGNED) BETWEEN 50 AND 59 THEN '50-59'
+                    WHEN CAST(sd_age.answer AS UNSIGNED) BETWEEN 60 AND 69 THEN '60-69'
+                    ELSE '70+'
+                END as age_group,
+                SUM(CASE WHEN s.snehita_lifetime_risk < 0.4004 THEN 1 ELSE 0 END) as no_risk,
+                SUM(CASE WHEN s.snehita_lifetime_risk >= 0.4004 AND s.snehita_lifetime_risk < 0.574 THEN 1 ELSE 0 END) as low,
+                SUM(CASE WHEN s.snehita_lifetime_risk >= 0.574 AND s.snehita_lifetime_risk < 0.795 THEN 1 ELSE 0 END) as moderate,
+                SUM(CASE WHEN s.snehita_lifetime_risk >= 0.795 THEN 1 ELSE 0 END) as high
+            FROM session_table s
+            JOIN session_data_table sd_age ON s.session_id = sd_age.session_id
+            JOIN (
+                SELECT session_id, MAX(answer) as answer
+                FROM session_data_table 
+                WHERE question IN ('Institute Name', 'Enter the Hospital ID(If any, else leave):')
+                  AND answer NOT IN ('Other', 'Test')
+                  AND answer IS NOT NULL AND answer != ''
+                GROUP BY session_id
+            ) sd_inst ON s.session_id = sd_inst.session_id
+            WHERE s.snehita_lifetime_risk IS NOT NULL
+              AND sd_age.question='What is your current age? (Please enter a number - years)'
+            GROUP BY age_group
+            ORDER BY age_group ASC
+        `);
+        
+        // Ensure all bins exist even if database has no entries for a range
+        const ageLabels = ['18-29', '30-39', '40-49', '50-59', '60-69', '70+'];
+        const ageBins = ageLabels.map(label => {
+            const match = ageStackRes.find(r => r.age_group === label);
+            return {
+                name: label,
+                no_risk: Number(match?.no_risk) || 0,
+                low: Number(match?.low) || 0,
+                moderate: Number(match?.moderate) || 0,
+                high: Number(match?.high) || 0
+            };
+        });
+
+        res.status(200).json({ 
+            success: true, 
+            totalSubjects, 
+            institutionsEmpanelled,
+            riskBins, 
+            hospitalBins, 
+            ageBins 
+        });
+    } catch (err) {
+        console.error('❌ Error fetching stats:', err);
+        res.status(500).json({ success: false, message: 'Failed to fetch statistics.' });
     }
 });
 

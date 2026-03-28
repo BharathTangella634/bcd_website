@@ -11,7 +11,7 @@
 }
 
 .thank-you-dialog {
-  background: #ffffff;
+  background: #FDFCFC;
   border-radius: 16px;
   padding: 2rem 2.5rem;
   width: 90%;
@@ -67,7 +67,7 @@
 
 .risk-percentage {
   font-size: 2rem;
-  color: #6a1b9a;
+  color: #14868C;
   margin-top: 0.5rem;
 }
 
@@ -89,12 +89,12 @@
 }
 
 .ok-button {
-  background-color: #6a1b9a;
+  background-color: #14868C;
   color: white;
 }
 
 .ok-button:hover {
-  background-color: #4a0072;
+  background-color: #0e6a6f;
 }
 
 .download-button {
@@ -145,7 +145,7 @@
 }
 
 .thank-you-dialog {
-  background: #ffffff;
+  background: #FDFCFC;
   border-radius: 16px;
   padding: 30px 40px;
   width: 90%;
@@ -153,7 +153,7 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
-  border-top: 6px solid #6200EE;
+  border-top: 6px solid #14868C;
   animation: slideInUp 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   margin: auto; 
 }
@@ -192,7 +192,7 @@
 }
 
 .success-icon {
-  color: #6200EE !important;
+  color: #14868C !important;
 }
 
 .thank-you-dialog h3 {
@@ -210,11 +210,11 @@
 }
 
 .risk-result-container {
-  background: #f8f0ff;
+  background: #f0fafb;
   border-radius: 12px;
   padding: 20px;
   margin: 25px 0;
-  border: 1px solid #e0cffc;
+  border: 1px solid #cceef0;
 }
 
 .risk-result-container p {
@@ -228,7 +228,7 @@
 .risk-score {
   font-size: 2.8rem;
   font-weight: 700;
-  color: #6200EE;
+  color: #14868C;
   margin-top: 5px;
 }
 
@@ -253,7 +253,7 @@
 }
 
 .ok-button {
-  background-color: #6200EE;
+  background-color: #14868C;
   color: white;
   box-shadow: 0 4px 15px rgba(98, 0, 238, 0.2);
 
@@ -319,8 +319,8 @@
 }
 
 .risk-interpretation-table th {
-  background-color: #f8f0ff; 
-  color: #6200EE; 
+  background-color: #f0fafb; 
+  color: #14868C; 
   font-weight: 600;
   text-align: left;
 }
@@ -379,7 +379,7 @@
 }
 
 .thank-you-dialog {
-  background: #ffffff;
+  background: #FDFCFC;
   border-radius: 16px;
   padding: 30px 40px;
   width: 90%;
@@ -387,7 +387,7 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
-  border-top: 6px solid #6200EE;
+  border-top: 6px solid #14868C;
   animation: slideInUp 0.5s cubic-bezier(0.25, 1, 0.5, 1);
   margin: auto; /* Center vertically if space allows */
 }
@@ -426,7 +426,7 @@
 }
 
 .success-icon {
-  color: #6200EE !important;
+  color: #14868C !important;
 }
 
 .thank-you-dialog h3 {
@@ -444,11 +444,11 @@
 }
 
 .risk-result-container {
-  background: #f8f0ff;
+  background: #f0fafb;
   border-radius: 12px;
   padding: 20px;
   margin: 25px 0;
-  border: 1px solid #e0cffc;
+  border: 1px solid #cceef0;
 }
 
 .risk-result-container p {
@@ -462,7 +462,7 @@
 .risk-score {
   font-size: 2.8rem;
   font-weight: 700;
-  color: #6200EE;
+  color: #14868C;
   margin-top: 5px;
 }
 
@@ -502,16 +502,16 @@
 }
 
 .ok-button {
-  background-color: #6200EE;
+  background-color: #14868C;
   color: white;
-  box-shadow: 0 4px 15px rgba(98, 0, 238, 0.2);
+  box-shadow: 0 4px 15px rgba(20, 134, 140, 0.2);
   /* font-size: 1.5rem; */ /* Removed to match download button size */
 }
 
 .ok-button:hover {
-  background-color: #5a00d1;
+  background-color: #0e6a6f;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(98, 0, 238, 0.3);
+  box-shadow: 0 6px 20px rgba(20, 134, 140, 0.3);
 }
 
 .download-button {
@@ -568,8 +568,8 @@
 }
 
 .risk-interpretation-table th {
-  background-color: #f8f0ff; /* Light lavender header */
-  color: #6200EE; /* Purple text */
+  background-color: #f0fafb; /* Light teal header */
+  color: #14868C; /* Teal text */
   font-weight: 600;
   text-align: left;
 }
@@ -581,7 +581,7 @@
 
 /* Alternate row color for readability */
 .risk-interpretation-table tbody tr:nth-child(even) {
-  background-color: #fcfaff; 
+  background-color: #f8fdfd; 
 }
 
 /* Style for highlighting the user's risk row in the HTML table */
@@ -685,7 +685,7 @@
     left: 12px;
     width: calc(50% - 24px); /* (50% left padding) - (12px padding) */
     font-weight: 600;
-    color: #6200EE; /* Use theme color for label */
+    color: #14868C; /* Use theme color for label */
     text-align: left;
     vertical-align: top;
   }
@@ -787,14 +787,14 @@
     width: 210mm; /* A4 width */
     padding: 15mm; /* Document margin */
     box-sizing: border-box;
-    background-color: white; /* Ensure a white background for the PDF */
+    background-color: #FDFCFC; /* Ensure a white background for the PDF */
     color: #333; /* Standard text color */
     font-family: Arial, sans-serif; /* Use a common font for better rendering, actual language fonts will be used by the browser if available */
 }
 
 /* PDF Header and Title */
 .pdf-header {
-    border-bottom: 2px solid #6200EE;
+    border-bottom: 2px solid #14868C;
     padding-bottom: 10px;
     margin-bottom: 20px;
 }
@@ -816,8 +816,8 @@
 
 /* PDF Risk Score */
 .pdf-risk-result-container {
-    background: #f8f0ff;
-    border: 1px solid #e0cffc;
+    background: #f0fafb;
+    border: 1px solid #cceef0;
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 20px;
@@ -835,14 +835,14 @@
 .pdf-risk-score {
     font-size: 20pt;
     font-weight: 700;
-    color: #6200EE;
+    color: #14868C;
 }
 
 /* PDF Sections and Titles */
 .pdf-section-title {
     font-size: 12pt;
     font-weight: bold;
-    color: #6200EE;
+    color: #14868C;
     margin-top: 25px;
     margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
@@ -867,7 +867,7 @@
 }
 
 .pdf-risk-interpretation-table th {
-    background-color: #f8f0ff;
+    background-color: #f0fafb;
     color: #495057;
     font-weight: bold;
 }
@@ -914,7 +914,7 @@
     display: inline;
     font-size: 9pt;
     font-weight: bold;
-    color: #6200EE;
+    color: #14868C;
     margin-right: 5px;
 }
 

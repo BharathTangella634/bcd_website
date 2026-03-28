@@ -47,8 +47,10 @@
         },
         {
           "key": "Q45",
-          "type": "text",
-          "placeholder": "Universal"
+          "type": "select-plus-text",
+          "otherOptionId": "q45_other_specify",
+          "otherPlaceholder": "Please specify institute name",
+          "required": true
         },
         {
           "key": "Q47",
@@ -757,7 +759,12 @@
     },
     "Q45": {
       "question": "हॉस्पिटल आयडी लिहा (असल्यास, नसल्यास रिकामे ठेवा):",
-      "answers": []
+      "answers": [
+        "Shanmuga Hospital Limited",
+        "Sri Chamundeshwari Medical College Hospital & Research Institute",
+        "Other",
+        "Test"
+      ]
     },
     "Q46": {
       "question": "Preferred Language:",
@@ -770,6 +777,10 @@
         "पुरुष",
         "इतर"
       ]
+    },
+    "q45_other_specify": {
+      "question": "Institute Name (Other):",
+      "answers": []
     }
   }
 }
