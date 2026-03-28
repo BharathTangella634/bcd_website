@@ -300,6 +300,8 @@ app.get('/api/stats', async (req, res) => {
             };
         });
 
+        console.log(`📊 Stats Summary: Subjects:${totalSubjects}, Inst:${institutionsEmpanelled}, RiskBins:${riskBins.length}, HospBins:${hospitalBins.length}, AgeBins:${ageBins.length}`);
+
         res.status(200).json({ 
             success: true, 
             totalSubjects, 
@@ -309,8 +311,14 @@ app.get('/api/stats', async (req, res) => {
             ageBins 
         });
     } catch (err) {
-        console.error('❌ Error fetching stats:', err);
-        res.status(500).json({ success: false, message: 'Failed to fetch statistics.' });
+        console.error('❌ CRITICAL ERROR in /api/stats:', err);
+        // Provide more detail in the JSON response if in dev or just for debugging now
+        res.status(500).json({ 
+            success: false, 
+            message: 'Failed to fetch statistics.',
+            error: err.message,
+            stack: err.stack 
+        });
     }
 });
 
