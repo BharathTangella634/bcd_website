@@ -283,11 +283,19 @@ const Demo = () => {
         return (
             <div className="mock-gender-grid">
                 <div className={`gender-icon-box ${value === 'Female' ? 'selected pulse-teal' : ''}`}>
-                    <div className="icon">👩</div>
+                    <div className="icon">
+                        <svg viewBox="0 0 24 24" width="36" height="36" fill="#ec4899">
+                            <path d="M13.94 8.31C13.62 7.52 12.85 7 12 7s-1.62.52-1.94 1.31L7 16h3v6h4v-6h3l-3.06-7.69zM12 6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+                        </svg>
+                    </div>
                     <span>Female</span>
                 </div>
                 <div className={`gender-icon-box ${value === 'Male' ? 'selected pulse-teal' : ''}`}>
-                    <div className="icon">👨</div>
+                    <div className="icon">
+                        <svg viewBox="0 0 24 24" width="36" height="36" fill="#3b82f6">
+                            <path d="M14 7h-4c-1.1 0-2 .9-2 2v6h2v7h4v-7h2V9c0-1.1-.9-2-2-2zM12 6c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+                        </svg>
+                    </div>
                     <span>Male</span>
                 </div>
             </div>
