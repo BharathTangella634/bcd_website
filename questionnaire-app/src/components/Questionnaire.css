@@ -581,15 +581,15 @@
   height: 60px;
 }
 
-/* Binary Icons */
-.mock-binary-icons {
+/* Binary & Gender Icons */
+.mock-gender-grid, .mock-binary-icons {
   display: flex;
   gap: 1.5rem;
   justify-content: flex-start;
   margin: 1rem 0;
 }
 
-.binary-icon-box {
+.gender-icon-box, .binary-icon-box {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -604,7 +604,14 @@
   cursor: pointer;
 }
 
-.binary-icon-box span { font-weight: 700; color: #64748b; }
+.gender-icon-box .icon { font-size: 2.5rem; }
+
+.gender-icon-box.selected, .binary-icon-box.selected {
+  border-color: #14868C;
+  background: #f0fafb;
+}
+
+.binary-icon-box span, .gender-icon-box span { font-weight: 700; color: #64748b; }
 
 .binary-icon-box.selected {
   border-color: #14868C;
