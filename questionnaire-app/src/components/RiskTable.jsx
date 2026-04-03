@@ -4,28 +4,48 @@ import './RiskTable.css';
 const RiskTable = () => {
     const tableData = [
         {
-            category: 'Average Risk',
-            percentage: '~12% – 13%',
-            description: 'Most women fall in this group, with no major known risk indicators.',
-            nextSteps: 'Keep up your routine screening. Perform a self breast examination monthly and schedule a clinical breast examination annually.'
+            category: 'Average',
+            percentage: '≤ 14%',
+            description: (
+                <span><strong>The "Baseline" Category:</strong> Most women fall in this group, with no major known risk indicators.</span>
+            ),
+            nextSteps: [
+                'Routine screening'
+            ]
         },
         {
             category: 'Low-Intermediate',
-            percentage: '15% – 19%',
-            description: 'You have a few mild risk indicators that may be worth monitoring over time.',
-            nextSteps: 'Continue routine screening. Perform a self breast examination monthly and schedule a clinical breast examination every 6 months.'
+            percentage: '15% - 19%',
+            description: (
+                <span><strong>The "Watchful" Category:</strong> You have a few mild risk indicators that may be worth monitoring over time.</span>
+            ),
+            nextSteps: [
+                'Continue routine screening.',
+                'Yearly mammography based screening is mandatory.'
+            ]
         },
         {
-            category: 'Moderate Risk',
-            percentage: '20% – 24%',
-            description: 'You have stronger risk indicators that place you at a moderately elevated risk.',
-            nextSteps: 'Perform a self breast examination monthly. Schedule a clinical breast examination every 6 months and consult a physician for sono-mammography.'
+            category: 'Moderate',
+            percentage: '20% - 24%',
+            description: (
+                <span><strong>The "Increased" Category:</strong> You have at least one strong risk indicator that places you at a moderately elevated risk.</span>
+            ),
+            nextSteps: [
+                'Routine screening with yearly mammography being mandatory.',
+                'Supplemental screening is needed as well.'
+            ]
         },
         {
-            category: 'High Risk',
+            category: 'High',
             percentage: '≥ 25%',
-            description: 'You are at a higher than average risk and may need closer clinical attention.',
-            nextSteps: 'Perform a self breast examination monthly. Schedule an immediate clinical breast examination and consult a physician urgently for sono-mammography and further evaluation.'
+            description: (
+                <span><strong>The "Intensive" Category:</strong> You are at the highest risk and need closer clinical attention.</span>
+            ),
+            nextSteps: [
+                'Routine screening with yearly mammography being mandatory.',
+                'Additional annual screening including breast MRI is desirable.',
+                'Genetic counseling and relatives screening might be necessary.'
+            ]
         }
     ];
 
@@ -39,23 +59,29 @@ const RiskTable = () => {
                             <th>Risk Category</th>
                             <th>Lifetime Risk Percentage</th>
                             <th>Description</th>
-                            <th>Next steps</th>
+                            <th>Recommendation (next steps)</th>
                         </tr>
                     </thead>
                     <tbody>
                         {tableData.map((row, idx) => {
                             let bgColor = 'inherit';
-                            if (row.category.includes('High Risk')) bgColor = '#fb7185';
-                            else if (row.category.includes('Moderate Risk')) bgColor = '#fb923c';
+                            if (row.category.includes('High')) bgColor = '#fb7185';
+                            else if (row.category.includes('Moderate')) bgColor = '#fb923c';
                             else if (row.category.includes('Low-Intermediate')) bgColor = '#fde047';
-                            else if (row.category.includes('Average Risk')) bgColor = '#6ee7b7';
+                            else if (row.category.includes('Average')) bgColor = '#6ee7b7';
                             
                             return (
                                 <tr key={idx} style={{ backgroundColor: bgColor, color: '#111' }}>
                                     <td style={{ color: '#111', fontWeight: '500' }}>{row.category}</td>
-                                    <td style={{ color: '#111' }}>{row.percentage}</td>
+                                    <td style={{ color: '#111', whiteSpace: 'nowrap' }}>{row.percentage}</td>
                                     <td style={{ color: '#111' }}>{row.description}</td>
-                                    <td style={{ color: '#111' }}>{row.nextSteps}</td>
+                                    <td style={{ color: '#111' }}>
+                                        <ul style={{ margin: 0, paddingLeft: '1.2rem' }}>
+                                            {row.nextSteps.map((step, i) => (
+                                                <li key={i} style={{ marginBottom: '4px' }}>{step}</li>
+                                            ))}
+                                        </ul>
+                                    </td>
                                 </tr>
                             );
                         })}
