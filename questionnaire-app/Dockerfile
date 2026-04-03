@@ -103,6 +103,7 @@ RUN SKIP_FETCH=1 VITE_API_URL=$VITE_API_URL npm run build
 FROM httpd:2.4-alpine AS runtime
 
 RUN sed -i 's%^#\?LoadModule rewrite_module modules/mod_rewrite.so%LoadModule rewrite_module modules/mod_rewrite.so%' /usr/local/apache2/conf/httpd.conf \
+  && sed -i 's%^#\?LoadModule headers_module modules/mod_headers.so%LoadModule headers_module modules/mod_headers.so%' /usr/local/apache2/conf/httpd.conf \
   && sed -i 's%^#\?LoadModule proxy_module modules/mod_proxy.so%LoadModule proxy_module modules/mod_proxy.so%' /usr/local/apache2/conf/httpd.conf \
   && sed -i 's%^#\?LoadModule proxy_http_module modules/mod_proxy_http.so%LoadModule proxy_http_module modules/mod_proxy_http.so%' /usr/local/apache2/conf/httpd.conf \
   && sed -i 's/AllowOverride None/AllowOverride All/i' /usr/local/apache2/conf/httpd.conf \

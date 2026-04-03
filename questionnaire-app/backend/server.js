@@ -300,7 +300,37 @@ app.get('/api/stats', async (req, res) => {
             };
         });
 
-        console.log(`📊 Stats Summary: Subjects:${totalSubjects}, Inst:${institutionsEmpanelled}, RiskBins:${riskBins.length}, HospBins:${hospitalBins.length}, AgeBins:${ageBins.length}`);
+        // 5. Bin by Month (Stacked by Risk)
+        const [monthRes] = await pool.query(`
+            SELECT 
+                DATE_FORMAT(COALESCE(s.session_end_time, s.session_start_time), '%b %Y') as month_year,
+                DATE_FORMAT(COALESCE(s.session_end_time, s.session_start_time), '%Y-%m') as sort_key,
+                SUM(CASE WHEN s.snehita_lifetime_risk < 0.4004 THEN 1 ELSE 0 END) as no_risk,
+                SUM(CASE WHEN s.snehita_lifetime_risk >= 0.4004 AND s.snehita_lifetime_risk < 0.574 THEN 1 ELSE 0 END) as low,
+                SUM(CASE WHEN s.snehita_lifetime_risk >= 0.574 AND s.snehita_lifetime_risk < 0.795 THEN 1 ELSE 0 END) as moderate,
+                SUM(CASE WHEN s.snehita_lifetime_risk >= 0.795 THEN 1 ELSE 0 END) as high
+            FROM session_table s
+            JOIN (
+                SELECT session_id, MAX(answer) as answer
+                FROM session_data_table 
+                WHERE question IN ('Institute Name', 'Enter the Hospital ID(If any, else leave):')
+                  AND answer NOT IN ('Other', 'Test')
+                  AND answer IS NOT NULL AND answer != ''
+                GROUP BY session_id
+            ) sd_inst ON s.session_id = sd_inst.session_id
+            WHERE s.snehita_lifetime_risk IS NOT NULL
+            GROUP BY month_year, sort_key
+            ORDER BY sort_key ASC
+        `);
+        const monthBins = monthRes.map(row => ({
+            name: row.month_year,
+            no_risk: Number(row.no_risk) || 0,
+            low: Number(row.low) || 0,
+            moderate: Number(row.moderate) || 0,
+            high: Number(row.high) || 0
+        }));
+
+        console.log(`📊 Stats Summary: Subjects:${totalSubjects}, Inst:${institutionsEmpanelled}, RiskBins:${riskBins.length}, HospBins:${hospitalBins.length}, AgeBins:${ageBins.length}, MonthBins:${monthBins.length}`);
 
         res.status(200).json({ 
             success: true, 
@@ -308,7 +338,8 @@ app.get('/api/stats', async (req, res) => {
             institutionsEmpanelled,
             riskBins, 
             hospitalBins, 
-            ageBins 
+            ageBins,
+            monthBins
         });
     } catch (err) {
         console.error('❌ CRITICAL ERROR in /api/stats:', err);

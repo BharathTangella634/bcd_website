@@ -7,12 +7,13 @@ import { Download, CheckCircle } from 'lucide-react';
 import thankYouData from '../../public/locales/english/thankyou.json' with { type: 'json' };
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';   
+import RiskTable from './RiskTable';
 
 
 // Helper function to determine the risk level based on the score (Unchanged)
 const getRiskLevel = (score, t) => {
     const rows = t('interpretation.data', { returnObjects: true });
-    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["No Risk", "Low Risk", "Moderate Risk", "High Risk"];
+    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["Average Risk", "Low-Intermediate Risk", "Moderate Risk", "High Risk"];
 
     const numScore = parseFloat(score);
     if (isNaN(numScore)) return null;
@@ -40,8 +41,8 @@ const getRiskLevel = (score, t) => {
 const getRiskLevelEn = (score) => {
     const numScore = parseFloat(score);
     if (isNaN(numScore)) return null;
-    if (numScore < 0.4004) return "No Risk";
-    if (numScore >= 0.4004 && numScore < 0.574) return "Low Risk";
+    if (numScore < 0.4004) return "Average Risk";
+    if (numScore >= 0.4004 && numScore < 0.574) return "Low-Intermediate Risk";
     if (numScore >= 0.574 && numScore < 0.795) return "Moderate Risk";
     if (numScore >= 0.795) return "High Risk";
     return null;
@@ -64,8 +65,8 @@ const Riskometer = ({ riskLevel }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             const angles = {
-                "No Risk": -67.5,
-                "Low Risk": -22.5,
+                "Average Risk": -67.5,
+                "Low-Intermediate Risk": -22.5,
                 "Moderate Risk": 22.5,
                 "High Risk": 67.5
             };
@@ -82,8 +83,8 @@ const Riskometer = ({ riskLevel }) => {
                 <div className="riskometer-center"></div>
             </div>
             <div className="gauge-labels">
-                <span className={riskLevel === "No Risk" ? "active-level" : ""}>No</span>
-                <span className={riskLevel === "Low Risk" ? "active-level" : ""}>Low</span>
+                <span className={riskLevel === "Average Risk" ? "active-level" : ""}>Avg</span>
+                <span className={riskLevel === "Low-Intermediate Risk" ? "active-level" : ""}>Low-Int</span>
                 <span className={riskLevel === "Moderate Risk" ? "active-level" : ""}>Mod</span>
                 <span className={riskLevel === "High Risk" ? "active-level" : ""}>High</span>
             </div>
@@ -445,6 +446,12 @@ function ThankYou({ riskResult, formData, sessionId, formStructure, questionnair
                 </div>
             );
         })()}
+
+        {score !== null && !isMale && (
+            <div style={{ width: '100%' }}>
+              <RiskTable />
+            </div>
+        )}
 
         <p className="disclaimer-text" style={{ textAlign: 'left', marginTop: '20px', marginBottom: '30px' }}>
           <span className="disclaimer-asterisk">{tThankYou('disclaimer.asterisk')}</span>
