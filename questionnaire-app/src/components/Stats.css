@@ -374,6 +374,11 @@
     padding: 0.6rem;
     min-width: 140px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #FDFCFC !important;
+    height: max-content !important;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000 !important;
   }
 
   .tooltip-title {
@@ -393,9 +398,15 @@
   }
 
   .tooltip-total {
-    font-size: 0.8rem;
-    padding-top: 0.3rem;
-    margin-top: 0.2rem;
+    font-size: 0.85rem;
+    padding-top: 0.5rem;
+    margin-top: 0.4rem;
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100%;
+    background-color: #FDFCFC !important;
+    border-top: 2px solid rgba(20, 134, 140, 0.2) !important;
+    color: #14868C !important;
   }
 }
 
@@ -415,4 +426,10 @@
   .pie-wrapper {
     height: 320px;
   }
+}
+
+/* Force Recharts tooltip wrappers to be fully opaque on all devices */
+.recharts-tooltip-wrapper {
+  opacity: 1 !important;
+  z-index: 1000 !important;
 }
