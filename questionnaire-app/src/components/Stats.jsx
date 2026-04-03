@@ -35,7 +35,7 @@ const AnimatedCounter = ({ value, duration = 1500 }) => {
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
-    const riskOrder = ['Average Risk', 'Low-Intermediate Risk', 'Moderate Risk', 'High Risk'];
+    const riskOrder = ['Average Risk', 'Intermediate Risk', 'Moderate Risk', 'High Risk'];
     const sortedPayload = [...payload].sort((a, b) => 
       riskOrder.indexOf(a.name) - riskOrder.indexOf(b.name)
     );
@@ -65,7 +65,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
 const CustomLegend = (props) => {
   const { payload } = props;
-  const riskOrder = ['Average Risk', 'Low-Intermediate Risk', 'Moderate Risk', 'High Risk'];
+  const riskOrder = ['Average Risk', 'Intermediate Risk', 'Moderate Risk', 'High Risk'];
   const sortedPayload = [...payload].sort((a, b) => 
     riskOrder.indexOf(a.value) - riskOrder.indexOf(b.value)
   );
@@ -99,7 +99,7 @@ const Stats = () => {
           if (json.riskBins) {
             json.riskBins = json.riskBins.map(bin => {
               if (bin.name === 'No Risk') return { ...bin, name: 'Average Risk' };
-              if (bin.name === 'Low Risk') return { ...bin, name: 'Low-Intermediate Risk' };
+              if (bin.name === 'Low Risk' || bin.name === 'Low-Intermediate Risk') return { ...bin, name: 'Intermediate Risk' };
               return bin;
             });
           }
@@ -201,7 +201,7 @@ const Stats = () => {
                     let cellColor = '#3498db'; // Default
                     if (entry.name === 'High Risk') cellColor = '#fb7185'; 
                     if (entry.name === 'Moderate Risk') cellColor = '#fb923c';
-                    if (entry.name === 'Low-Intermediate Risk' || entry.name === 'Low Risk') cellColor = '#fde047';
+                    if (entry.name === 'Intermediate Risk' || entry.name === 'Low-Intermediate Risk' || entry.name === 'Low Risk') cellColor = '#fde047';
                     if (entry.name === 'Average Risk' || entry.name === 'No Risk') cellColor = '#6ee7b7';
                     
                     return <Cell key={`cell-${index}`} fill={cellColor} />;
@@ -225,10 +225,10 @@ const Stats = () => {
                   <YAxis tick={{ fontSize: 12, fill: '#14868C', fontFamily: 'Poppins', fontWeight: 500 }} axisLine={{ stroke: '#14868C', strokeOpacity: 0.2 }} />
                   <Tooltip content={<CustomTooltip />} />
                   <Legend verticalAlign="bottom" height={36} content={<CustomLegend />} />
-                  <Bar dataKey="no_risk" name="Average Risk" stackId="a" fill="#00ff00" />
-                  <Bar dataKey="low" name="Low-Intermediate Risk" stackId="a" fill="#ffff00" />
-                  <Bar dataKey="moderate" name="Moderate Risk" stackId="a" fill="#ffa500" />
-                  <Bar dataKey="high" name="High Risk" stackId="a" fill="#fa325c" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="no_risk" name="Average Risk" stackId="a" fill="#6ee7b7" />
+                  <Bar dataKey="low" name="Intermediate Risk" stackId="a" fill="#fde047" />
+                  <Bar dataKey="moderate" name="Moderate Risk" stackId="a" fill="#fb923c" />
+                  <Bar dataKey="high" name="High Risk" stackId="a" fill="#fb7185" radius={[4, 4, 0, 0]} />
                 </BarChart>
             </ResponsiveContainer>
           </div>
@@ -261,7 +261,7 @@ const Stats = () => {
                  <Tooltip content={<CustomTooltip />} />
                  <Legend verticalAlign="bottom" height={36} content={<CustomLegend />} />
                  <Bar dataKey="no_risk" name="Average Risk" stackId="a" fill="#6ee7b7" />
-                 <Bar dataKey="low" name="Low-Intermediate Risk" stackId="a" fill="#fde047" />
+                 <Bar dataKey="low" name="Intermediate Risk" stackId="a" fill="#fde047" />
                  <Bar dataKey="moderate" name="Moderate Risk" stackId="a" fill="#fb923c" />
                  <Bar dataKey="high" name="High Risk" stackId="a" fill="#fb7185" radius={[4, 4, 0, 0]} />
                </BarChart>
@@ -288,7 +288,7 @@ const Stats = () => {
                  <Tooltip content={<CustomTooltip />} />
                  <Legend verticalAlign="bottom" height={36} content={<CustomLegend />} />
                  <Bar dataKey="no_risk" name="Average Risk" stackId="a" fill="#6ee7b7" />
-                 <Bar dataKey="low" name="Low-Intermediate Risk" stackId="a" fill="#fde047" />
+                 <Bar dataKey="low" name="Intermediate Risk" stackId="a" fill="#fde047" />
                  <Bar dataKey="moderate" name="Moderate Risk" stackId="a" fill="#fb923c" />
                  <Bar dataKey="high" name="High Risk" stackId="a" fill="#fb7185" radius={[4, 4, 0, 0]} />
                </BarChart>

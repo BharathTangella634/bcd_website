@@ -13,7 +13,7 @@ import RiskTable from './RiskTable';
 // Helper function to determine the risk level based on the score (Unchanged)
 const getRiskLevel = (score, t) => {
     const rows = t('interpretation.data', { returnObjects: true });
-    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["Average Risk", "Low-Intermediate Risk", "Moderate Risk", "High Risk"];
+    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["Average Risk", "Intermediate Risk", "Moderate Risk", "High Risk"];
 
     const numScore = parseFloat(score);
     if (isNaN(numScore)) return null;
@@ -42,7 +42,7 @@ const getRiskLevelEn = (score) => {
     const numScore = parseFloat(score);
     if (isNaN(numScore)) return null;
     if (numScore < 0.4004) return "Average Risk";
-    if (numScore >= 0.4004 && numScore < 0.574) return "Low-Intermediate Risk";
+    if (numScore >= 0.4004 && numScore < 0.574) return "Intermediate Risk";
     if (numScore >= 0.574 && numScore < 0.795) return "Moderate Risk";
     if (numScore >= 0.795) return "High Risk";
     return null;
@@ -66,7 +66,7 @@ const Riskometer = ({ riskLevel }) => {
         const timer = setTimeout(() => {
             const angles = {
                 "Average Risk": -67.5,
-                "Low-Intermediate Risk": -22.5,
+                "Intermediate Risk": -22.5,
                 "Moderate Risk": 22.5,
                 "High Risk": 67.5
             };
@@ -84,7 +84,7 @@ const Riskometer = ({ riskLevel }) => {
             </div>
             <div className="gauge-labels">
                 <span className={riskLevel === "Average Risk" ? "active-level" : ""}>Avg</span>
-                <span className={riskLevel === "Low-Intermediate Risk" ? "active-level" : ""}>Low-Int</span>
+                <span className={riskLevel === "Intermediate Risk" ? "active-level" : ""}>Intermediate</span>
                 <span className={riskLevel === "Moderate Risk" ? "active-level" : ""}>Mod</span>
                 <span className={riskLevel === "High Risk" ? "active-level" : ""}>High</span>
             </div>

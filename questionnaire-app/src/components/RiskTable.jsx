@@ -14,7 +14,7 @@ const RiskTable = () => {
             ]
         },
         {
-            category: 'Low-Intermediate',
+            category: 'Intermediate',
             percentage: '15% - 19%',
             description: (
                 <span><strong>The "Watchful" Category:</strong> You have a few mild risk indicators that may be worth monitoring over time.</span>
@@ -67,7 +67,7 @@ const RiskTable = () => {
                             let bgColor = 'inherit';
                             if (row.category.includes('High')) bgColor = '#fb7185';
                             else if (row.category.includes('Moderate')) bgColor = '#fb923c';
-                            else if (row.category.includes('Low-Intermediate')) bgColor = '#fde047';
+                            else if (row.category.includes('Intermediate')) bgColor = '#fde047';
                             else if (row.category.includes('Average')) bgColor = '#6ee7b7';
                             
                             return (
