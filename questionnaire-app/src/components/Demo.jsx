@@ -35,7 +35,7 @@ const Demo = () => {
   // Helper from ThankYou.jsx
   const getRiskLevel = (score, tFunc) => {
     const rows = tFunc('interpretation.data', { returnObjects: true });
-    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["Average Risk", "Intermediate Risk", "Moderate Risk", "High Risk"];
+    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["Baseline Risk", "Evident Risk", "Significant Risk", "High Risk"];
     const numScore = parseFloat(score);
     if (isNaN(numScore)) return null;
     if (numScore < 0.4004) return levels[0];
@@ -237,9 +237,9 @@ const Demo = () => {
         const timer = setTimeout(() => {
             // Angles relative to a -90 to +90 arc
             const angles = {
-                "Average Risk": -67.5,
-                "Intermediate Risk": -22.5,
-                "Moderate Risk": 22.5,
+                "Baseline Risk": -67.5,
+                "Evident Risk": -22.5,
+                "Significant Risk": 22.5,
                 "High Risk": 67.5
             };
             setNeedleRotation(angles[riskLevel] || 67.5);
@@ -255,9 +255,9 @@ const Demo = () => {
                 <div className="riskometer-center"></div>
             </div>
             <div className="gauge-labels">
-                <span className={riskLevel === "Average Risk" ? "active-level" : ""}>Avg</span>
-                <span className={riskLevel === "Intermediate Risk" ? "active-level" : ""}>Intermediate</span>
-                <span className={riskLevel === "Moderate Risk" ? "active-level" : ""}>Mod</span>
+                <span className={riskLevel === "Baseline Risk" ? "active-level" : ""}>Baseline</span>
+                <span className={riskLevel === "Evident Risk" ? "active-level" : ""}>Evident</span>
+                <span className={riskLevel === "Significant Risk" ? "active-level" : ""}>Significant</span>
                 <span className={riskLevel === "High Risk" ? "active-level" : ""}>High</span>
             </div>
         </div>

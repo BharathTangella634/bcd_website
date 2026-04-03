@@ -13,7 +13,7 @@ import RiskTable from './RiskTable';
 // Helper function to determine the risk level based on the score (Unchanged)
 const getRiskLevel = (score, t) => {
     const rows = t('interpretation.data', { returnObjects: true });
-    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["Average Risk", "Intermediate Risk", "Moderate Risk", "High Risk"];
+    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["Baseline Risk", "Evident Risk", "Significant Risk", "High Risk"];
 
     const numScore = parseFloat(score);
     if (isNaN(numScore)) return null;
@@ -41,9 +41,9 @@ const getRiskLevel = (score, t) => {
 const getRiskLevelEn = (score) => {
     const numScore = parseFloat(score);
     if (isNaN(numScore)) return null;
-    if (numScore < 0.4004) return "Average Risk";
-    if (numScore >= 0.4004 && numScore < 0.574) return "Intermediate Risk";
-    if (numScore >= 0.574 && numScore < 0.795) return "Moderate Risk";
+    if (numScore < 0.4004) return "Baseline Risk";
+    if (numScore >= 0.4004 && numScore < 0.574) return "Evident Risk";
+    if (numScore >= 0.574 && numScore < 0.795) return "Significant Risk";
     if (numScore >= 0.795) return "High Risk";
     return null;
 };
@@ -65,9 +65,9 @@ const Riskometer = ({ riskLevel }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             const angles = {
-                "Average Risk": -67.5,
-                "Intermediate Risk": -22.5,
-                "Moderate Risk": 22.5,
+                "Baseline Risk": -67.5,
+                "Evident Risk": -22.5,
+                "Significant Risk": 22.5,
                 "High Risk": 67.5
             };
             setNeedleRotation(angles[riskLevel] || 67.5);
@@ -83,9 +83,9 @@ const Riskometer = ({ riskLevel }) => {
                 <div className="riskometer-center"></div>
             </div>
             <div className="gauge-labels">
-                <span className={riskLevel === "Average Risk" ? "active-level" : ""}>Avg</span>
-                <span className={riskLevel === "Intermediate Risk" ? "active-level" : ""}>Intermediate</span>
-                <span className={riskLevel === "Moderate Risk" ? "active-level" : ""}>Mod</span>
+                <span className={riskLevel === "Baseline Risk" ? "active-level" : ""}>Baseline</span>
+                <span className={riskLevel === "Evident Risk" ? "active-level" : ""}>Evident</span>
+                <span className={riskLevel === "Significant Risk" ? "active-level" : ""}>Significant</span>
                 <span className={riskLevel === "High Risk" ? "active-level" : ""}>High</span>
             </div>
         </div>

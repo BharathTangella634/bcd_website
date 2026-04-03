@@ -4,7 +4,7 @@ import './RiskTable.css';
 const RiskTable = () => {
     const tableData = [
         {
-            category: 'Average',
+            category: 'Baseline',
             percentage: '≤ 14%',
             description: (
                 <span><strong>The "Baseline" Category:</strong> Most women fall in this group, with no major known risk indicators.</span>
@@ -14,7 +14,7 @@ const RiskTable = () => {
             ]
         },
         {
-            category: 'Intermediate',
+            category: 'Evident',
             percentage: '15% - 19%',
             description: (
                 <span><strong>The "Watchful" Category:</strong> You have a few mild risk indicators that may be worth monitoring over time.</span>
@@ -25,7 +25,7 @@ const RiskTable = () => {
             ]
         },
         {
-            category: 'Moderate',
+            category: 'Significant',
             percentage: '20% - 24%',
             description: (
                 <span><strong>The "Increased" Category:</strong> You have at least one strong risk indicator that places you at a moderately elevated risk.</span>
@@ -66,9 +66,9 @@ const RiskTable = () => {
                         {tableData.map((row, idx) => {
                             let bgColor = 'inherit';
                             if (row.category.includes('High')) bgColor = '#fb7185';
-                            else if (row.category.includes('Moderate')) bgColor = '#fb923c';
-                            else if (row.category.includes('Intermediate')) bgColor = '#fde047';
-                            else if (row.category.includes('Average')) bgColor = '#6ee7b7';
+                            else if (row.category.includes('Significant')) bgColor = '#fb923c';
+                            else if (row.category.includes('Evident')) bgColor = '#fde047';
+                            else if (row.category.includes('Baseline')) bgColor = '#6ee7b7';
                             
                             return (
                                 <tr key={idx} style={{ backgroundColor: bgColor, color: '#111' }}>
