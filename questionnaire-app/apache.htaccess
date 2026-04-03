@@ -3,6 +3,9 @@
 # - Otherwise, rewrite to /index.html so the client-side router can handle it.
 
 <IfModule mod_headers.c>
+    # Allow embedding this app inside an iframe from these specific origins
+    Header always set Content-Security-Policy "frame-ancestors 'self' https://tanuh.ai https://app.tanuh.ai https://research.tanuh.ai"
+
     <FilesMatch "\.(html|htm)$">
         Header set Cache-Control "no-cache, no-store, must-revalidate"
         Header set Pragma "no-cache"
