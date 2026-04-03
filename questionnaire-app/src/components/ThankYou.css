@@ -941,11 +941,11 @@
 }
 
 /* --- Added from Demo.css --- */
-/* Riskometer Gauge Styles */
+/* Common Riskometer Styles - Keep parity with Demo.css */
 .riskometer-container {
   position: relative;
   width: 100%;
-  max-width: 320px;
+  max-width: 400px;
   margin: 1.5rem auto;
   background: white;
   border-radius: 16px;
@@ -959,29 +959,27 @@
 
 .riskometer-gauge {
   position: relative;
-  width: 200px;
-  height: 100px;
-  overflow: hidden; /* Hide the bottom half */
-}
+  width: 280px;
+  height: 140px;
+  overflow: hidden; 
+}/* Hide the bottom half */
 
 .gauge-background {
   position: absolute;
   top: 0;
-  width: 200px;
-  height: 200px;
+  width: 280px;
+  height: 280px;
   border-radius: 50%;
-  background: conic-gradient(
-    from 270deg,
-    #81C784 0deg,
-    #81C784 45deg,
-    #FFD54F 45deg,
-    #FFD54F 90deg,
-    #FFB74D 90deg,
-    #FFB74D 135deg,
-    #E57373 135deg,
-    #E57373 180deg,
-    transparent 180deg
-  );
+  background: conic-gradient(from 270deg, 
+      #6ee7b7 0deg, 
+      #6ee7b7 45deg,
+      #fde047 45deg, 
+      #fde047 90deg, 
+      #fb923c 90deg, 
+      #fb923c 135deg,
+      #fb7185 135deg, 
+      #fb7185 180deg, 
+      transparent 180deg);
   mask: radial-gradient(farthest-side, transparent 70%, blue 71%);
   -webkit-mask: radial-gradient(farthest-side, transparent 70%, blue 71%);
 }
@@ -991,7 +989,7 @@
   bottom: 0;
   left: calc(50% - 2px);
   width: 4px;
-  height: 80px;
+  height: 112px;
   background: #333;
   transform-origin: bottom center;
   transform: rotate(-90deg); /* Start at No Risk (LEFT) */

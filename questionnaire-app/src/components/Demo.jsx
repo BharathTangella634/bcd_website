@@ -19,6 +19,16 @@ const Demo = () => {
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [simulationKey, setSimulationKey] = useState(0); // For forcing restart
   const scrollRef = useRef(null);
+  const viewportRef = useRef(null);
+
+  useEffect(() => {
+    if (demoPhase === 'simulating' && focusedQuestion) {
+        const el = document.querySelector('.demo-question.focused');
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
+  }, [focusedQuestion, demoPhase]);
 
   const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -88,12 +98,14 @@ const Demo = () => {
       await sleep(1500);
 
       // Language Switcher Walkthrough
+      setFocusedQuestion('lang_support');
       setActiveHighlight(highlights.lang_support);
       setDemoPhase('lang-dropdown-open');
       await sleep(1500);
       setLangSelected('English');
       setDemoPhase('lang-selected');
       await sleep(1500);
+      setFocusedQuestion('consent-section');
       setActiveHighlight(highlights.consent);
 
       // Scroll Consent
@@ -438,7 +450,8 @@ const Demo = () => {
               <div className="demo-step-content fade-in consent-demo-view">
                 <div className="demo-step-nav-header demo-step-nav-header-consent">
                   <h2>AI enabled Breast Cancer Risk Prediction Tool</h2>
-                  <div className="demo-mock-lang">
+                  <div className="demo-mock-lang" style={{ position: 'relative' }}>
+                    {focusedQuestion === 'lang_support' && renderTooltip('lang_support')}
                     <div className="lang-trigger">
                          🌐 {langSelected || 'Select Language...'}
                     </div>

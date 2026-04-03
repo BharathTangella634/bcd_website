@@ -45,14 +45,14 @@ const RiskTable = () => {
                     <tbody>
                         {tableData.map((row, idx) => {
                             let bgColor = 'inherit';
-                            if (row.category.includes('High Risk')) bgColor = '#fa325c';
-                            else if (row.category.includes('Moderate Risk')) bgColor = '#ffa500';
-                            else if (row.category.includes('Low-Intermediate')) bgColor = '#ffff00';
-                            else if (row.category.includes('Average Risk')) bgColor = '#00ff00';
+                            if (row.category.includes('High Risk')) bgColor = '#fb7185';
+                            else if (row.category.includes('Moderate Risk')) bgColor = '#fb923c';
+                            else if (row.category.includes('Low-Intermediate')) bgColor = '#fde047';
+                            else if (row.category.includes('Average Risk')) bgColor = '#6ee7b7';
                             
                             return (
                                 <tr key={idx} style={{ backgroundColor: bgColor, color: '#111' }}>
-                                    <td style={{ color: '#111' }}><strong>{row.category}</strong></td>
+                                    <td style={{ color: '#111', fontWeight: '500' }}>{row.category}</td>
                                     <td style={{ color: '#111' }}>{row.percentage}</td>
                                     <td style={{ color: '#111' }}>{row.description}</td>
                                     <td style={{ color: '#111' }}>{row.nextSteps}</td>

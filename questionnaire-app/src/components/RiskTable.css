@@ -45,10 +45,17 @@
     line-height: 1.4;
 }
 
+.risk-table tr {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
 .risk-table tr:last-child td {
     border-bottom: none;
 }
 
-.risk-table tr:hover {
-    background-color: #f1f5f9;
+.risk-table tbody tr:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    position: relative;
+    z-index: 10;
 }
