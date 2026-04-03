@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import demoContent from '../../public/locales/english/demo_content.json' with { type: 'json' };
 import thankYouDataJson from '../../public/locales/english/thankyou.json' with { type: 'json' };
 import { CheckCircle, Info } from 'lucide-react';
+import RiskTable from './RiskTable';
 
 const Demo = () => {
   const { t, ready, i18n } = useTranslation(['consent', 'questionnaire', 'thankyou', 'demo']);
@@ -24,7 +25,7 @@ const Demo = () => {
   // Helper from ThankYou.jsx
   const getRiskLevel = (score, tFunc) => {
     const rows = tFunc('interpretation.data', { returnObjects: true });
-    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["No Risk", "Low Risk", "Moderate Risk", "High Risk"];
+    const levels = Array.isArray(rows) ? rows.map(r => r.level) : ["Average Risk", "Low-Intermediate Risk", "Moderate Risk", "High Risk"];
     const numScore = parseFloat(score);
     if (isNaN(numScore)) return null;
     if (numScore < 0.4004) return levels[0];
@@ -224,8 +225,8 @@ const Demo = () => {
         const timer = setTimeout(() => {
             // Angles relative to a -90 to +90 arc
             const angles = {
-                "No Risk": -67.5,
-                "Low Risk": -22.5,
+                "Average Risk": -67.5,
+                "Low-Intermediate Risk": -22.5,
                 "Moderate Risk": 22.5,
                 "High Risk": 67.5
             };
@@ -242,8 +243,8 @@ const Demo = () => {
                 <div className="riskometer-center"></div>
             </div>
             <div className="gauge-labels">
-                <span className={riskLevel === "No Risk" ? "active-level" : ""}>No</span>
-                <span className={riskLevel === "Low Risk" ? "active-level" : ""}>Low</span>
+                <span className={riskLevel === "Average Risk" ? "active-level" : ""}>Avg</span>
+                <span className={riskLevel === "Low-Intermediate Risk" ? "active-level" : ""}>Low-Int</span>
                 <span className={riskLevel === "Moderate Risk" ? "active-level" : ""}>Mod</span>
                 <span className={riskLevel === "High Risk" ? "active-level" : ""}>High</span>
             </div>
@@ -527,6 +528,10 @@ const Demo = () => {
                   ) : (
                     <p className="no-data-text">{tThankYou('noActionData', { defaultValue: 'No specific action available.' })}</p>
                   )}
+                </div>
+
+                <div style={{ display: 'flex', width: '100%' }}>
+                    <RiskTable />
                 </div>
 
                 <p className="disclaimer-text">

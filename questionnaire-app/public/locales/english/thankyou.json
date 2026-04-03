@@ -13,13 +13,13 @@
     },
     "data": [
       {
-        "level": "No Risk",
+        "level": "Average Risk",
         "range": "Below 0.4004",
         "meaning": "Your risk is lower than most women (below the 50th percentile).",
         "action": "Keep up with routine checkups, like yearly breast exams by a doctor from 30 years of age."
       },
       {
-        "level": "Low Risk",
+        "level": "Low-Intermediate Risk",
         "range": "0.4004 to 0.574",
         "meaning": "Your risk is average or slightly higher (50th to 75th percentile).",
         "action": "Consider breast exams every year from 30 years of age and talk to your doctor about prevention."
