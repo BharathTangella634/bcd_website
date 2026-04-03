@@ -199,10 +199,10 @@ const Stats = () => {
                 >
                   {data.riskBins.map((entry, index) => {
                     let cellColor = '#3498db'; // Default
-                    if (entry.name === 'High Risk') cellColor = '#fa325c'; 
-                    if (entry.name === 'Moderate Risk') cellColor = '#ffa500';
-                    if (entry.name === 'Low-Intermediate Risk' || entry.name === 'Low Risk') cellColor = '#ffff00';
-                    if (entry.name === 'Average Risk' || entry.name === 'No Risk') cellColor = '#00ff00';
+                    if (entry.name === 'High Risk') cellColor = '#fb7185'; 
+                    if (entry.name === 'Moderate Risk') cellColor = '#fb923c';
+                    if (entry.name === 'Low-Intermediate Risk' || entry.name === 'Low Risk') cellColor = '#fde047';
+                    if (entry.name === 'Average Risk' || entry.name === 'No Risk') cellColor = '#6ee7b7';
                     
                     return <Cell key={`cell-${index}`} fill={cellColor} />;
                   })}
@@ -260,10 +260,10 @@ const Stats = () => {
                  <YAxis tick={{ fontSize: 12, fill: '#14868C', fontFamily: 'Poppins', fontWeight: 500 }} axisLine={{ stroke: '#14868C', strokeOpacity: 0.2 }} />
                  <Tooltip content={<CustomTooltip />} />
                  <Legend verticalAlign="bottom" height={36} content={<CustomLegend />} />
-                 <Bar dataKey="no_risk" name="Average Risk" stackId="a" fill="#00ff00" />
-                 <Bar dataKey="low" name="Low-Intermediate Risk" stackId="a" fill="#ffff00" />
-                 <Bar dataKey="moderate" name="Moderate Risk" stackId="a" fill="#ffa500" />
-                 <Bar dataKey="high" name="High Risk" stackId="a" fill="#fa325c" radius={[4, 4, 0, 0]} />
+                 <Bar dataKey="no_risk" name="Average Risk" stackId="a" fill="#6ee7b7" />
+                 <Bar dataKey="low" name="Low-Intermediate Risk" stackId="a" fill="#fde047" />
+                 <Bar dataKey="moderate" name="Moderate Risk" stackId="a" fill="#fb923c" />
+                 <Bar dataKey="high" name="High Risk" stackId="a" fill="#fb7185" radius={[4, 4, 0, 0]} />
                </BarChart>
             </ResponsiveContainer>
           </div>
@@ -287,10 +287,10 @@ const Stats = () => {
                  <YAxis tick={{ fontSize: 12, fill: '#14868C', fontFamily: 'Poppins', fontWeight: 500 }} axisLine={{ stroke: '#14868C', strokeOpacity: 0.2 }} />
                  <Tooltip content={<CustomTooltip />} />
                  <Legend verticalAlign="bottom" height={36} content={<CustomLegend />} />
-                 <Bar dataKey="no_risk" name="Average Risk" stackId="a" fill="#00ff00" />
-                 <Bar dataKey="low" name="Low-Intermediate Risk" stackId="a" fill="#ffff00" />
-                 <Bar dataKey="moderate" name="Moderate Risk" stackId="a" fill="#ffa500" />
-                 <Bar dataKey="high" name="High Risk" stackId="a" fill="#fa325c" radius={[4, 4, 0, 0]} />
+                 <Bar dataKey="no_risk" name="Average Risk" stackId="a" fill="#6ee7b7" />
+                 <Bar dataKey="low" name="Low-Intermediate Risk" stackId="a" fill="#fde047" />
+                 <Bar dataKey="moderate" name="Moderate Risk" stackId="a" fill="#fb923c" />
+                 <Bar dataKey="high" name="High Risk" stackId="a" fill="#fb7185" radius={[4, 4, 0, 0]} />
                </BarChart>
             </ResponsiveContainer>
           </div>
