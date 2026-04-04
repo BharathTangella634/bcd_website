@@ -28,10 +28,10 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
 
   // State hooks
   const [formData, setFormData] = useState(() => ({
-    Q45: t('ui.defaults.q45')
+    Q45: ''
   }));
   const [formDataEn, setFormDataEn] = useState(() => ({
-    Q45: 'Universal'
+    Q45: ''
   }));
   const [validationErrors, setValidationErrors] = useState([]);
   const [showQ27VideoPrompt, setShowQ27VideoPrompt] = useState(false); 
@@ -65,8 +65,7 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     // Pre-fill the form with defaults from the translation file
     setFormData(prevData => ({
       ...prevData,
-      Q44: newId,
-      Q45: t('ui.defaults.q45') // Use default from JSON
+      Q44: newId
     }));
   }, [t]); // 't' dependency re-runs this if language changes
   
@@ -312,14 +311,8 @@ function Questionnaire({ onSubmit, isSubmitting, formStructure, questionnaireDat
     if (!dataToSubmitEn.Q44) {
         dataToSubmitEn.Q44 = randomPatientId;
     }
-    if (!dataToSubmitEn.Q45) {
-        dataToSubmitEn.Q45 = "Universal"; 
-    }
     if (!dataToSubmit.Q44) {
         dataToSubmit.Q44 = randomPatientId;
-    }
-    if (!dataToSubmit.Q45) {
-        dataToSubmit.Q45 = t('ui.defaults.q45'); 
     }
     const visibleRequiredKeys = getVisibleRequiredQuestions();
     const missingFields = visibleRequiredKeys.filter(key => {
