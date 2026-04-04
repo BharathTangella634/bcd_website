@@ -8,6 +8,7 @@ import thankYouData from '../../public/locales/english/thankyou.json' with { typ
 import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';   
 import RiskTable from './RiskTable';
+import mixpanel from 'mixpanel-browser';
 
 
 // Helper function to determine the risk level based on the score (Unchanged)
@@ -100,6 +101,10 @@ function ThankYou({ riskResult, formData, sessionId, formStructure, questionnair
     
     // // NEW: Ref to track the main question number across sections
     // const mainQuestionCounterRef = useRef(0);
+
+    useEffect(() => {
+        mixpanel.track('Page View', { page: 'Thank You' });
+    }, []);
 
     const score = riskResult !== null ? (parseFloat(riskResult) / 100).toFixed(2) : null;
     const isMale = formData?.Q47 === 'Male';

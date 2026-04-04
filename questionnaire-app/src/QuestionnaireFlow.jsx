@@ -1,9 +1,10 @@
 
-import React, { useState, lazy, Suspense } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Consent from './components/Consent';
 import './App.css';
 // --- NEW: Import the translation hook ---
 import { useTranslation } from 'react-i18next';
+import mixpanel from 'mixpanel-browser';
 
 import questionnaireDataEng from '../public/locales/english/questionnaire.json' with { type: 'json' };
 
@@ -12,6 +13,10 @@ const Questionnaire = lazy(() => import('./components/Questionnaire'));
 const ThankYou = lazy(() => import('./components/ThankYou'));
 
 function QuestionnaireFlow() {
+  useEffect(() => {
+    mixpanel.track('Page View', { page: 'Questionnaire Flow' });
+  }, []);
+
   const [appState, setAppState] = useState('consent');
   const [sessionId, setSessionId] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,6 +77,7 @@ function QuestionnaireFlow() {
         setSessionId(data.sessionId);
         setAppState('questionnaire');
         window.scrollTo(0, 0);
+        mixpanel.track('Started Questionnaire', { session_id: data.sessionId });
       } else {
         console.error('Session start failed:', data);
         alert(t('consent:errors.sessionStart', 'Could not start a session. Please try again.'));
@@ -112,6 +118,10 @@ function QuestionnaireFlow() {
       if (result.success) {
         setRiskResult(result.riskPercentage);
         setAppState('submitted');
+        mixpanel.track('Completed Questionnaire', { 
+          session_id: sessionId, 
+          risk_percentage: result.riskPercentage 
+        });
       } else {
         alert(t('questionnaire:ui.errors.validationAlert')); // Use translated error
         setFinalFormData(null);

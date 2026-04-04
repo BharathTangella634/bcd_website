@@ -18,7 +18,16 @@ import './index.css';
 
 // --- ADD THIS LINE ---
 import './i18n'; // Initializes i18next
+import mixpanel from 'mixpanel-browser';
 // --- END ADDITION ---
+
+mixpanel.init("1b5ae67adbef3181991d97bbe6ae2d46", {
+    debug: true,
+    track_pageview: true,
+    persistence: "localStorage",
+    autocapture: true,
+    record_sessions_percent: 100,
+});
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

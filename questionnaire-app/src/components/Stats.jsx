@@ -6,6 +6,7 @@ import {
 } from 'recharts';
 import './Stats.css';
 import RiskTable from './RiskTable';
+import mixpanel from 'mixpanel-browser';
 
 const AnimatedCounter = ({ value, duration = 1500 }) => {
   const [count, setCount] = useState(0);
@@ -91,6 +92,7 @@ const Stats = () => {
 
   useEffect(() => {
     const fetchStats = async () => {
+      mixpanel.track('Page View', { page: 'Stats' });
       try {
         const response = await fetch(`${API_URL}/api/stats`);
         if (!response.ok) throw new Error('Failed to load stats');

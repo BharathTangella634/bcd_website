@@ -96,11 +96,12 @@
 // export default Consent;
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Consent.css';
 // NEW: Import the translation hook and the switcher
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from './LanguageSwitcher'; // Import the new component
+import mixpanel from 'mixpanel-browser';
 
 function Consent({ onAccept }) {
   const [isChecked, setIsChecked] = useState(false);
@@ -108,6 +109,10 @@ function Consent({ onAccept }) {
   const { t } = useTranslation('consent');
   // alert(t('title'));
   // 't' is a function that takes a key and returns the text
+
+  useEffect(() => {
+    mixpanel.track('Page View', { page: 'Consent' });
+  }, []);
 
   return (
     <div className="consent-container">

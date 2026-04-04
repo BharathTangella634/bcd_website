@@ -5,6 +5,7 @@ import demoContent from '../../public/locales/english/demo_content.json' with { 
 import thankYouDataJson from '../../public/locales/english/thankyou.json' with { type: 'json' };
 import { CheckCircle, Info } from 'lucide-react';
 import RiskTable from './RiskTable';
+import mixpanel from 'mixpanel-browser';
 
 const Demo = () => {
   const { t, ready, i18n } = useTranslation(['consent', 'questionnaire', 'thankyou', 'demo']);
@@ -89,6 +90,7 @@ const Demo = () => {
     const checkMounted = () => isMounted;
 
     const runSimulation = async () => {
+      mixpanel.track('Page View', { page: 'Demo' });
       // Step 0: Consent & Language Initialization
       setDemoPhase('init');
       setCurrentStep(0);
@@ -195,6 +197,7 @@ const Demo = () => {
   }, [ready, isAutoPlaying, simulationKey]); 
 
   const handleRestart = () => {
+    mixpanel.track('Restarted Demo');
     setCurrentStep(0);
     setConsentChecked(false);
     setTypedValues({});
@@ -206,6 +209,7 @@ const Demo = () => {
   };
 
   const skipToResult = () => {
+    mixpanel.track('Skipped Demo to Result');
     setIsAutoPlaying(false);
     setCurrentStep(totalSteps - 1);
     setFocusedQuestion('risk-result');
