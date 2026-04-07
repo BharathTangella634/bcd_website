@@ -4,7 +4,7 @@
 
 <IfModule mod_headers.c>
     # Allow embedding this app inside an iframe from these specific origins
-    Header always set Content-Security-Policy "frame-ancestors 'self' https://tanuh.ai https://app.tanuh.ai https://research.tanuh.ai"
+    Header always set Content-Security-Policy "frame-ancestors 'self' https://tanuh.ai https://www.tanuh.ai https://app.tanuh.ai https://research.tanuh.ai"
 
     <FilesMatch "\.(html|htm)$">
         Header set Cache-Control "no-cache, no-store, must-revalidate"

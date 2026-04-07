@@ -59,4 +59,10 @@ else
 fi
 set +x
 
+# Redeploy Apache config
+if [[ -f "./deploy-apache.sh" ]]; then
+  echo "Updating Apache configuration on host..."
+  sudo ./deploy-apache.sh
+fi
+
 echo "Done."
