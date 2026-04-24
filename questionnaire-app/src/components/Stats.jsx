@@ -146,7 +146,7 @@ const Stats = () => {
           <img src="/IISc_logo.png" alt="IISc Logo" className="stats-logo iisc-img" />
         </div>
         <h1 className="stats-main-title">AI enabled Breast Cancer Risk Prediction Tool</h1>
-        <p className="stats-powered-by"><span style={{ color: '#e91e8c', fontWeight: 700 }}>PinkShieldAI</span></p>
+        <p className="stats-powered-by"><span style={{ color: '#e91e8c', fontWeight: 800, fontSize: '2.2rem', fontFamily: 'Poppins, sans-serif', letterSpacing: '1px', textTransform: 'uppercase' }}>PinkShieldAI</span></p>
         <div className="stats-subtitle-container">
           <h2>Analytics Dashboard</h2>
           <p>Real-time project progress dashboard</p>

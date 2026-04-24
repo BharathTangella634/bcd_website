@@ -442,9 +442,9 @@ const Demo = () => {
             <div className="demo-header-brands">
               <img src="/tanuh.png" alt="Tanuh" className="brand-logo" />
               <div className="brand-divider"></div>
-              <img src="/IISc_logo.png" alt="IISc" className="brand-logo" />
+              <img src="/MoE_Logo.svg" alt="MoE" className="brand-logo" />
               <div className="brand-divider"></div>
-              <img src="/moe.png" alt="MoE" className="brand-logo" />
+              <img src="/IISc_logo.png" alt="IISc" className="brand-logo" />
             </div>
           </div>
 
