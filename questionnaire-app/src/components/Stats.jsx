@@ -143,10 +143,10 @@ const Stats = () => {
         <div className="stats-logos-container">
           <img src="/tanuh.png" alt="TANUH Logo" className="stats-logo" />
           <img src="/MoE_Logo.svg" alt="Ministry of Education Logo" className="stats-logo moe-img" />
-          <img src="/IISc_Logo.png" alt="IISc Logo" className="stats-logo iisc-img" />
+          <img src="/IISc_logo.png" alt="IISc Logo" className="stats-logo iisc-img" />
         </div>
         <h1 className="stats-main-title">AI enabled Breast Cancer Risk Prediction Tool</h1>
-        <p className="stats-powered-by">In partnership with <strong>PinkShieldAI</strong></p>
+        <p className="stats-powered-by"><span style={{ color: '#e91e8c', fontWeight: 700 }}>PinkShieldAI</span></p>
         <div className="stats-subtitle-container">
           <h2>Analytics Dashboard</h2>
           <p>Real-time project progress dashboard</p>
