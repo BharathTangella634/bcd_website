@@ -88,6 +88,10 @@ const RiskTable = () => {
                     </tbody>
                 </table>
             </div>
+            <p className="risk-table-footnote">
+                <span style={{ color: '#e03944', fontWeight: 700 }}>*</span>{' '}
+                Risk categories shown in the Risk Prediction chart are based on the lifetime risk thresholds defined in this table.
+            </p>
         </div>
     );
 };

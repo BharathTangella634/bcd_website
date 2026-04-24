@@ -119,8 +119,8 @@ function Consent({ onAccept }) {
 
       <div className="stats-logos-container">
         <img src="/tanuh.png" alt={t('logos.tanuhAlt')} className="stats-logo" />
-        <img src="/IISc_logo.png" alt={t('logos.iiscAlt')} className="stats-logo iisc-img" />
-        <img src="/moe.png" alt={t('logos.moeAlt')} className="stats-logo moe-img" />
+        <img src="/MoE_Logo.svg" alt={t('logos.moeAlt')} className="stats-logo moe-img" />
+        <img src="/IISc_Logo.png" alt={t('logos.iiscAlt')} className="stats-logo iisc-img" />
       </div>
 
       {/* Use the 't' function to get the text */}

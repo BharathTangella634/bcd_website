@@ -55,7 +55,7 @@ const CustomTooltip = ({ active, payload, label }) => {
           ))}
         </div>
         <div className="tooltip-total">
-          <span>Total Captured:</span>
+          <span>Total Collected:</span>
           <span>{total}</span>
         </div>
       </div>
@@ -142,10 +142,11 @@ const Stats = () => {
       <div className="stats-header-branding">
         <div className="stats-logos-container">
           <img src="/tanuh.png" alt="TANUH Logo" className="stats-logo" />
-          <img src="/IISc_logo.png" alt="IISc Logo" className="stats-logo iisc-img" />
-          <img src="/moe.png" alt="Ministry of Education Logo" className="stats-logo moe-img" />
+          <img src="/MoE_Logo.svg" alt="Ministry of Education Logo" className="stats-logo moe-img" />
+          <img src="/IISc_Logo.png" alt="IISc Logo" className="stats-logo iisc-img" />
         </div>
         <h1 className="stats-main-title">AI enabled Breast Cancer Risk Prediction Tool</h1>
+        <p className="stats-powered-by">In partnership with <strong>PinkShieldAI</strong></p>
         <div className="stats-subtitle-container">
           <h2>Analytics Dashboard</h2>
           <p>Real-time project progress dashboard</p>
@@ -187,7 +188,7 @@ const Stats = () => {
       <div className="charts-grid">
         {/* Risk Bins */}
         <div className="chart-card full-width">
-          <h3>Risk Prediction</h3>
+          <h3>Risk Prediction <span style={{ color: '#e03944', fontWeight: 700 }}>*</span></h3>
           <div className="chart-wrapper pie-wrapper">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>

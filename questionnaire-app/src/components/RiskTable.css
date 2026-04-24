@@ -59,3 +59,11 @@
     position: relative;
     z-index: 10;
 }
+
+.risk-table-footnote {
+    margin-top: 10px;
+    font-size: 0.8rem;
+    color: #7f8c8d;
+    font-family: 'Poppins', sans-serif;
+    padding: 0 4px;
+}
