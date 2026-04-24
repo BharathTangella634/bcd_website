@@ -188,7 +188,7 @@ const Stats = () => {
       <div className="charts-grid">
         {/* Risk Bins */}
         <div className="chart-card full-width">
-          <h3>Risk Prediction <span style={{ color: '#e03944', fontWeight: 700 }}>*</span></h3>
+          <h3>Risk Prediction <a href="#risk-categories-table" style={{ color: '#e03944', fontWeight: 700, textDecoration: 'none' }}>*</a></h3>
           <div className="chart-wrapper pie-wrapper">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>

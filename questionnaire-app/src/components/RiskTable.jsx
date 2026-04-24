@@ -50,7 +50,7 @@ const RiskTable = () => {
     ];
 
     return (
-        <div className="risk-table-container fade-in">
+        <div id="risk-categories-table" className="risk-table-container fade-in">
             <h4 className="risk-table-title">Risk Categories Reference</h4>
             <div className="risk-table-wrapper">
                 <table className="risk-table">
