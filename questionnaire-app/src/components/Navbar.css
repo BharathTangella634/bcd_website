@@ -43,6 +43,10 @@
   object-fit: contain;
 }
 
+.logo-img.iisc-logo {
+  mix-blend-mode: multiply;
+}
+
 .navbar-tabs {
   display: flex;
   gap: 1.5rem;
