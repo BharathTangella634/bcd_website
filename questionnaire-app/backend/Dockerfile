@@ -18,11 +18,7 @@
 
 # Backend Dockerfile
 
-
-
-
-
-FROM node:20-alpine
+FROM node:22-alpine
 
 WORKDIR /app
 
@@ -35,7 +31,6 @@ RUN npm install --omit=dev --no-audit --no-fund
 COPY backend ./backend
 COPY mysql_explorer ./mysql_explorer
 COPY public ./public
-COPY *.pem ./
 
 # ✅ Expose backend port
 EXPOSE 3001

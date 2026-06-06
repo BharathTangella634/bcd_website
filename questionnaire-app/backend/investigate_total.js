@@ -1,7 +1,7 @@
 import { getPool } from '../mysql_explorer/db.js';
 
 async function investigate() {
-    const pool = getPool();
+    const pool = await getPool();
     try {
         const [rows] = await pool.query(`
             SELECT sd.question, sd.answer, COUNT(DISTINCT s.session_id) as c

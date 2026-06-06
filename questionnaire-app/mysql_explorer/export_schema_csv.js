@@ -22,7 +22,7 @@ function csvEscape(value) {
 }
 
 async function fetchSchema() {
-  const pool = getPool();
+  const pool = await getPool();
   const sql = `
     SELECT 
       c.TABLE_SCHEMA AS schema_name,

@@ -5,7 +5,7 @@
 import { getPool, closePool } from '../mysql_explorer/db.js';
 
 async function viewData() {
-    const pool = getPool();
+    const pool = await getPool();
     console.log('✅ Connecting to the database to fetch data...');
 
     try {

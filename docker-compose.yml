@@ -34,7 +34,9 @@ services:
     ports:
       - "3001:3001"
     env_file:
-      - ./questionnaire-app/backend/.env   # ✅ your existing backend .env file
+      - ./questionnaire-app/backend/.env
+    volumes:
+      - ./questionnaire-app/gcp-service-account.json:/app/gcp-service-account.json:ro
     networks:
       - tanuhnet
     restart: always

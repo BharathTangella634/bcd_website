@@ -13,6 +13,7 @@
     "fetch:questionnaire": "echo 'scripts/fetch_questionnaire.js not found'"
   },
   "dependencies": {
+    "@google-cloud/cloud-sql-connector": "^1.11.1",
     "dotenv": "^16.4.5",
     "html2canvas": "^1.4.1",
     "i18next": "^25.6.0",

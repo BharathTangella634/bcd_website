@@ -27,6 +27,9 @@ pnpm-debug.log*
 .env.*
 !.env.example
 
+# GCP credentials
+gcp-service-account.json
+
 # OS and editor folders/files
 .DS_Store
 .idea/
