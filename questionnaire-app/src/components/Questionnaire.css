@@ -233,12 +233,10 @@
   background-color: #FDFCFC;
   border-radius: 16px;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
-  padding: 30px 40px 40px;
-  max-width: 800px;
-  width: 100%;
+  padding: 30px clamp(20px, 4vw, 40px) 40px;
+  width: 90%;
   border: 1px solid rgba(0, 0, 0, 0.05); border-top: 6px solid #14868C;
-  /* NEW: Add margin to prevent overlap with fixed progress bar */
-  margin-top: 70px; /* Adjust if progress bar height changes */
+  margin-top: 70px;
 }
 
 .form-header {

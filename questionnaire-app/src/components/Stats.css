@@ -1,7 +1,7 @@
 .stats-container {
-  max-width: 1000px;
+  width: 90%;
   margin: 2rem auto;
-  padding: 2rem;
+  padding: 2rem clamp(1rem, 3vw, 2rem);
   background: #FDFCFC;
   min-height: calc(100vh - 80px);
   /* Account for navbar */

@@ -106,9 +106,8 @@
   background: #FDFCFC;
   border-radius: 16px;
   box-shadow: 0 12px 50px -10px rgba(20, 134, 140, 0.15);
-  padding: 40px 50px;
-  max-width: 800px;
-  width: 100%;
+  padding: 40px clamp(20px, 5vw, 50px);
+  width: 90%;
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-top: 6px solid #14868C;
   animation: fadeIn 0.5s ease-out;

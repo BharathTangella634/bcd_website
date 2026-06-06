@@ -383,7 +383,6 @@
   border-radius: 16px;
   padding: 30px 40px;
   width: 90%;
-  max-width: 650px; /* Increased width to accommodate table */
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
   text-align: center;
   position: relative;
