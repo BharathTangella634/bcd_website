@@ -19,16 +19,16 @@ steps:
     args:
       - '-c'
       - |
-        for i in $(seq 1 12); do
-          STATUS=$(gcloud compute ssh tanuh-bcd-vm \
+        for i in $$(seq 1 12); do
+          gcloud compute ssh tanuh-bcd-vm \
             --zone=asia-south1-c --project=$PROJECT_ID \
             --command="curl -sf http://localhost:3000/health && curl -sf http://localhost:3001/api/stats | head -c 20" \
-            --ssh-flag="-o StrictHostKeyChecking=no" 2>/dev/null)
-          if [ $? -eq 0 ]; then
+            --ssh-flag="-o StrictHostKeyChecking=no" 2>/dev/null
+          if [ $$? -eq 0 ]; then
             echo "Health check passed"
             exit 0
           fi
-          echo "Attempt $i/12 - waiting 10s..."
+          echo "Attempt $$i/12 - waiting 10s..."
           sleep 10
         done
         echo "Health check failed after 2 minutes"
@@ -52,9 +52,9 @@ steps:
     args:
       - '-c'
       - |
-        IMAGE_NAME="tanuh-bcd-boot-${SHORT_SHA}-$(date +%Y%m%d%H%M%S)"
-        echo "$IMAGE_NAME" > /workspace/image_name.txt
-        gcloud compute images create "$IMAGE_NAME" \
+        _IMG="tanuh-bcd-boot-${SHORT_SHA}-$$(date +%Y%m%d%H%M%S)"
+        echo "$$_IMG" > /workspace/image_name.txt
+        gcloud compute images create "$$_IMG" \
           --source-disk=tanuh-bcd-vm \
           --source-disk-zone=asia-south1-c \
           --project=$PROJECT_ID \
@@ -78,13 +78,13 @@ steps:
     args:
       - '-c'
       - |
-        IMAGE_NAME=$(cat /workspace/image_name.txt)
-        TEMPLATE_NAME="tanuh-bcd-tmpl-${SHORT_SHA}-$(date +%Y%m%d%H%M%S)"
-        echo "$TEMPLATE_NAME" > /workspace/template_name.txt
+        _IMG=$$(cat /workspace/image_name.txt)
+        _TMPL="tanuh-bcd-tmpl-${SHORT_SHA}-$$(date +%Y%m%d%H%M%S)"
+        echo "$$_TMPL" > /workspace/template_name.txt
 
-        gcloud compute instance-templates create "$TEMPLATE_NAME" \
+        gcloud compute instance-templates create "$$_TMPL" \
           --machine-type=e2-small \
-          --image="$IMAGE_NAME" \
+          --image="$$_IMG" \
           --boot-disk-size=10GB \
           --boot-disk-type=pd-balanced \
           --tags=http-server,https-server \
@@ -99,15 +99,15 @@ steps:
     args:
       - '-c'
       - |
-        TEMPLATE_NAME=$(cat /workspace/template_name.txt)
+        _TMPL=$$(cat /workspace/template_name.txt)
 
         gcloud compute instance-groups managed set-instance-template tanuh-bcd-mig \
-          --template="$TEMPLATE_NAME" \
+          --template="$$_TMPL" \
           --zone=asia-south1-c \
           --project=$PROJECT_ID
 
         gcloud compute instance-groups managed rolling-action start-update tanuh-bcd-mig \
-          --version=template="$TEMPLATE_NAME" \
+          --version=template="$$_TMPL" \
           --zone=asia-south1-c \
           --max-surge=1 \
           --max-unavailable=0 \
@@ -120,15 +120,13 @@ steps:
     args:
       - '-c'
       - |
-        CURRENT_TEMPLATE=$(cat /workspace/template_name.txt)
-
         echo "Cleaning up old boot images (keeping last 3)..."
         gcloud compute images list --project=$PROJECT_ID \
           --filter="name~tanuh-bcd-boot" \
           --sort-by=~creationTimestamp \
           --format="value(name)" | tail -n +4 | while read img; do
-          echo "Deleting image: $img"
-          gcloud compute images delete "$img" --project=$PROJECT_ID --quiet || true
+          echo "Deleting image: $$img"
+          gcloud compute images delete "$$img" --project=$PROJECT_ID --quiet || true
         done
 
         echo "Cleaning up old instance templates (keeping last 3)..."
@@ -136,8 +134,8 @@ steps:
           --filter="name~tanuh-bcd-tmpl" \
           --sort-by=~creationTimestamp \
           --format="value(name)" | tail -n +4 | while read tmpl; do
-          echo "Deleting template: $tmpl"
-          gcloud compute instance-templates delete "$tmpl" --project=$PROJECT_ID --quiet || true
+          echo "Deleting template: $$tmpl"
+          gcloud compute instance-templates delete "$$tmpl" --project=$PROJECT_ID --quiet || true
         done
 
 options:
