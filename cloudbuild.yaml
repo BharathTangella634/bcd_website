@@ -9,7 +9,8 @@ steps:
         gcloud compute ssh tanuh-bcd-vm \
           --zone=asia-south1-c \
           --project=$PROJECT_ID \
-          --command="cd ~/tanuh_website && git fetch origin main && git reset --hard origin/main && chmod +x dc-rebuild.sh && ./dc-rebuild.sh" \
+          --tunnel-through-iap \
+          --command="sudo bash -c 'cd /app/tanuh_website && git fetch origin main && git reset --hard origin/main && chmod +x dc-rebuild.sh && ./dc-rebuild.sh'" \
           --ssh-flag="-o StrictHostKeyChecking=no"
 
   # 2. Wait for Docker containers to stabilize
@@ -22,6 +23,7 @@ steps:
         for i in $$(seq 1 12); do
           gcloud compute ssh tanuh-bcd-vm \
             --zone=asia-south1-c --project=$PROJECT_ID \
+            --tunnel-through-iap \
             --command="curl -sf http://localhost:3000/health && curl -sf http://localhost:3001/api/stats | head -c 20" \
             --ssh-flag="-o StrictHostKeyChecking=no" 2>/dev/null
           if [ $$? -eq 0 ]; then
