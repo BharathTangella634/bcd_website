@@ -1,8 +1,12 @@
 name: Deploy to VM
 
+# Deployment is now handled by Cloud Build (cloudbuild.yaml).
+# This workflow is kept for reference but disabled.
+# Cloud Build triggers on push to main, deploys to VM, creates a new
+# machine image + instance template, and rolling-updates the MIG.
+
 on:
-  push:
-    branches: [ main ]   # or 'master', depending on your default branch
+  workflow_dispatch: # Manual trigger only — Cloud Build handles auto-deploy
 
 jobs:
   deploy:
