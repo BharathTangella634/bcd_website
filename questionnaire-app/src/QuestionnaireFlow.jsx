@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react';
 import Consent from './components/Consent';
 import './App.css';
 // --- NEW: Import the translation hook ---
@@ -13,16 +13,32 @@ const Questionnaire = lazy(() => import('./components/Questionnaire'));
 const ThankYou = lazy(() => import('./components/ThankYou'));
 
 function QuestionnaireFlow() {
-  useEffect(() => {
-    mixpanel.track('Page View', { page: 'Questionnaire Flow' });
-  }, []);
-
   const [appState, setAppState] = useState('consent');
   const [sessionId, setSessionId] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [riskResult, setRiskResult] = useState(null);
   const [finalFormData, setFinalFormData] = useState(null);
+  const [hospitalList, setHospitalList] = useState(null);
   const API_URL = (import.meta.env.VITE_API_URL || '').replace(/^["'](.+)["']$/, '$1');
+
+  useEffect(() => {
+    mixpanel.track('Page View', { page: 'Questionnaire Flow' });
+  }, []);
+
+  useEffect(() => {
+    const fetchHospitals = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/hospitals`);
+        const data = await res.json();
+        if (data.success && data.hospitals) {
+          setHospitalList([...data.hospitals, 'Other', 'Test']);
+        }
+      } catch (e) {
+        console.error('Failed to fetch hospitals:', e);
+      }
+    };
+    fetchHospitals();
+  }, [API_URL]);
 
   const safeFetch = async (url, options) => {
     let res;
@@ -59,32 +75,50 @@ function QuestionnaireFlow() {
   // We use the 't' function with the namespace prefix
   const formStructure = t('questionnaire:formStructure', { returnObjects: true });
   const questionnaireData = t('questionnaire:questions', { returnObjects: true });
-  const questionnaireDataEn = questionnaireDataEng.questions;
+  const questionnaireDataEnBase = questionnaireDataEng.questions;
   const formStructureEn = questionnaireDataEng.formStructure;
   const questionnaireDataEngRaw = questionnaireDataEng;
+
+  const questionnaireDataEn = useMemo(() => {
+    if (!hospitalList || !questionnaireDataEnBase) return questionnaireDataEnBase;
+    return { ...questionnaireDataEnBase, Q45: { ...questionnaireDataEnBase.Q45, answers: hospitalList } };
+  }, [questionnaireDataEnBase, hospitalList]);
+
+  const mergedQuestionnaireData = useMemo(() => {
+    if (!hospitalList || !questionnaireData) return questionnaireData;
+    return { ...questionnaireData, Q45: { ...questionnaireData.Q45, answers: hospitalList } };
+  }, [questionnaireData, hospitalList]);
   
   // --- END MODIFICATION ---
 
   const { i18n } = useTranslation();
 
 
-  const handleConsent = async () => {
+  const handleConsent = async ({ file } = {}) => {
     try {
       console.log(`Starting session via: ${API_URL}/api/session/start`);
       const data = await safeFetch(`${API_URL}/api/session/start`, { method: 'POST' });
-      
+
       if (data.success && data.sessionId) {
         setSessionId(data.sessionId);
         setAppState('questionnaire');
         window.scrollTo(0, 0);
         mixpanel.track('Started Questionnaire', { session_id: data.sessionId });
+
+        if (file) {
+          const formData = new FormData();
+          formData.append('file', file);
+          fetch(`${API_URL}/api/session/${data.sessionId}/consent`, {
+            method: 'POST',
+            body: formData,
+          }).catch(err => console.error('Consent upload failed (non-blocking):', err));
+        }
       } else {
         console.error('Session start failed:', data);
         alert(t('consent:errors.sessionStart', 'Could not start a session. Please try again.'));
       }
     } catch (error) {
       console.error('Error starting session:', error);
-      // Enhanced diagnostic info
       const diagnosticMsg = `Error: ${error.message}. API_URL: "${API_URL}".`;
       console.error(diagnosticMsg);
       alert(`${t('consent:errors.sessionConnect', 'Could not connect to the server to start a session.')}\n\nTechnical details: ${error.message}`);
@@ -157,7 +191,7 @@ function QuestionnaireFlow() {
             isSubmitting={isSubmitting}
             // Pass the loaded data down
             formStructure={formStructure}
-            questionnaireData={questionnaireData}
+            questionnaireData={mergedQuestionnaireData}
             questionnaireDataEn={questionnaireDataEn}
           />
         )}

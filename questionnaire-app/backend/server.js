@@ -1,9 +1,14 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import multer from 'multer';
 import { v4 as uuidv4 } from 'uuid';
+import { Storage } from '@google-cloud/storage';
 import { getPool } from '../mysql_explorer/db.js';
 import questionnaireJson from '../public/locales/english/questionnaire.json' with { type: 'json' };
+
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
+const GCS_BUCKET = process.env.GCS_BUCKET || 'breast-cancer-image-dataset';
 
 
 const questionnaireData = questionnaireJson.questions; 
@@ -81,7 +86,7 @@ function calculateSnehithaRisk(formData) {
 
 // === NEW ENDPOINT: To start a session ===
 app.post('/api/session/start', async (req, res) => {
-    const pool = getPool();
+    const pool = await getPool();
     const sessionId = uuidv4();
     const sessionStartTime = new Date();
     const ipAddress = req.ip; // Get user's IP address
@@ -101,6 +106,37 @@ app.post('/api/session/start', async (req, res) => {
         res.status(500).json({ success: false, message: 'Failed to create a session.' });
     }
 });
+// === Consent image upload ===
+app.post('/api/session/:sessionId/consent', upload.single('file'), async (req, res) => {
+    const { sessionId } = req.params;
+    if (!req.file) {
+        return res.status(400).json({ success: false, message: 'No file provided.' });
+    }
+
+    try {
+        const extension = req.file.originalname.rsplit ? req.file.originalname.split('.').pop() : 'jpg';
+        const uploadDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+        const blobName = `tanuh-data-capture/consent/${sessionId}_consent_${uploadDate}.${extension}`;
+
+        const gcsClient = process.env.GOOGLE_APPLICATION_CREDENTIALS
+            ? new Storage({ keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS })
+            : new Storage();
+        const bucket = gcsClient.bucket(GCS_BUCKET);
+        const blob = bucket.file(blobName);
+        await blob.save(req.file.buffer, { contentType: req.file.mimetype || 'application/octet-stream' });
+
+        const gcsUrl = `gs://${GCS_BUCKET}/${blobName}`;
+        const pool = await getPool();
+        await pool.query('UPDATE session_table SET consent_url = ? WHERE session_id = ?', [gcsUrl, sessionId]);
+
+        console.log(`✅ Consent uploaded for session ${sessionId}: ${gcsUrl}`);
+        res.status(200).json({ success: true, consent_url: gcsUrl });
+    } catch (err) {
+        console.error('❌ Consent upload error:', err);
+        res.status(500).json({ success: false, message: 'Consent upload failed.', error: err.message });
+    }
+});
+
 // Endpoint to submit answers
 app.post('/api/submit', async (req, res) => {
     const { sessionId, formDataEn } = req.body; 
@@ -109,7 +145,7 @@ app.post('/api/submit', async (req, res) => {
         console.warn('⚠️ Missing sessionId or formDataEn in request body');
         return res.status(400).json({ success: false, message: 'Session ID and form data are required.' });
     }
-    const pool = getPool();
+    const pool = await getPool();
     let connection;
 
     try {
@@ -181,75 +217,71 @@ app.post('/api/submit', async (req, res) => {
 
 // === NEW ENDPOINT: Stats Dashboard ===
 app.get('/api/stats', async (req, res) => {
-    const pool = getPool();
+    const pool = await getPool();
     try {
-        // 1. Total Subjects Captured (only those with a final score and from empanelled institutes)
-        const [totalRes] = await pool.query(`
-            SELECT COUNT(DISTINCT s.session_id) as total 
-            FROM session_table s
+        // Fetch valid hospital names from bcd_application2 (whitelist approach, matching tanuh_bcd_website)
+        const [hospitalRows] = await pool.query("SELECT name, short_name FROM bcd_application2.hospitals WHERE name != 'Test'");
+        const validNames = hospitalRows.map(r => r.name);
+        const shortNameMap = Object.fromEntries(hospitalRows.map(r => [r.name, r.short_name || r.name]));
+
+        if (validNames.length === 0) {
+            return res.status(200).json({
+                success: true, totalSubjects: 0, institutionsEmpanelled: 0, statesCount: 0,
+                riskBins: [], hospitalBins: [], ageBins: [], monthBins: []
+            });
+        }
+
+        const INST_QUESTIONS = ['Institute Name', 'Enter the Hospital ID(If any, else leave):', 'Q45'];
+        const AGE_QUESTIONS = ['What is your current age? (Please enter a number - years)', 'Q1'];
+
+        const instFilter = `
             JOIN (
                 SELECT session_id, MAX(answer) as answer
-                FROM session_data_table 
-                WHERE question IN ('Institute Name', 'Enter the Hospital ID(If any, else leave):')
-                  AND answer NOT IN ('Other', 'Test')
-                  AND answer IS NOT NULL AND answer != ''
+                FROM session_data_table
+                WHERE question IN (?) AND answer IN (?)
                 GROUP BY session_id
-            ) sd ON s.session_id = sd.session_id
+            ) sd_inst ON s.session_id = sd_inst.session_id
+        `;
+
+        // 1. Total Subjects
+        const [totalRes] = await pool.query(`
+            SELECT COUNT(DISTINCT s.session_id) as total
+            FROM session_table s ${instFilter}
             WHERE s.snehita_lifetime_risk IS NOT NULL
-        `);
+        `, [INST_QUESTIONS, validNames]);
         const totalSubjects = totalRes[0].total;
 
-        // NEW: Institutions Empanelled (from questionnaire JSON)
-        const allInstitutes = questionnaireJson.questions.Q45?.answers || [];
-        const institutionsEmpanelled = allInstitutes.filter(name => name !== 'Other' && name !== 'Test').length;
-
-        // 2. Bin by Risk (matching logic from getRiskLevel, filtered by institute)
+        // 2. Risk Bins
         const [riskRes] = await pool.query(`
-            SELECT 
+            SELECT
               SUM(CASE WHEN s.snehita_lifetime_risk < 0.4004 THEN 1 ELSE 0 END) as no_risk,
               SUM(CASE WHEN s.snehita_lifetime_risk >= 0.4004 AND s.snehita_lifetime_risk < 0.574 THEN 1 ELSE 0 END) as low_risk,
               SUM(CASE WHEN s.snehita_lifetime_risk >= 0.574 AND s.snehita_lifetime_risk < 0.795 THEN 1 ELSE 0 END) as moderate_risk,
               SUM(CASE WHEN s.snehita_lifetime_risk >= 0.795 THEN 1 ELSE 0 END) as high_risk
-            FROM session_table s
-            JOIN (
-                SELECT session_id, MAX(answer) as answer
-                FROM session_data_table 
-                WHERE question IN ('Institute Name', 'Enter the Hospital ID(If any, else leave):')
-                  AND answer NOT IN ('Other', 'Test')
-                  AND answer IS NOT NULL AND answer != ''
-                GROUP BY session_id
-            ) sd ON s.session_id = sd.session_id
+            FROM session_table s ${instFilter}
             WHERE s.snehita_lifetime_risk IS NOT NULL
-        `);
+        `, [INST_QUESTIONS, validNames]);
         const riskBins = [
-            { name: 'No Risk', value: Number(riskRes[0].no_risk) || 0 },
-            { name: 'Low Risk', value: Number(riskRes[0].low_risk) || 0 },
-            { name: 'Moderate Risk', value: Number(riskRes[0].moderate_risk) || 0 },
+            { name: 'Baseline Risk', value: Number(riskRes[0].no_risk) || 0 },
+            { name: 'Evident Risk', value: Number(riskRes[0].low_risk) || 0 },
+            { name: 'Significant Risk', value: Number(riskRes[0].moderate_risk) || 0 },
             { name: 'High Risk', value: Number(riskRes[0].high_risk) || 0 }
         ];
 
         // 3. Bin by Institute (Stacked by Risk)
         const [instituteRes] = await pool.query(`
-            SELECT 
-                sd.answer as institute,
+            SELECT
+                sd_inst.answer as institute,
                 SUM(CASE WHEN s.snehita_lifetime_risk < 0.4004 THEN 1 ELSE 0 END) as no_risk,
                 SUM(CASE WHEN s.snehita_lifetime_risk >= 0.4004 AND s.snehita_lifetime_risk < 0.574 THEN 1 ELSE 0 END) as low,
                 SUM(CASE WHEN s.snehita_lifetime_risk >= 0.574 AND s.snehita_lifetime_risk < 0.795 THEN 1 ELSE 0 END) as moderate,
                 SUM(CASE WHEN s.snehita_lifetime_risk >= 0.795 THEN 1 ELSE 0 END) as high
-            FROM session_table s
-            JOIN (
-                SELECT session_id, MAX(answer) as answer
-                FROM session_data_table 
-                WHERE question IN ('Institute Name', 'Enter the Hospital ID(If any, else leave):')
-                  AND answer NOT IN ('Other', 'Test')
-                  AND answer IS NOT NULL AND answer != ''
-                GROUP BY session_id
-            ) sd ON s.session_id = sd.session_id
+            FROM session_table s ${instFilter}
             WHERE s.snehita_lifetime_risk IS NOT NULL
-            GROUP BY sd.answer
-        `);
+            GROUP BY sd_inst.answer
+        `, [INST_QUESTIONS, validNames]);
         const hospitalBins = instituteRes.map(row => ({
-            name: row.institute === 'Universal' || !row.institute ? 'Universal' : row.institute,
+            name: shortNameMap[row.institute] || row.institute || 'Unknown',
             no_risk: Number(row.no_risk) || 0,
             low: Number(row.low) || 0,
             moderate: Number(row.moderate) || 0,
@@ -258,8 +290,8 @@ app.get('/api/stats', async (req, res) => {
 
         // 4. Bin by Age Range (Stacked by Risk)
         const [ageStackRes] = await pool.query(`
-            SELECT 
-                CASE 
+            SELECT
+                CASE
                     WHEN CAST(sd_age.answer AS UNSIGNED) BETWEEN 18 AND 29 THEN '18-29'
                     WHEN CAST(sd_age.answer AS UNSIGNED) BETWEEN 30 AND 39 THEN '30-39'
                     WHEN CAST(sd_age.answer AS UNSIGNED) BETWEEN 40 AND 49 THEN '40-49'
@@ -273,21 +305,13 @@ app.get('/api/stats', async (req, res) => {
                 SUM(CASE WHEN s.snehita_lifetime_risk >= 0.795 THEN 1 ELSE 0 END) as high
             FROM session_table s
             JOIN session_data_table sd_age ON s.session_id = sd_age.session_id
-            JOIN (
-                SELECT session_id, MAX(answer) as answer
-                FROM session_data_table 
-                WHERE question IN ('Institute Name', 'Enter the Hospital ID(If any, else leave):')
-                  AND answer NOT IN ('Other', 'Test')
-                  AND answer IS NOT NULL AND answer != ''
-                GROUP BY session_id
-            ) sd_inst ON s.session_id = sd_inst.session_id
+            ${instFilter}
             WHERE s.snehita_lifetime_risk IS NOT NULL
-              AND sd_age.question='What is your current age? (Please enter a number - years)'
+              AND sd_age.question IN (?)
             GROUP BY age_group
             ORDER BY age_group ASC
-        `);
-        
-        // Ensure all bins exist even if database has no entries for a range
+        `, [INST_QUESTIONS, validNames, AGE_QUESTIONS]);
+
         const ageLabels = ['18-29', '30-39', '40-49', '50-59', '60-69', '70+'];
         const ageBins = ageLabels.map(label => {
             const match = ageStackRes.find(r => r.age_group === label);
@@ -302,26 +326,18 @@ app.get('/api/stats', async (req, res) => {
 
         // 5. Bin by Month (Stacked by Risk)
         const [monthRes] = await pool.query(`
-            SELECT 
+            SELECT
                 DATE_FORMAT(COALESCE(s.session_end_time, s.session_start_time), '%b %Y') as month_year,
                 DATE_FORMAT(COALESCE(s.session_end_time, s.session_start_time), '%Y-%m') as sort_key,
                 SUM(CASE WHEN s.snehita_lifetime_risk < 0.4004 THEN 1 ELSE 0 END) as no_risk,
                 SUM(CASE WHEN s.snehita_lifetime_risk >= 0.4004 AND s.snehita_lifetime_risk < 0.574 THEN 1 ELSE 0 END) as low,
                 SUM(CASE WHEN s.snehita_lifetime_risk >= 0.574 AND s.snehita_lifetime_risk < 0.795 THEN 1 ELSE 0 END) as moderate,
                 SUM(CASE WHEN s.snehita_lifetime_risk >= 0.795 THEN 1 ELSE 0 END) as high
-            FROM session_table s
-            JOIN (
-                SELECT session_id, MAX(answer) as answer
-                FROM session_data_table 
-                WHERE question IN ('Institute Name', 'Enter the Hospital ID(If any, else leave):')
-                  AND answer NOT IN ('Other', 'Test')
-                  AND answer IS NOT NULL AND answer != ''
-                GROUP BY session_id
-            ) sd_inst ON s.session_id = sd_inst.session_id
+            FROM session_table s ${instFilter}
             WHERE s.snehita_lifetime_risk IS NOT NULL
             GROUP BY month_year, sort_key
             ORDER BY sort_key ASC
-        `);
+        `, [INST_QUESTIONS, validNames]);
         const monthBins = monthRes.map(row => ({
             name: row.month_year,
             no_risk: Number(row.no_risk) || 0,
@@ -330,26 +346,46 @@ app.get('/api/stats', async (req, res) => {
             high: Number(row.high) || 0
         }));
 
-        console.log(`📊 Stats Summary: Subjects:${totalSubjects}, Inst:${institutionsEmpanelled}, RiskBins:${riskBins.length}, HospBins:${hospitalBins.length}, AgeBins:${ageBins.length}, MonthBins:${monthBins.length}`);
+        // Institutions & States from bcd_application2.hospitals
+        const institutionsEmpanelled = validNames.length;
+        const [statesRes] = await pool.query(
+            "SELECT COUNT(DISTINCT state) as count FROM bcd_application2.hospitals WHERE name != 'Test' AND state IS NOT NULL AND state != ''"
+        );
+        const statesCount = statesRes[0].count;
 
-        res.status(200).json({ 
-            success: true, 
-            totalSubjects, 
+        console.log(`📊 Stats Summary: Subjects:${totalSubjects}, Inst:${institutionsEmpanelled}, States:${statesCount}, RiskBins:${riskBins.length}, HospBins:${hospitalBins.length}, AgeBins:${ageBins.length}, MonthBins:${monthBins.length}`);
+
+        res.status(200).json({
+            success: true,
+            totalSubjects,
             institutionsEmpanelled,
-            riskBins, 
-            hospitalBins, 
+            statesCount,
+            riskBins,
+            hospitalBins,
             ageBins,
             monthBins
         });
     } catch (err) {
         console.error('❌ CRITICAL ERROR in /api/stats:', err);
-        // Provide more detail in the JSON response if in dev or just for debugging now
-        res.status(500).json({ 
-            success: false, 
+        res.status(500).json({
+            success: false,
             message: 'Failed to fetch statistics.',
             error: err.message,
-            stack: err.stack 
+            stack: err.stack
         });
+    }
+});
+
+// === Hospitals endpoint: fetch from bcd_application2 ===
+app.get('/api/hospitals', async (req, res) => {
+    try {
+        const pool = await getPool();
+        const [rows] = await pool.query('SELECT id, name FROM bcd_application2.hospitals ORDER BY name ASC');
+        const hospitals = rows.map(r => r.name);
+        res.status(200).json({ success: true, hospitals });
+    } catch (err) {
+        console.error('❌ Error fetching hospitals:', err);
+        res.status(500).json({ success: false, message: 'Failed to fetch hospitals.', error: err.message });
     }
 });
 
@@ -368,7 +404,7 @@ app.get('/health', (req, res) => {
 app.get('/api/db-test', async (req, res) => {
     console.log('🚀 Received DB test request');
     try {
-        const pool = getPool();
+        const pool = await getPool();
         const [rows] = await pool.query('SELECT 1 AS ok');
         console.log('✅ DB Test successful');
         res.status(200).json({ success: true, message: 'Database connected!', result: rows });
@@ -383,7 +419,7 @@ app.listen(PORT, async () => {
     
     // Check DB connection on startup
     try {
-        const pool = getPool();
+        const pool = await getPool();
         await pool.query('SELECT 1');
         console.log('✅ Connected to database successfully.');
     } catch (err) {
