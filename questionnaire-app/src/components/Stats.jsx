@@ -92,20 +92,11 @@ const Stats = () => {
 
   useEffect(() => {
     const fetchStats = async () => {
-      mixpanel.track('Page View', { page: 'Stats' });
       try {
         const response = await fetch(`${API_URL}/api/stats`);
         if (!response.ok) throw new Error('Failed to load stats');
         const json = await response.json();
         if (json.success) {
-          if (json.riskBins) {
-            json.riskBins = json.riskBins.map(bin => {
-              if (bin.name === 'No Risk' || bin.name === 'Average Risk') return { ...bin, name: 'Baseline Risk' };
-              if (bin.name === 'Low Risk' || bin.name === 'Low-Intermediate Risk' || bin.name === 'Intermediate Risk') return { ...bin, name: 'Evident Risk' };
-              if (bin.name === 'Moderate Risk') return { ...bin, name: 'Significant Risk' };
-              return bin;
-            });
-          }
           setData(json);
         } else {
           throw new Error(json.message || 'Error parsing backend data');
@@ -116,7 +107,10 @@ const Stats = () => {
         setLoading(false);
       }
     };
+    mixpanel.track('Page View', { page: 'Stats' });
     fetchStats();
+    const interval = setInterval(fetchStats, 30000);
+    return () => clearInterval(interval);
   }, [API_URL]);
 
   if (loading) return <div className="stats-loader">Loading Dashboard...</div>;
@@ -180,7 +174,7 @@ const Stats = () => {
             <h3>States</h3>
           </div>
           <div className="big-number">
-            <AnimatedCounter value={2} />
+            <AnimatedCounter value={data.statesCount} />
           </div>
         </div>
       </div>
@@ -243,12 +237,8 @@ const Stats = () => {
           <h3>Institute Distribution</h3>
           <div className="chart-wrapper">
             <ResponsiveContainer width="100%" height="100%">
-               <BarChart 
-                 data={data.hospitalBins.map(b => ({
-                   ...b,
-                   name: b.name === 'Shanmuga Hospital Limited' ? 'SHL' : 
-                         b.name === 'Sri Chamundeshwari Medical College Hospital & Research Institute' ? 'SCMCHRI' : b.name
-                 }))} 
+               <BarChart
+                 data={data.hospitalBins}
                  margin={{ top: 20, right: 30, left: 20, bottom: 100 }}
                >
                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#14868C" strokeOpacity={0.1} />

@@ -31,7 +31,8 @@ function QuestionnaireFlow() {
         const res = await fetch(`${API_URL}/api/hospitals`);
         const data = await res.json();
         if (data.success && data.hospitals) {
-          setHospitalList([...data.hospitals, 'Other', 'Test']);
+          const list = data.hospitals.filter(h => h !== 'Other' && h !== 'Test');
+          setHospitalList([...list, 'Other', 'Test']);
         }
       } catch (e) {
         console.error('Failed to fetch hospitals:', e);
