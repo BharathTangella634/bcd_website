@@ -1,5 +1,5 @@
 {
-  "title": "ই-সন্মতি",
+  "title": "অধ্যয়নৰ বিষয়ে অংশগ্ৰহণকাৰী তথ্য (Participant Information about the Study)",
   "logos": {
     "tanuhAlt": "TANUH লোগো",
     "iiscAlt": "IISC লোগো"
@@ -80,7 +80,7 @@
       "paragraphs": [
         { "text": "যদি আপুনি অধ্যয়নৰ পৰা স্বতন্ত্ৰ কাৰোবাৰ সৈতে কথা পাতিব বিচাৰে, তেন্তে আপুনি যোগাযোগ কৰিব পাৰে:" },
         { "strong": "প্ৰতিষ্ঠানিক নৈতিকতা কমিটি (IEC)", "text": "" },
-        { "strong": "নাম:", "text": "ড° এছ হেমা প্ৰিয়দৰ্শিনী, সম্পাদিকা, IEC, TANUH" },
+        { "strong": "নাম:", "text": "ড° শ্ৰী বিদ্যা জগদীশ, সম্পাদিকা, IEC, TANUH" },
         { "strong": "ইমেইল:", "text": "secretary.iec@tanuh.ai" },
         { "strong": "ফোন নং", "text": "080 - 2293 4106 / 2293 4107" }
       ]
