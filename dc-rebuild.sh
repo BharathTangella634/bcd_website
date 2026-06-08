@@ -30,31 +30,15 @@ fi
 SERVICE=${1:-}
 
 set -x
-# Stop containers (service-specific if provided)
+# Tear down containers and networks cleanly
 if [[ -n "$SERVICE" ]]; then
   docker compose stop "$SERVICE" || true
-else
-  docker compose stop || true
-fi
-
-# Remove stopped containers
-if [[ -n "$SERVICE" ]]; then
   docker compose rm -f "$SERVICE" || true
-else
-  docker compose rm -f || true
-fi
-
-# Build images
-if [[ -n "$SERVICE" ]]; then
   docker compose build "$SERVICE"
-else
-  docker compose build
-fi
-
-# Start containers in detached mode
-if [[ -n "$SERVICE" ]]; then
   docker compose up -d "$SERVICE"
 else
+  docker compose down --remove-orphans || true
+  docker compose build
   docker compose up -d
 fi
 set +x
