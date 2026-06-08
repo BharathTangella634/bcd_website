@@ -257,7 +257,9 @@ const QuestionBlock = ({
           )}
           {q27VideoConfirmed && qConfig.videoUrlOnNo && (
             <div className="youtube-player-container">
-              <iframe width="560" height="315" src={qConfig.videoUrlOnNo} title={t('ui.videoPrompt.videoTitle')} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+              <video width="100%" controls autoPlay playsInline style={{maxWidth: '560px', borderRadius: '8px'}}>
+                <source src={qConfig.videoUrlOnNo} type="video/mp4" />
+              </video>
             </div>
           )}
         </>

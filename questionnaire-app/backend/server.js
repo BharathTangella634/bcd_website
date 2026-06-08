@@ -241,7 +241,7 @@ app.get('/api/stats', async (req, res) => {
             });
         }
 
-        const INST_QUESTIONS = ['Institute Name', 'Enter the Hospital ID(If any, else leave):', 'Q45'];
+        const INST_QUESTIONS = ['Institute Name', 'Institute Name:', 'Enter the Hospital ID(If any, else leave):', 'Q45'];
         const AGE_QUESTIONS = ['What is your current age? (Please enter a number - years)', 'Q1'];
 
         const instFilter = `
