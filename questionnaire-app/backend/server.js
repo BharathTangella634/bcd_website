@@ -83,6 +83,15 @@ function calculateSnehithaRisk(formData) {
     return riskPercentage;
 }
 
+function getRiskCategory(riskFraction) {
+    const val = parseFloat(riskFraction);
+    if (isNaN(val)) return 'Baseline Risk';
+    if (val < 0.4004) return 'Baseline Risk';
+    if (val < 0.574)  return 'Evident Risk';
+    if (val < 0.795)  return 'Significant Risk';
+    return 'High Risk';
+}
+
 
 // === NEW ENDPOINT: To start a session ===
 app.post('/api/session/start', async (req, res) => {
@@ -195,12 +204,13 @@ app.post('/api/submit', async (req, res) => {
             }
         }
         
-        // --- MODIFIED: Update session_table with end_time AND the calculated risk ---
-        const updateSessionSql = 'UPDATE session_table SET session_end_time = ?, snehita_lifetime_risk = ? WHERE session_id = ?';
-        // await connection.query(updateSessionSql, [new Date(), `${riskPercentage}%`, sessionId]);
-        await connection.query(updateSessionSql, [new Date(), (riskPercentage / 100).toFixed(2), sessionId]);
+        // --- MODIFIED: Update session_table with end_time, calculated risk, AND risk_category ---
+        const riskFraction = (riskPercentage / 100).toFixed(2);
+        const riskCategory = getRiskCategory(riskFraction);
+        const updateSessionSql = 'UPDATE session_table SET session_end_time = ?, snehita_lifetime_risk = ?, risk_category = ? WHERE session_id = ?';
+        await connection.query(updateSessionSql, [new Date(), riskFraction, riskCategory, sessionId]);
 
-        console.log(`✅ Finalized session ${sessionId} with risk ${riskPercentage}%`);
+        console.log(`✅ Finalized session ${sessionId} with risk ${riskPercentage}% (${riskCategory})`);
         
         await connection.commit();
         // --- MODIFIED: Send the risk percentage back to the frontend ---
