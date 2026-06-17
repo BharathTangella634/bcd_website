@@ -19,17 +19,15 @@ if (fs.existsSync(envPath)) {
   dotenv.config();
 }
 
-const config = {
-  host: process.env.MYSQL_HOST,
-  port: Number(process.env.MYSQL_PORT || 3306),
-  database: process.env.MYSQL_DB,
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-};
-
-const useCloudSqlConnector = (process.env.USE_CLOUD_SQL_CONNECTOR || '').toLowerCase() === 'true';
-const cloudSqlConnectionName = process.env.CLOUD_SQL_CONNECTION_NAME || '';
-const connectorIpType = (process.env.CLOUD_SQL_IP_TYPE || 'PRIVATE').toUpperCase();
+function getConfig() {
+  return {
+    host: process.env.MYSQL_HOST,
+    port: Number(process.env.MYSQL_PORT || 3306),
+    database: process.env.MYSQL_DB,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+  };
+}
 
 const POOL_OPTS = {
   waitForConnections: true,
@@ -46,22 +44,12 @@ const POOL_OPTS = {
 let pool;
 let connector;
 
-function resolveCredentialsPath() {
-  const credPath = process.env.GOOGLE_APPLICATION_CREDENTIALS;
-  if (!credPath) return null;
-  for (const p of [credPath, path.resolve(__dirname, '..', credPath), path.resolve('/app', credPath)]) {
-    if (fs.existsSync(p)) return p;
-  }
-  return null;
-}
-
 async function buildConnectorPool() {
   const { Connector, IpAddressTypes } = await import('@google-cloud/cloud-sql-connector');
 
-  const resolvedCreds = resolveCredentialsPath();
-  if (resolvedCreds) {
-    process.env.GOOGLE_APPLICATION_CREDENTIALS = resolvedCreds;
-  }
+  const cloudSqlConnectionName = process.env.CLOUD_SQL_CONNECTION_NAME || '';
+  const connectorIpType = (process.env.CLOUD_SQL_IP_TYPE || 'PRIVATE').toUpperCase();
+  const config = getConfig();
 
   connector = new Connector();
   const ipType = connectorIpType === 'PUBLIC' ? IpAddressTypes.PUBLIC : IpAddressTypes.PRIVATE;
@@ -80,6 +68,7 @@ async function buildConnectorPool() {
 }
 
 function buildDirectPool() {
+  const config = getConfig();
   return mysql.createPool({
     host: config.host,
     port: config.port,
@@ -92,7 +81,9 @@ function buildDirectPool() {
 
 export async function getPool() {
   if (!pool) {
-    if (useCloudSqlConnector && cloudSqlConnectionName) {
+    const useConnector = (process.env.USE_CLOUD_SQL_CONNECTOR || '').toLowerCase() === 'true';
+    const connectionName = process.env.CLOUD_SQL_CONNECTION_NAME || '';
+    if (useConnector && connectionName) {
       pool = await buildConnectorPool();
     } else {
       pool = buildDirectPool();
@@ -118,4 +109,6 @@ export async function closePool() {
   }
 }
 
-export const dbName = config.database;
+export function getDbName() {
+  return process.env.MYSQL_DB;
+}

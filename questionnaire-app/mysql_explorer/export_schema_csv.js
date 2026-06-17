@@ -5,7 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getPool, closePool, dbName, testConnection } from './db.js';
+import { getPool, closePool, getDbName, testConnection } from './db.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -81,12 +81,12 @@ async function fetchSchema() {
     WHERE c.TABLE_SCHEMA = ?
     ORDER BY c.TABLE_NAME, c.ORDINAL_POSITION
   `;
-  const [rows] = await pool.query(sql, [dbName]);
+  const [rows] = await pool.query(sql, [getDbName()]);
   return rows;
 }
 
 async function main() {
-  console.log(`[mysql_explorer] Testing connection to database: ${dbName}`);
+  console.log(`[mysql_explorer] Testing connection to database: ${getDbName()}`);
   const ok = await testConnection();
   if (!ok) {
     throw new Error('Database connection test failed. Please verify .env settings.');

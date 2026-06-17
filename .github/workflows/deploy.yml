@@ -1,42 +1,139 @@
-name: Deploy to VM
-
-# Deployment is now handled by Cloud Build (cloudbuild.yaml).
-# This workflow is kept for reference but disabled.
-# Cloud Build triggers on push to main, deploys to VM, creates a new
-# machine image + instance template, and rolling-updates the MIG.
+name: Deploy to GCP
 
 on:
-  workflow_dispatch: # Manual trigger only — Cloud Build handles auto-deploy
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  GCP_PROJECT: bcd-prototypes
+  GCP_ZONE: asia-south1-c
+  VM_NAME: tanuh-bcd-vm
+  MIG_NAME: tanuh-bcd-mig
+  SA_EMAIL: tanuh-bcd-portal@bcd-prototypes.iam.gserviceaccount.com
+  # After running infra/setup-gcp.sh, paste the WIF provider string here
+  WIF_PROVIDER: projects/135552380858/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.9.0
+      - name: Authenticate to GCP via WIF
+        uses: google-github-actions/auth@v2
         with:
-          ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
+          workload_identity_provider: ${{ env.WIF_PROVIDER }}
+          service_account: ${{ env.SA_EMAIL }}
 
-      - name: Copy project files to server
+      - name: Set up gcloud CLI
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.GCP_PROJECT }}
+
+      - name: Deploy code to VM and rebuild containers
         run: |
-          rsync -avz --delete \
-            --exclude '.env' \
-            --exclude '*/.env' \
-            -e "ssh -o StrictHostKeyChecking=no" \
-            ./ ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:~/tanuh_website
+          gcloud compute ssh ${{ env.VM_NAME }} \
+            --zone=${{ env.GCP_ZONE }} \
+            --project=${{ env.GCP_PROJECT }} \
+            --tunnel-through-iap \
+            --command="sudo bash -c 'cd /app/tanuh_website && git fetch origin main && git reset --hard origin/main && chmod +x dc-rebuild.sh && ./dc-rebuild.sh'" \
+            --ssh-flag="-o StrictHostKeyChecking=no"
 
+      - name: Health check
+        run: |
+          for i in $(seq 1 12); do
+            if gcloud compute ssh ${{ env.VM_NAME }} \
+              --zone=${{ env.GCP_ZONE }} \
+              --project=${{ env.GCP_PROJECT }} \
+              --tunnel-through-iap \
+              --command="curl -sf http://localhost:3000/health && curl -sf http://localhost:3001/api/stats | head -c 20" \
+              --ssh-flag="-o StrictHostKeyChecking=no" 2>/dev/null; then
+              echo "Health check passed"
+              exit 0
+            fi
+            echo "Attempt $i/12 - waiting 10s..."
+            sleep 10
+          done
+          echo "Health check failed after 2 minutes"
+          exit 1
 
-      - name: Rebuild and restart containers
-        uses: appleboy/ssh-action@v0.1.10
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd ~/tanuh_website
-            chmod +x dc-rebuild.sh
-            ./dc-rebuild.sh
+      - name: Stop VM for disk snapshot
+        run: |
+          gcloud compute instances stop ${{ env.VM_NAME }} \
+            --zone=${{ env.GCP_ZONE }} \
+            --project=${{ env.GCP_PROJECT }}
+
+      - name: Create boot disk image
+        id: create-image
+        run: |
+          IMG="tanuh-bcd-boot-${GITHUB_SHA::7}-$(date +%Y%m%d%H%M%S)"
+          gcloud compute images create "$IMG" \
+            --source-disk=${{ env.VM_NAME }} \
+            --source-disk-zone=${{ env.GCP_ZONE }} \
+            --project=${{ env.GCP_PROJECT }} \
+            --labels=app=tanuh-bcd,commit=${GITHUB_SHA::7}
+          echo "image_name=$IMG" >> "$GITHUB_OUTPUT"
+
+      - name: Start VM back up
+        run: |
+          gcloud compute instances start ${{ env.VM_NAME }} \
+            --zone=${{ env.GCP_ZONE }} \
+            --project=${{ env.GCP_PROJECT }}
+
+      - name: Create instance template
+        id: create-template
+        run: |
+          TMPL="tanuh-bcd-tmpl-${GITHUB_SHA::7}-$(date +%Y%m%d%H%M%S)"
+          gcloud compute instance-templates create "$TMPL" \
+            --machine-type=e2-small \
+            --image=${{ steps.create-image.outputs.image_name }} \
+            --boot-disk-size=10GB \
+            --boot-disk-type=pd-balanced \
+            --tags=http-server,https-server \
+            --scopes=cloud-platform \
+            --service-account=${{ env.SA_EMAIL }} \
+            --network=default \
+            --project=${{ env.GCP_PROJECT }}
+          echo "template_name=$TMPL" >> "$GITHUB_OUTPUT"
+
+      - name: Rolling-update MIG
+        run: |
+          gcloud compute instance-groups managed set-instance-template ${{ env.MIG_NAME }} \
+            --template=${{ steps.create-template.outputs.template_name }} \
+            --zone=${{ env.GCP_ZONE }} \
+            --project=${{ env.GCP_PROJECT }}
+
+          gcloud compute instance-groups managed rolling-action start-update ${{ env.MIG_NAME }} \
+            --version=template=${{ steps.create-template.outputs.template_name }} \
+            --zone=${{ env.GCP_ZONE }} \
+            --max-surge=1 \
+            --max-unavailable=0 \
+            --project=${{ env.GCP_PROJECT }}
+
+      - name: Cleanup old images and templates (keep 3)
+        run: |
+          echo "Cleaning up old boot images..."
+          gcloud compute images list --project=${{ env.GCP_PROJECT }} \
+            --filter="name~tanuh-bcd-boot" \
+            --sort-by=~creationTimestamp \
+            --format="value(name)" | tail -n +4 | while read img; do
+            echo "Deleting image: $img"
+            gcloud compute images delete "$img" --project=${{ env.GCP_PROJECT }} --quiet || true
+          done
+
+          echo "Cleaning up old instance templates..."
+          gcloud compute instance-templates list --project=${{ env.GCP_PROJECT }} \
+            --filter="name~tanuh-bcd-tmpl" \
+            --sort-by=~creationTimestamp \
+            --format="value(name)" | tail -n +4 | while read tmpl; do
+            echo "Deleting template: $tmpl"
+            gcloud compute instance-templates delete "$tmpl" --project=${{ env.GCP_PROJECT }} --quiet || true
+          done

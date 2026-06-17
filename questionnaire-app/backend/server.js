@@ -1,10 +1,13 @@
+import { loadSecrets } from './secrets.js';
+await loadSecrets();
+
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import multer from 'multer';
 import { v4 as uuidv4 } from 'uuid';
 import { Storage } from '@google-cloud/storage';
-import { getPool } from '../mysql_explorer/db.js';
+const { getPool } = await import('../mysql_explorer/db.js');
 import questionnaireJson from '../public/locales/english/questionnaire.json' with { type: 'json' };
 
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
@@ -127,9 +130,7 @@ app.post('/api/session/:sessionId/consent', upload.single('file'), async (req, r
         const uploadDate = new Date().toISOString().slice(0, 10).replace(/-/g, '');
         const blobName = `tanuh-data-capture/consent/${sessionId}_consent_${uploadDate}.${extension}`;
 
-        const gcsClient = process.env.GOOGLE_APPLICATION_CREDENTIALS
-            ? new Storage({ keyFilename: process.env.GOOGLE_APPLICATION_CREDENTIALS })
-            : new Storage();
+        const gcsClient = new Storage();
         const bucket = gcsClient.bucket(GCS_BUCKET);
         const blob = bucket.file(blobName);
         await blob.save(req.file.buffer, { contentType: req.file.mimetype || 'application/octet-stream' });
