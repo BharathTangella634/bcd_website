@@ -231,7 +231,7 @@ app.get('/api/stats', async (req, res) => {
     const pool = await getPool();
     try {
         // Fetch valid hospital names from bcd_application2 (whitelist approach, matching tanuh_bcd_website)
-        const [hospitalRows] = await pool.query("SELECT name, short_name FROM bcd_application2.hospitals WHERE name != 'Test'");
+        const [hospitalRows] = await pool.query("SELECT name, short_name FROM bcd_application2.hospitals WHERE name NOT IN ('Test', 'Tanuh Foundation')");
         const validNames = hospitalRows.map(r => r.name);
         const shortNameMap = Object.fromEntries(hospitalRows.map(r => [r.name, r.short_name || r.name]));
 
@@ -360,7 +360,7 @@ app.get('/api/stats', async (req, res) => {
         // Institutions & States from bcd_application2.hospitals
         const institutionsEmpanelled = validNames.length;
         const [statesRes] = await pool.query(
-            "SELECT COUNT(DISTINCT state) as count FROM bcd_application2.hospitals WHERE name != 'Test' AND state IS NOT NULL AND state != ''"
+            "SELECT COUNT(DISTINCT state) as count FROM bcd_application2.hospitals WHERE name NOT IN ('Test', 'Tanuh Foundation') AND state IS NOT NULL AND state != ''"
         );
         const statesCount = statesRes[0].count;
 
